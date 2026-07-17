@@ -1,0 +1,23 @@
+---
+// src/layouts/BaseLayout.astro
+import '../styles/style.css'; 
+// 1. This is how Astro reads "arguments" passed to this component module
+const { title } = Astro.props;
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title} |The Santanu Initiative</title>
+    </head>
+    <body>
+        
+        <!-- Everything from your pages will be injected here -->
+        <slot />
+
+    </body>
+</html>

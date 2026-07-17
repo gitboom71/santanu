@@ -1,0 +1,39 @@
+---
+// src/components/Header.astro
+
+const navItems = [
+    { name: 'Home', url: '/' },
+    { name: 'About', url: '/about' },
+    { name: 'Projects', url: '/projects' },
+    { name: 'Insurance', url: '/insurance' },
+    { name: 'Learning', url: '/learning' },
+    { name: 'Contact', url: '/contact' }
+];
+
+// 1. Astro built-in wizardry: This automatically reads the exact URL path the user is browsing
+const currentPath = Astro.url.pathname;
+---
+
+<!-- Header -->
+<header>
+    <div class="container">
+        <div class="logo">
+            <h1>The Santanu Initiative</h1>
+            <p>Technology • Insurance • Learning</p>
+        </div>
+    </div>
+</header>
+
+<nav>
+    <!-- 2. Inside the loop, we check if the current URL matches the link's destination -->
+    {navItems.map((item) => (
+        <a 
+            href={item.url} 
+            class={currentPath === item.url ? 'active' : ''}
+        >
+            {item.name}
+        </a>
+    ))}
+    
+    <a href="/bn" class="lang-toggle" title="বাংলা সংস্করণ">বাংলা</a>
+</nav>

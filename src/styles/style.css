@@ -1,0 +1,864 @@
+:root{
+    --primary:#0b3d91;
+    --secondary:#08306b;
+    --accent:#0077cc;
+    --background:#f5f7fa;
+    --white:#ffffff;
+    --text:#333333;
+}
+/* ===== Base Reset & Typography ===== */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+/* ===== Global Container ===== */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+/* ===== Header & Branding ===== */
+header{
+    background: #0b3d91;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+/* ===== Homepage Hero Layout ===== */
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+
+.hero-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+
+.hero-image {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+}
+
+
+.hero-image img {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 8px 24px rgba(0,0,0,.15);
+}
+/* ===== Homepage Hero Layout End ===== */
+.logo h1{
+    font-size: 40px;
+}
+
+.logo p{
+    margin-top: 10px;
+    letter-spacing: 2px;
+}
+
+/* ===== Sticky Navigation ===== */
+nav{
+    background: #08306b;
+    text-align: center;
+    padding: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav a{
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+nav a:hover{
+    color: gold;
+}
+
+nav a.active {
+    color: gold; /* Changed to gold for excellent dark-blue contrast */
+    font-weight: bold;
+    border-bottom: 2px solid gold;
+    padding-bottom: 4px;
+}
+
+/* ===== Main Hero Section ===== */
+.hero{
+    max-width: 900px;
+    margin: auto;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.hero h2{
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.hero p{
+    margin-bottom: 30px;
+}
+
+/* ===== Page Layout Sections ===== */
+.section {
+    padding: 60px 20px;
+}
+
+.light {
+    background-color: #ffffff; /* Brighter background for clean sections */
+}
+
+.section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section p {
+    max-width: 900px;
+    margin: 15px auto;
+    line-height: 1.7;
+    font-size: 18px;
+}
+
+/* ===== Responsive Cards Grid ===== */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1100px;
+    margin: 30px auto 0 auto;
+    padding: 0 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,.05);
+    transition: 0.3s ease;
+}
+
+.card h3 {
+    margin-bottom: 15px;
+    color: #0b3d91;
+}
+
+.card:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,.1);
+}
+
+/* ===== UI Elements & Buttons ===== */
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 28px;
+    background: #0077cc;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #005fa3;
+}
+
+blockquote {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    font-size: 1.2rem;
+    font-style: italic;
+    text-align: center;
+    color: #555;
+    border-left: 4px solid #0077cc;
+    background: #f9f9f9;
+}
+
+/* ===== Footer ===== */
+footer{
+    background: #0b3d91;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 60px;
+}
+/* =========================================
+   VERSION 8.0 - INSURANCE KNOWLEDGE CENTRE
+========================================= */
+
+
+/* Section Introduction */
+
+.section-intro {
+    max-width: 850px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+}
+
+
+
+/* =========================================
+   Insurance Comparison Table
+========================================= */
+
+.comparison-table {
+    overflow-x: auto;
+    margin-top: 2rem;
+}
+
+
+.comparison-table table {
+
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+}
+
+
+
+.comparison-table th {
+
+    background: #1a252f;
+    color: white;
+    padding: 15px;
+    text-align: left;
+
+}
+
+
+
+.comparison-table td {
+
+    padding: 15px;
+    border-bottom: 1px solid #eeeeee;
+    line-height: 1.6;
+
+}
+
+
+
+.comparison-table tr:nth-child(even) {
+
+    background: #f8f9fa;
+
+}
+
+
+
+/* =========================================
+   Insurance Knowledge Cards
+========================================= */
+
+
+.cards {
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+
+}
+
+
+
+.card {
+
+    background: #ffffff;
+
+    padding: 1.8rem;
+
+    border-radius: 12px;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,0.08);
+
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+
+}
+
+
+
+.card:hover {
+
+    transform: translateY(-6px);
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,0.12);
+
+}
+
+
+
+.card h3 {
+
+    margin-bottom: 1rem;
+
+}
+
+
+
+.card p {
+
+    line-height: 1.7;
+
+}
+
+
+
+/* =========================================
+   Buttons
+========================================= */
+
+
+.card button,
+.card a,
+.section a {
+
+
+    display: inline-block;
+
+    margin-top: 1rem;
+
+    padding: 10px 18px;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    border: none;
+
+
+}
+
+
+
+/* =========================================
+   FAQ
+========================================= */
+
+
+.faq {
+
+    max-width: 900px;
+
+    margin: auto;
+
+}
+
+
+.faq h3 {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    cursor: pointer;
+
+}
+
+
+.faq-icon {
+
+    font-size: 1.5rem;
+    font-weight: bold;
+
+}
+
+
+
+.faq p {
+
+    padding: 10px 15px;
+
+    line-height: 1.7;
+
+}
+
+
+
+
+
+
+/* =========================================
+   Insurance CTA
+========================================= */
+
+
+.section:last-of-type {
+
+    text-align: center;
+
+}
+
+
+
+
+
+/* =========================================
+   Mobile Optimisation
+========================================= */
+
+
+@media(max-width:768px){
+
+
+.comparison-table table {
+
+    font-size: 14px;
+
+}
+
+
+.card {
+
+    padding: 1.3rem;
+
+}
+
+
+.hero h2 {
+
+    font-size: 2rem;
+
+}
+
+}
+/* Insurance Page Compact Layout */
+
+.section {
+
+    padding: 2.5rem 0;
+
+}
+
+
+.section h2 {
+
+    margin-bottom: 1rem;
+
+}
+
+
+.section p {
+
+    margin-bottom: 1rem;
+
+}
+
+
+.cards {
+
+    gap: 1.2rem;
+
+}
+/* =========================================
+   Version 8.1 - Insurance UX Improvements
+========================================= */
+
+
+/* Compact Section Spacing */
+
+.section {
+
+    padding: 2.5rem 0;
+
+}
+
+
+.section h2 {
+
+    margin-bottom: 1rem;
+
+}
+
+
+
+.section p {
+
+    margin-bottom: 1rem;
+
+}
+
+
+
+/* Reduce card spacing */
+
+.cards {
+
+    gap: 1.2rem;
+
+}
+
+
+
+/* FAQ Interactive Style */
+
+.faq h3 {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    cursor: pointer;
+
+    user-select: none;
+
+}
+
+
+
+.faq-icon {
+
+    font-size: 1.6rem;
+
+    font-weight: bold;
+
+    margin-left: 1rem;
+
+}
+
+
+
+.faq p {
+
+    padding: 0.8rem 1rem;
+
+    line-height: 1.6;
+
+}
+/* =========================================
+   Version 8.2 Insurance Group Layout
+========================================= */
+
+
+.insurance-group {
+
+    background: #f8f9fa;
+
+    border-radius: 16px;
+
+    margin: 2rem auto;
+
+    padding: 2rem 1.5rem;
+
+}
+
+
+
+.insurance-group:nth-child(even) {
+
+    background: #ffffff;
+
+}
+
+
+
+.insurance-group .container {
+
+    max-width: 1200px;
+
+}
+.section-tag {
+
+    font-size: 0.85rem;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 0.5rem;
+
+}
+/* =========================================
+   Insurance Quick Navigation
+========================================= */
+
+
+.quick-nav {
+
+    background: #f8f9fa;
+
+}
+
+
+
+.quick-card {
+
+    text-align: center;
+
+    cursor: pointer;
+
+}
+
+
+
+.quick-card a {
+
+    background: #1a252f;
+
+    color: white;
+
+    padding: 10px 20px;
+
+    border-radius: 6px;
+
+    display: inline-block;
+
+    text-decoration: none;
+
+}
+
+
+
+.quick-card a:hover {
+
+    opacity: 0.85;
+
+}
+
+
+
+/* Smooth anchor movement */
+
+html {
+
+    scroll-behavior: smooth;
+
+}
+/* Insurance Quick Navigation Four Cards */
+
+.quick-nav .cards {
+
+    grid-template-columns: repeat(4, 1fr);
+
+}
+
+
+.quick-card {
+
+    min-height: 260px;
+
+}
+
+
+/* Tablet */
+
+@media(max-width: 900px){
+
+    .quick-nav .cards {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+}
+
+
+/* Mobile */
+
+@media(max-width: 600px){
+
+    .quick-nav .cards {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+/* =========================================================
+   Version 8.3 - Smooth FAQ Accordion Animation
+========================================================= */
+.faq p {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0 1rem; /* Collapse vertical padding when closed */
+    margin: 0;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.3s ease, 
+                padding 0.4s ease;
+}
+
+/* The expansion state triggered by JavaScript */
+.faq p.is-open {
+    max-height: 400px; /* Safe upper bound limit for text content */
+    opacity: 1;
+    padding: 0.8rem 1rem; /* Restore padding smoothly */
+    margin-bottom: 1rem;
+}
+/* =========================================================
+   Version 8.5 - Navigation Polish & Floating Controls
+========================================================= */
+
+/* High-contrast elevation shadow applied when page is scrolled */
+nav.scrolled {
+    background: #062452; /* Shifts to a slightly deeper dark blue */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Floating Back-to-Top Toggle */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 46px;
+    height: 46px;
+    background-color: #0077cc;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1001;
+}
+
+/* State changes handled smoothly via JS active classes */
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background-color: #005fa3;
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+/* ===== Bilingual Navigation Toggle ===== */
+nav a.lang-toggle {
+    color: #0077cc; /* Starts with a distinct blue */
+    background: #ffffff; /* Sits in a clean white pill button */
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-left: 25px; /* Pushes it slightly away from normal nav links */
+    transition: all 0.3s ease;
+}
+
+nav a.lang-toggle:hover {
+    color: #ffffff;
+    background: #0077cc; /* Swaps colors on hover */
+    border-color: #0077cc;
+}
+
+/* Adjust alignment on mobile screens */
+@media (max-width: 768px) {
+    nav a.lang-toggle {
+        display: inline-block;
+        margin-top: 10px;
+        margin-left: 0;
+    }
+}
+/* ===== Navigation Dropdown Styles ===== */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #08306b; /* Matches your nav color */
+    min-width: 180px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    z-index: 1002;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    margin: 0;
+    text-align: left;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-content a:last-child {
+    border-bottom: none;
+}
+
+.dropdown-content a:hover {
+    background-color: #0b3d91; /* Highlight shade */
+    color: gold !important;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+/* ===== Bilingual Navbar Flex Layout ===== */
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-wrap: wrap;
+}
+
+/* Elegant Switcher Pill styling */
+nav a.lang-toggle {
+    background-color: #ffffff;
+    color: #0b3d91 !important; /* Standout bold font coloring */
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-left: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+nav a.lang-toggle:hover {
+    background-color: #gold;
+    color: #111e30 !important;
+    transform: translateY(-1px);
+}

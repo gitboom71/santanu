@@ -1,0 +1,18 @@
+---
+// src/pages/[filename].astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout>
+    <Header />
+
+    <main class="container" style="padding: 4rem 0;">
+        <!-- Change this heading for each file (e.g., My Projects, Insurance Services, etc.) -->
+        <h2>Learning Page</h2>
+        <p>This page is ready for your amazing content!</p>
+    </main>
+
+    <Footer />
+</BaseLayout>

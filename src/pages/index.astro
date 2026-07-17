@@ -1,17 +1,102 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro'; // 1. Add this import line!
+import Footer from '../components/Footer.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Home">
+    
+    <!-- Header & Navigation component loaded here -->
+    <Header />
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <!-- Left Side Text -->
+            <div class="hero-text">
+                <h2>Building Trust Through Knowledge</h2>
+                <p>
+                    Welcome to <strong>The Santanu Initiative</strong>.
+                    A place where Technology, Insurance and Lifelong Learning
+                    come together to help individuals and families make informed decisions.
+                </p>
+                <a href="about.html" class="btn">
+                    Learn More About Me
+                </a>
+            </div>
+            <!-- Right Side Image -->
+            <div class="hero-image">
+                <img src="/images/DP_for_wapp.png" alt="Santanu Mukherjee Logo">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Preview Section -->
+    <section class="section">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>
+                Hello! I'm <strong>Santanu Mukherjee</strong>,
+                an IT Professional, Insurance Advisor and Lifelong Learner
+                with nearly three decades of experience in Information Technology.
+            </p>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="section light">
+        <div class="container">
+            <h2>My Mission</h2>
+            <p>
+                To simplify insurance, promote financial awareness,
+                and inspire continuous learning through technology,
+                honesty and trust.
+            </p>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="section">
+        <div class="container">
+            <div class="cards">
+                <div class="card">
+                    <h3>Nearly 3 Decades</h3>
+                    <p>Information Technology</p>
+                </div>
+                <div class="card">
+                    <h3>Lifelong</h3>
+                    <p>Learning</p>
+                </div>
+                <div class="card">
+                    <h3>Trust • Knowledge</h3>
+                    <p>Service</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Focus Areas Section -->
+    <section class="section light">
+        <div class="container">
+            <h2>Focus Areas</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3>Technology</h3>
+                    <p>Exploring web development, programming and digital skills.</p>
+                </div>
+                <div class="card">
+                    <h3>Insurance</h3>
+                    <p>Helping families understand life and health insurance through education.</p>
+                </div>
+                <div class="card">
+                    <h3>Learning</h3>
+                    <p>Sharing knowledge, experiences and useful resources for continuous growth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer component loaded here -->
+    <Footer />
+
+</BaseLayout>

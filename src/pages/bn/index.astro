@@ -1,0 +1,17 @@
+---
+// src/pages/bn/index.astro
+import BaseLayout from '../../layouts/BaseLayout.astro'; // Added extra ../
+import Header from '../../components/Header.astro';     // Added extra ../
+import Footer from '../../components/Footer.astro';     // Added extra ../
+---
+
+<BaseLayout>
+    <Header />
+
+    <main class="container" style="padding: 4rem 0;">
+        <h2>স্বাগতম (Welcome)</h2>
+        <p>This is the Bengali version of your site!</p>
+    </main>
+
+    <Footer />
+</BaseLayout>
