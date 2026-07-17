@@ -1,20 +1,141 @@
 ---
-// src/pages/about.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<BaseLayout title="About">
-    <Header />
+<BaseLayout 
+  title="About Santanu Mukherjee | IT Professional & Insurance Advisor" 
+  description="Learn about Santanu Mukherjee, an IT Professional with nearly three decades of experience, Insurance Advisor and lifelong learner behind Santanu's Space."
+>
 
-    <main class="container" style="padding: 4rem 0;">
-        <h2>About Santanu Mukherjee</h2>
-        <p>
-            This is your brand-new About page! With nearly three decades of IT experience, 
-            this space will tell your story, your background, and your vision.
-        </p>
-    </main>
+  <!-- About Hero -->
+  <section class="hero">
+    <div class="container">
+      <h2>About Me</h2>
+      <p>
+        Technology Professional • Insurance Advisor • Lifelong Learner
+      </p>
+    </div>
+  </section>
 
-    <Footer />
+  <!-- Who I Am -->
+  <section class="section">
+    <div class="container">
+      <h2>Who I Am</h2>
+      <p>Hello, I'm Santanu Mukherjee.</p>
+      <p>
+        I have spent nearly three decades in Information Technology,
+        gaining experience in software, problem solving and continuous
+        learning.
+      </p>
+      <p>
+        Alongside technology, I have chosen to work as an Insurance
+        Advisor because financial protection is one of the meaningful
+        ways to serve people.
+      </p>
+      <p>
+        Santanu's Space brings together Technology, Insurance
+        and Learning with a commitment to lifelong growth.
+      </p>
+    </div>
+  </section>
+
+  <!-- Journey -->
+  <section class="section light">
+    <div class="container">
+      <h2>My Journey</h2>
+      <p>Technology taught me structured thinking.</p>
+      <p>Insurance taught me the importance of understanding people's needs.</p>
+      <p>Learning taught me that growth never ends.</p>
+    </div>
+  </section>
+
+  <!-- Why Insurance -->
+  <section class="section">
+    <div class="container">
+      <h2>Why Insurance</h2>
+      <p>Insurance is not simply about policies.</p>
+      <p>
+        It is about protecting families, planning for the future,
+        and creating financial confidence.
+      </p>
+      <p>My goal is to help people understand before they decide.</p>
+    </div>
+  </section>
+
+  <!-- Why Technology -->
+  <section class="section light">
+    <div class="container">
+      <h2>Why Technology</h2>
+      <p>
+        Technology is constantly changing.
+        Learning never stops.
+      </p>
+      <p>
+        My IT background helps me approach challenges with curiosity,
+        discipline and structured thinking.
+      </p>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="section">
+    <div class="container">
+      <h2>Core Values</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Trust</h3>
+          <p>Relationships begin with trust.</p>
+        </div>
+        <div class="card">
+          <h3>Knowledge</h3>
+          <p>Learning creates confidence.</p>
+        </div>
+        <div class="card">
+          <h3>Service</h3>
+          <p>Helping people comes before selling.</p>
+        </div>
+        <div class="card">
+          <h3>Lifelong Learning</h3>
+          <p>Every day is an opportunity to improve.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission -->
+  <section class="section light">
+    <div class="container">
+      <h2>My Mission</h2>
+      <p>
+        To combine technology, financial awareness and continuous
+        learning to create meaningful value for people and society.
+      </p>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="section cta">
+    <div class="container">
+      <h2>Let's Learn Together</h2>
+      <p>
+        Thank you for visiting Santanu's Space.
+        I invite you to explore my journey, projects,
+        and continuous learning.
+      </p>
+      <a href="/" class="btn">Back to Home</a>
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="section">
+    <div class="container">
+      <blockquote>
+        "Learning is a lifelong journey. Technology empowers us, and
+        insurance helps us protect what matters most."
+      </blockquote>
+    </div>
+  </section>
+
 </BaseLayout>
