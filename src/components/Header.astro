@@ -27,15 +27,35 @@ const clean = (path: string) => path.replace(/\/$/, '') || '/';
 </header>
 
 <nav>
-    {navItems.map((item) => (
-        <a 
-            href={item.url} 
-            // /* We use the clean() helper here to compare both paths safely */
-            class={clean(currentPath) === clean(item.url) ? 'active' : ''}
-        >
-            {item.name}
-        </a>
-    ))}
+    {navItems.map((item) => {
+        // Smart Check: Active if exact match, OR if it's the Insurance tab and we are on a sub-insurance page
+        const isActive = clean(currentPath) === clean(item.url) || 
+                         (item.name === 'Insurance' && currentPath.includes('insurance'));
+
+        // If the item is Insurance, render it with the version 8.5 dropdown wrapper
+        if (item.name === 'Insurance') {
+            return (
+                <div class="dropdown">
+                    <a href={item.url} class={isActive ? 'active' : ''}>
+                        {item.name} ▾
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="/insurance">Insurance Hub</a>
+                        <a href="/health-insurance">Health Insurance</a>
+                        <a href="/life-insurance">Life Insurance</a>
+                    </div>
+                </div>
+            );
+        }
+
+        // For all other standard items, render your classic clean link
+        return (
+            <a href={item.url} class={isActive ? 'active' : ''}>
+                {item.name}
+            </a>
+        );
+    })}
     
+    <!-- Language Toggle Pill pointing to the localized path -->
     <a href="/bn" class="lang-toggle" title="বাংলা সংস্করণ">বাংলা</a>
 </nav>
