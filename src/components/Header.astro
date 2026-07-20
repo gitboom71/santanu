@@ -14,6 +14,25 @@ const currentPath = Astro.url.pathname;
 
 // A quick helper function to strip trailing slashes so comparisons always match
 const clean = (path: string) => path.replace(/\/$/, '') || '/';
+
+// 1. Structural Check: Is the user currently inside the Bengali directory?
+const isBengali = currentPath.startsWith('/bn') || currentPath.includes('/bn/');
+
+// 2. Dynamic Link Localizer: Smart routes depending on current location
+const getLocalizedUrl = (url: string) => {
+    if (!isBengali) return url;
+    if (url === '/') return '/bn'; // Bengali Home base
+    return `/bn${url}`;            // Prefixes /bn onto other sub-pages
+};
+
+// 3. Perfect Language Switch Matrix: Evaluates current path to route to cross-language twin
+// Example: Clicking the pill on /bn/about takes you directly to /about, and vice-versa!
+const toggleUrl = isBengali 
+    ? currentPath.replace(/^\/bn/, '') || '/' 
+    : (currentPath === '/' ? '/bn' : `/bn${currentPath}`);
+
+const toggleLabel = isBengali ? 'English' : 'বাংলা';
+const toggleTitle = isBengali ? 'Switch to English' : 'বাংলা সংস্করণ';
 ---
 
 <!-- Header -->
@@ -28,34 +47,36 @@ const clean = (path: string) => path.replace(/\/$/, '') || '/';
 
 <nav>
     {navItems.map((item) => {
-        // Smart Check: Active if exact match, OR if it's the Insurance tab and we are on a sub-insurance page
-        const isActive = clean(currentPath) === clean(item.url) || 
+        // Compute the proper localized path based on environment context
+        const localizedUrl = getLocalizedUrl(item.url);
+        
+        // Match active status against the computed localized path
+        const isActive = clean(currentPath) === clean(localizedUrl) || 
                          (item.name === 'Insurance' && currentPath.includes('insurance'));
 
-        // If the item is Insurance, render it with the version 8.5 dropdown wrapper
+        // Handle Insurance dropdown configuration cleanly without repeating links
         if (item.name === 'Insurance') {
             return (
                 <div class="dropdown">
-                    <a href={item.url} class={isActive ? 'active' : ''}>
+                    <a href={localizedUrl} class={isActive ? 'active' : ''}>
                         {item.name} ▾
                     </a>
                     <div class="dropdown-content">
-                        {/* <a href="/insurance">Insurance Hub</a> */}
-                        <a href="/health-insurance">Health Insurance</a>
-                        <a href="/life-insurance">Life Insurance</a>
+                        <a href={getLocalizedUrl('/health-insurance')}>Health Insurance</a>
+                        <a href={getLocalizedUrl('/life-insurance')}>Life Insurance</a>
                     </div>
                 </div>
             );
         }
 
-        // For all other standard items, render your classic clean link
+        // Standard Navigation Output
         return (
-            <a href={item.url} class={isActive ? 'active' : ''}>
+            <a href={localizedUrl} class={isActive ? 'active' : ''}>
                 {item.name}
             </a>
         );
     })}
     
-    <!-- Language Toggle Pill pointing to the localized path -->
-    <a href="/bn" class="lang-toggle" title="বাংলা সংস্করণ">বাংলা</a>
+    <!-- Intelligent Global Toggle Pill -->
+    <a href={toggleUrl} class="lang-toggle" title={toggleTitle}>{toggleLabel}</a>
 </nav>
