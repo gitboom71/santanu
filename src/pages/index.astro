@@ -1,12 +1,18 @@
 ---
+// src/pages/index.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro'; // 1. Add this import line!
+import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+
+// Import the translation database
+import { homepageTranslations } from '../utils/i18n.js';
+
+// Select the English dataset
+const t = homepageTranslations.en;
 ---
 
-<BaseLayout title="Home">
+<BaseLayout title={t.title}>
     
-    <!-- Header & Navigation component loaded here -->
     <Header />
 
     <!-- Hero Section -->
@@ -14,14 +20,10 @@ import Footer from '../components/Footer.astro';
         <div class="container hero-content">
             <!-- Left Side Text -->
             <div class="hero-text">
-                <h2>Building Trust Through Knowledge</h2>
-                <p>
-                    Welcome to <strong>Santanu's Space</strong>.
-                    A place where Technology, Insurance and Lifelong Learning
-                    come together to help individuals and families make informed decisions.
-                </p>
-                <a href="about.html" class="btn">
-                    Learn More About Me
+                <h2>{t.heroTitle}</h2>
+                <p>{t.heroText}</p>
+                <a href="/about" class="btn">
+                    {t.heroCta}
                 </a>
             </div>
             <!-- Right Side Image -->
@@ -34,24 +36,16 @@ import Footer from '../components/Footer.astro';
     <!-- About Preview Section -->
     <section class="section">
         <div class="container">
-            <h2>About Me</h2>
-            <p>
-                Hello! I'm <strong>Santanu Mukherjee</strong>,
-                an IT Professional, Insurance Advisor and Lifelong Learner
-                with nearly three decades of experience in Information Technology.
-            </p>
+            <h2>{t.aboutTitle}</h2>
+            <p>{t.aboutText}</p>
         </div>
     </section>
 
     <!-- Mission Section -->
     <section class="section light">
         <div class="container">
-            <h2>My Mission</h2>
-            <p>
-                To simplify insurance, promote financial awareness,
-                and inspire continuous learning through technology,
-                honesty and trust.
-            </p>
+            <h2>{t.missionTitle}</h2>
+            <p>{t.missionText}</p>
         </div>
     </section>
 
@@ -60,16 +54,16 @@ import Footer from '../components/Footer.astro';
         <div class="container">
             <div class="cards">
                 <div class="card">
-                    <h3>Nearly 3 Decades</h3>
-                    <p>Information Technology</p>
+                    <h3>{t.stat1Title}</h3>
+                    <p>{t.stat1Desc}</p>
                 </div>
                 <div class="card">
-                    <h3>Lifelong</h3>
-                    <p>Learning</p>
+                    <h3>{t.stat2Title}</h3>
+                    <p>{t.stat2Desc}</p>
                 </div>
                 <div class="card">
-                    <h3>Trust • Knowledge</h3>
-                    <p>Service</p>
+                    <h3>{t.stat3Title}</h3>
+                    <p>{t.stat3Desc}</p>
                 </div>
             </div>
         </div>
@@ -78,25 +72,24 @@ import Footer from '../components/Footer.astro';
     <!-- Focus Areas Section -->
     <section class="section light">
         <div class="container">
-            <h2>Focus Areas</h2>
+            <h2>{t.focusTitle}</h2>
             <div class="cards">
                 <div class="card">
-                    <h3>Technology</h3>
-                    <p>Exploring web development, programming and digital skills.</p>
+                    <h3>{t.focus1Title}</h3>
+                    <p>{t.focus1Desc}</p>
                 </div>
                 <div class="card">
-                    <h3>Insurance</h3>
-                    <p>Helping families understand life and health insurance through education.</p>
+                    <h3>{t.focus2Title}</h3>
+                    <p>{t.focus2Desc}</p>
                 </div>
                 <div class="card">
-                    <h3>Learning</h3>
-                    <p>Sharing knowledge, experiences and useful resources for continuous growth.</p>
+                    <h3>{t.focus3Title}</h3>
+                    <p>{t.focus3Desc}</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer component loaded here -->
     <Footer />
 
 </BaseLayout>
