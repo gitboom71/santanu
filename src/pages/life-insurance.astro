@@ -1,0 +1,132 @@
+---
+// src/pages/life-insurance.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import InsuranceNav from '../components/InsuranceNav.astro';
+
+// Link the shared master styles
+import '../styles/insurance.css';
+
+const pageTitle = "Life Insurance Protection | The Santanu Initiative";
+const pageDescription = "Explore term insurance, endowment alternatives, riders, and financial protection assets.";
+
+const policyCategories = [
+  {
+    title: "Term Insurance",
+    desc: "Pure, low-cost protection. Pays a massive lump sum to nominees if death occurs during the policy term. No maturity returns."
+  },
+  {
+    title: "Endowment Plans",
+    desc: "Combines insurance protection with guaranteed savings. Provides a lump sum payout on maturity or in the event of demise."
+  },
+  {
+    title: "ULIPs",
+    desc: "Unit-Linked Insurance Plans. A hybrid product where a portion of your premium goes toward life coverage and the rest is invested in market equities."
+  }
+];
+
+const comparisonMetrics = [
+  {
+    parameter: "Premium Cost",
+    term: "Extremely Low (Affordable)",
+    endowment: "Significantly Higher"
+  },
+  {
+    parameter: "Maturity Benefit",
+    term: "None (Zero return unless TROP selected)",
+    endowment: "Guaranteed Sum Assured + Accrued Bonuses"
+  },
+  {
+    parameter: "Primary Focus",
+    term: "High-value income replacement",
+    endowment: "Disciplined, long-term wealth creation"
+  }
+];
+
+const faqs = [
+  {
+    question: "What is the Claim Settlement Ratio (CSR)?",
+    answer: "CSR shows the percentage of death claims an insurance company has successfully paid out out of every 100 claims received. Always look for a provider with a CSR higher than 97%."
+  },
+  {
+    question: "What are Policy Riders?",
+    answer: "Riders are optional add-on benefits you attach to your base policy for an extra fee, such as Critical Illness or Accidental Death benefits."
+  }
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <Header />
+
+  <!-- 1. Drop your unified smart subnavigation component right here -->
+  <InsuranceNav />
+
+  <!-- ========================== POLICY CATEGORIES ========================== -->
+  <!-- Changed ID to 'types' to sync perfectly with your dynamic subnav link -->
+  <section id="types" class="section">
+    <div class="container">
+      <span class="section-tag">Financial Protection</span>
+      <h2>Securing Your Family's Future</h2>
+      <p class="section-intro">Life insurance ensures that your financial liabilities don't cascade down to your family members in your absence.</p>
+      
+      <div class="cards">
+        {policyCategories.map((card) => (
+          <div class="card">
+            <h3>{card.title}</h3>
+            <p>{card.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== KEY METRICS TABLE ========================== -->
+  <!-- Changed ID to 'eligibility' to sync perfectly with your dynamic subnav link -->
+  <section id="eligibility" class="section light">
+    <div class="container">
+      <h2>What to Check: Term vs. Endowment</h2>
+      <div class="comparison-table">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Pure Term Plan</th>
+                <th>Endowment / LIC Savings Plan</th>
+              </tr>
+            </thead>
+            <tbody>
+              {comparisonMetrics.map((row) => (
+                <tr>
+                  <td><strong>{row.parameter}</strong></td>
+                  <td>{row.term}</td>
+                  <td>{row.endowment}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== FAQs ========================== -->
+  <section id="faq" class="section">
+    <div class="container">
+      <h2>Life Insurance FAQs</h2>
+      <div class="faq">
+        {faqs.map((item) => (
+          <div class="faq-block">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<script is:inline src="/js/insurance.js"></script>

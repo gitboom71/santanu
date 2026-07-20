@@ -1,18 +1,322 @@
 ---
-// src/pages/[filename].astro
+// src/pages/insurance.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+// Link the shared master styles
+import '../styles/insurance.css';
+import InsuranceNav from '../components/InsuranceNav.astro';
+
+// Page Metadata matching your original HTML descriptions
+const pageTitle = "Insurance Learning Centre | Life & Health Insurance Awareness";
+const pageDescription = "Understand life insurance, health insurance, LIC plans, health insurance concepts, riders, calculators and insurance awareness resources through The Santanu Initiative.";
+
+// Clean data structures for repetitive layout loops to maximize scannability and editing
+const quickNavCategories = [
+  { 
+    title: "Life Insurance", 
+    href: "/life-insurance", 
+    desc: "Understand life protection, LIC plans, riders and planning concepts.", 
+    class: "card-life", 
+    btnClass: "btn-life", 
+    btnText: "Explore Life Plans →",
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 12a11.02 11.02 0 0 0-22 0zm-11-8v8"></path><path d="M12 12a2 2 0 0 0 4 0"></path><path d="M12 14v6a2 2 0 0 0 2 2"></path></svg>`
+  },
+  { 
+    title: "Health Insurance", 
+    href: "/health-insurance", 
+    desc: "Learn about health covers, claims, benefits and important terms.", 
+    class: "card-health", 
+    btnClass: "btn-health", 
+    btnText: "Explore Health Plans →",
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M12 8v8"></path><path d="M8 12h8"></path></svg>`
+  },
+  { 
+    title: "Calculators", 
+    href: "#calculators", 
+    desc: "Estimate protection needs using simple planning tools.", 
+    class: "card-calc", 
+    btnClass: "btn-calc", 
+    btnText: "Explore Tools →",
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="22" x2="9" y2="16"></line><line x1="15" y1="22" x2="15" y2="16"></line><line x1="9" y1="16" x2="15" y2="16"></line><path d="M8 6h8"></path><path d="M8 10h8"></path></svg>`
+  },
+  { 
+    title: "Resources", 
+    href: "#resources", 
+    desc: "Guides, FAQs and useful insurance learning materials.", 
+    class: "card-res", 
+    btnClass: "btn-res", 
+    btnText: "Explore Materials →",
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>`
+  }
+];
+
+const comparisonRows = [
+  { feature: "Purpose", health: "Medical expenses and hospitalisation support during life.", life: "Financial protection for family after the policyholder's death." },
+  { feature: "Main Need", health: "Protect current savings from medical emergencies.", life: "Protect future income and family responsibilities." },
+  { feature: "Claim Trigger", health: "Hospitalisation, treatment or eligible medical events.", life: "Death of the insured person as per policy terms." },
+  { feature: "Benefit Type", health: "Cashless treatment or reimbursement.", life: "Financial benefit paid to nominee." },
+  { feature: "Term Length", health: "Short-term (renewed annually).", life: "Long-term (typically 10 to 30+ years, or whole life)." }
+];
+
+const faqs = [
+  { q: "Why should insurance be considered early?", a: "Starting early generally allows longer protection periods and may provide cost advantages depending on the product." },
+  { q: "Is insurance an investment?", a: "The primary purpose of insurance is protection. Different products may have different savings features." },
+  { q: "Can one insurance policy solve every need?", a: "Life insurance and health insurance solve different financial risks and should be understood separately." },
+  { q: "What is the difference between Term Life and Endowment plans in India?", a: "Term insurance offers high protection cover at affordable premiums without maturity returns. Endowment plans combine life cover with guaranteed or variable savings payouts over time." },
+  { q: "How does Cashless Hospitalization work in Indian health insurance?", a: "Insurers tie up with network hospitals to settle medical bills directly. This minimizes your out-of-pocket expenses during a medical emergency." },
+  { q: "Why should I add a Critical Illness rider to my base policy?", a: "A critical illness rider provides a lump-sum payout upon diagnosing major diseases like cancer or heart attack. This money helps cover lifestyle modifications and lost income during recovery." },
+  { q: "Can I claim tax benefits on life and health insurance premiums?", a: "Yes, premiums paid qualify for tax deductions under the Income Tax Act. Section 80C covers life insurance premiums, while Section 80D applies to health insurance." },
+  { q: "What is a Pre-Existing Disease (PED) and its waiting period?", a: "PED refers to any health condition you have before buying a policy. Indian insurers typically require a waiting period of 1 to 4 years before covering these conditions." }
+];
 ---
 
-<BaseLayout>
-    <Header />
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <Header />
 
-    <main class="container" style="padding: 4rem 0;">
-        <!-- Change this heading for each file (e.g., My Projects, Insurance Services, etc.) -->
-        <h2>Insurance Page</h2>
-        <p>This page is ready for your amazing content!</p>
-    </main>
+  <!-- ========================== INSURANCE HERO ========================== -->
+  <section class="hero">
+    <div class="container">
+      <h2>Insurance Knowledge Centre</h2>
+      <p>Understanding protection before making important financial decisions.</p>
+    </div>
+  </section>
 
-    <Footer />
+  <!-- ========================== QUICK NAVIGATION ========================== -->
+  <section class="section quick-nav">
+    <div class="container">
+      <h2>Explore Insurance Learning</h2>
+      <p class="quick-nav-intro">Choose a topic and jump directly to the area you want to understand.</p>
+
+      <div class="cards-wrapper">
+        {quickNavCategories.map((card) => (
+          <div class={`insurance-card ${card.class}`}>
+            <div class="card-icon" set:html={card.iconSvg} />
+            <h3>{card.title}</h3>
+            <p>{card.desc}</p>
+            <a href={card.href} class={`card-btn ${card.btnClass}`}>{card.btnText}</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== WHY INSURANCE MATTERS ========================== -->
+  <section class="section insurance-group">
+    <div class="container">
+      <h2>Why Insurance Matters</h2>
+      <p class="section-intro">
+        Insurance is not just about buying a policy. It is about protecting your family's financial stability, your health, your dreams and your future responsibilities.
+      </p>
+
+      <div class="cards">
+        <div class="card">
+          <h3>🛡️ Life Insurance</h3>
+          <p>Life insurance creates a financial safety net for your family. It helps replace lost income, protect goals and provide stability when life takes an unexpected turn.</p>
+        </div>
+        <div class="card">
+          <h3>❤️ Health Insurance</h3>
+          <p>Health insurance protects your hard-earned savings from medical emergencies. A good health cover helps you focus on recovery rather than financial stress.</p>
+        </div>
+        <div class="card">
+          <h3>📘 Insurance Education</h3>
+          <p>With decades of IT experience and analytical thinking, my aim is to simplify insurance concepts so people can understand before choosing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== LIFE VS HEALTH GUIDE ========================== -->
+  <section class="section insurance-group">
+    <div class="container">
+      <h2>Life vs. Health: The Quick Guide</h2>
+      <p>Life Insurance and Health Insurance solve different problems. Understanding the difference is the first step towards proper protection.</p>
+
+      <div class="comparison-table">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>❤️ Health Insurance</th>
+                <th>🛡️ Life Insurance</th>
+              </tr>
+            </thead>
+            <tbody>
+              {comparisonRows.map((row) => (
+                <tr>
+                  <td><strong>{row.feature}</strong></td>
+                  <td>{row.health}</td>
+                  <td>{row.life}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== INSURANCE CHOICE CARDS ========================== -->
+  <section class="section insurance-group">
+    <div class="container">
+      <h2>Choose Your Insurance Area</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>🛡️ Life Insurance Learning</h3>
+          <p>Explore term plans, savings plans, whole life concepts, riders and LIC plan awareness.</p>
+          <a href="/life-insurance">Explore Life Insurance</a>
+        </div>
+        <div class="card">
+          <h3>❤️ Health Insurance Learning</h3>
+          <p>Understand health covers, family floater, cashless facilities, waiting periods and benefits.</p>
+          <a href="/health-insurance">Explore Health Insurance</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== INSURANCE CALCULATORS ========================== -->
+  <section class="section" id="calculators">
+    <div class="container">
+      <h2>Insurance Calculators</h2>
+      <p>Simple tools to understand your protection requirements.</p>
+
+      <div class="cards">
+        <div class="card">
+          <h3>🧮 Life Cover Calculator</h3>
+          <p>Estimate the approximate life cover needed to protect your family's future goals.</p>
+          <button disabled>Coming Soon</button>
+        </div>
+        <div class="card">
+          <h3>🏥 Health Cover Calculator</h3>
+          <p>Understand how medical inflation and family needs impact your health insurance requirement.</p>
+          <button disabled>Coming Soon</button>
+        </div>
+        <div class="card">
+          <h3>📊 Financial Planning Tools</h3>
+          <p>Future tools will include retirement planning, education goals and premium affordability checks.</p>
+          <button disabled>Coming Soon</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== LIC LEARNING CENTRE ========================== -->
+  <section class="section" id="life-learning">
+    <div class="container">
+      <h2>LIC Learning Centre</h2>
+      <p>Understanding LIC plans through simple explanations, not complicated policy language.</p>
+
+      <div class="cards">
+        <div class="card">
+          <h3>LIC Plan Understanding</h3>
+          <p>Learn how different LIC plans work, including protection plans, savings plans, whole life concepts and limited premium options.</p>
+        </div>
+        <div class="card">
+          <h3>Example: Jeevan Utsav</h3>
+          <p>Understand guaranteed income concepts, whole life protection, premium paying terms and suitability considerations.</p>
+        </div>
+        <div class="card">
+          <h3>Choosing the Right Approach</h3>
+          <p>The right plan depends on goals, income stability, family responsibilities and financial priorities.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== HEALTH INSURANCE SIMPLIFIED ========================== -->
+  <section class="section" id="health-learning">
+    <div class="container">
+      <h2>Health Insurance Simplified</h2>
+      <p>Important concepts explained in simple language.</p>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Individual vs Family Floater</h3>
+          <p>Understand which type of health cover may suit different family situations.</p>
+        </div>
+        <div class="card">
+          <h3>Cashless & Reimbursement</h3>
+          <p>Learn how hospital networks, claims and reimbursements work.</p>
+        </div>
+        <div class="card">
+          <h3>Important Features</h3>
+          <p>Waiting period, restoration benefit, no claim bonus and room rent limits explained.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== RIDERS ========================== -->
+  <section class="section insurance-group">
+    <div class="container">
+      <h2>Understanding Insurance Riders</h2>
+      <p>Riders provide additional protection options attached to a base insurance policy.</p>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Accidental Death Benefit</h3>
+          <p>Additional protection in case of accidental death, subject to policy terms.</p>
+        </div>
+        <div class="card">
+          <h3>Critical Illness Rider</h3>
+          <p>Provides financial support after diagnosis of covered critical illnesses.</p>
+        </div>
+        <div class="card">
+          <h3>Premium Waiver Benefit</h3>
+          <p>Helps continue policy benefits in specific situations defined by the policy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== FAQ ========================== -->
+  <section class="section insurance-group">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq">
+        {faqs.map((faq) => (
+          <h3>{faq.q}</h3>
+          <p>{faq.a}</p>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== RESOURCES ========================== -->
+  <section class="section" id="resources">
+    <div class="container">
+      <h2>Learning Resources</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Insurance Guides</h3>
+          <p>Simple explanations of insurance concepts and terminology.</p>
+        </div>
+        <div class="card">
+          <h3>Downloads</h3>
+          <p>Future worksheets, checklists and learning materials.</p>
+        </div>
+        <div class="card">
+          <h3>Useful Links</h3>
+          <p>Official insurance resources and customer services.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== CONTACT CTA ========================== -->
+  <section class="section insurance-group">
+    <div class="container">
+      <h2>Need Personal Guidance?</h2>
+      <p>Every family's situation is different. Understand your needs before selecting protection.</p>
+      <a href="/contact" class="cta-link">Contact Santanu</a>
+    </div>
+  </section>
+
+  <Footer />
 </BaseLayout>
+
+<!-- Client Side Script Implementation safely mounted directly into Astro -->
+<script is:inline src="/js/insurance.js"></script>
+

@@ -30,7 +30,7 @@ const clean = (path: string) => path.replace(/\/$/, '') || '/';
     {navItems.map((item) => (
         <a 
             href={item.url} 
-            /* We use the clean() helper here to compare both paths safely */
+            // /* We use the clean() helper here to compare both paths safely */
             class={clean(currentPath) === clean(item.url) ? 'active' : ''}
         >
             {item.name}

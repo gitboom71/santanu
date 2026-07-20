@@ -1,0 +1,108 @@
+---
+// src/components/InsuranceNav.astro
+const pathname = Astro.url.pathname;
+
+const isHealth = pathname.includes('health-insurance');
+const isLife = pathname.includes('life-insurance');
+const isHub = pathname.includes('insurance') && !isHealth && !isLife;
+---
+
+<!-- Changed from <nav> to <div> to bypass global style.css overrides -->
+<div class="insurance-subnav">
+  <div class="subnav-container">
+    
+    <!-- IF USER IS ON THE MAIN PORTAL HUB -->
+    {isHub && (
+      <a href="/" class="subnav-link">← Back to Home Front</a>
+      <a href="/health-insurance" class="subnav-link">Go to Health Insurance →</a>
+      <a href="/life-insurance" class="subnav-link">Go to Life Insurance →</a>
+    )}
+
+    <!-- IF USER IS ON THE HEALTH INSURANCE PAGE -->
+    {isHealth && (
+      <a href="/insurance" class="subnav-link return-hub">← Insurance Hub</a>
+      <a href="#concepts" class="subnav-link">Health Pillars</a>
+      <a href="#comparison" class="subnav-link">Plan Matrix</a>
+      <a href="#faq" class="subnav-link">FAQs</a>
+      <a href="/life-insurance" class="subnav-link switch-context">Switch to Life Insurance →</a>
+    )}
+
+    <!-- IF USER IS ON THE LIFE INSURANCE PAGE -->
+    {isLife && (
+      <a href="/insurance" class="subnav-link return-hub">← Insurance Hub</a>
+      <a href="#types" class="subnav-link active">Policy Categories</a>
+      <a href="#eligibility" class="subnav-link">Key Metrics</a>
+      <a href="#faq" class="subnav-link">Life FAQs</a>
+      <a href="/health-insurance" class="subnav-link switch-context">Switch to Health Insurance →</a>
+    )}
+
+  </div>
+</div>
+
+<style>
+  /* Clean, isolated sub-navigation styling */
+  .insurance-subnav {
+    background: #ffffff; /* Crisp white background separates it from the header */
+    border-bottom: 2px solid #e2e8f0;
+    padding: 12px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+  
+  .subnav-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+    align-items: center;
+  }
+
+  .subnav-link {
+    text-decoration: none;
+    color: #4a5568; /* Slate gray text */
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    padding: 4px 0;
+  }
+
+  .subnav-link:hover {
+    color: #0b3d91; /* Highlights using your primary branding blue */
+  }
+
+  /* Style for the current active page feature */
+  .subnav-link.active {
+    color: #0b3d91;
+    border-bottom: 2px solid #0b3d91;
+  }
+
+  .return-hub {
+    color: #0b3d91;
+    font-weight: bold;
+  }
+
+  /* Beautifully pushes the contextual toggle to the far right edge */
+  .switch-context {
+    margin-left: auto;
+    color: #0077cc;
+    background: #e6f4fe;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+  }
+
+  .switch-context:hover {
+    background: #0077cc;
+    color: #ffffff !important;
+  }
+
+  /* Mobile responsiveness adjustment */
+  @media(max-width: 768px) {
+    .switch-context {
+      margin-left: 0;
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>
