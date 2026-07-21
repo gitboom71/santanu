@@ -56,3 +56,75 @@ export const homepageTranslations = {
     focus3Desc: "ক্রমাগত বৃদ্ধির জন্য জ্ঞান, অভিজ্ঞতা এবং দরকারী সংস্থান শেয়ার করা।"
   }
 };
+// ============================================================================
+// CONTACT PAGE TRANSLATIONS (src/utils/i18n.js)
+// ============================================================================
+// This dictionary holds every word and phrase displayed on the Contact page.
+// To change any text on the Contact page, simply edit the text inside the quotes below.
+// ============================================================================
+
+export const contactTranslations = {
+  // --------------------------------------------------------------------------
+  // ENGLISH DICTIONARY
+  // --------------------------------------------------------------------------
+  en: {
+    // Page Title (Appears in the browser tab)
+    pageTitle: "Contact Me",
+    
+    // Main Section Headings
+    heading: "Get in Touch",
+    subheading: "Have a question about IT systems, insurance planning, or continuous learning? Feel free to reach out using the form below or through direct contact.",
+    
+    // Direct Contact Info Cards
+    emailLabel: "Email Me Directly",
+    emailValue: "santanu@santanumukherjee.com", // Adjust to your actual email
+    locationLabel: "Location",
+    locationValue: "Kolkata, West Bengal, India",
+    
+    // Contact Form Field Labels
+    formHeading: "Send a Message",
+    nameLabel: "Your Name",
+    namePlaceholder: "e.g., Rahul Sharma",
+    emailFormLabel: "Your Email Address",
+    emailPlaceholder: "e.g., rahul@example.com",
+    subjectLabel: "Subject",
+    subjectPlaceholder: "e.g., Question about Health Insurance",
+    messageLabel: "Message",
+    messagePlaceholder: "Write your message or inquiry here...",
+    
+    // Form Submit Button
+    submitButton: "Send Message"
+  },
+
+  // --------------------------------------------------------------------------
+  // BENGALI DICTIONARY (বাংলা সংস্করণ)
+  // --------------------------------------------------------------------------
+  bn: {
+    // Page Title (Appears in the browser tab)
+    pageTitle: "যোগাযোগ",
+    
+    // Main Section Headings
+    heading: "যোগাযোগ করুন",
+    subheading: "আইটি সিস্টেম, বীমা পরিকল্পনা, বা ক্রমাগত শিক্ষা সম্পর্কে কোনও প্রশ্ন আছে? নিচের ফর্মটি ব্যবহার করে বা সরাসরি আমার সাথে যোগাযোগ করুন।",
+    
+    // Direct Contact Info Cards
+    emailLabel: "সরাসরি ইমেল করুন",
+    emailValue: "santanu@santanumukherjee.com",
+    locationLabel: "অবস্থান",
+    locationValue: "কলকাতা, পশ্চিমবঙ্গ, ভারত",
+    
+    // Contact Form Field Labels
+    formHeading: "একটি বার্তা পাঠান",
+    nameLabel: "আপনার নাম",
+    namePlaceholder: "যেমন: রাহুল শর্মা",
+    emailFormLabel: "আপনার ইমেল ঠিকানা",
+    emailPlaceholder: "যেমন: rahul@example.com",
+    subjectLabel: "বিষয়",
+    subjectPlaceholder: "যেমন: স্বাস্থ্য বীমা সম্পর্কে প্রশ্ন",
+    messageLabel: "বার্তা",
+    messagePlaceholder: "আপনার বার্তা বা জিজ্ঞাসা এখানে লিখুন...",
+    
+    // Form Submit Button
+    submitButton: "বার্তা পাঠান"
+  }
+};
