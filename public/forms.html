@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Netlify Form Detection Helper</title>
+</head>
+<body>
+  <!-- 
+    This hidden form helps Netlify's build scanner register 
+    your contact form 100% reliably in Astro static builds.
+  -->
+  <form name="contact" data-netlify="true" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="text" name="subject" />
+    <textarea name="message"></textarea>
+  </form>
+</body>
+</html>
