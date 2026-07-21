@@ -2,56 +2,43 @@
 // ============================================================================
 // BENGALI CONTACT PAGE (src/pages/bn/contact.astro)
 // ============================================================================
-// This file renders the Bengali Contact page at: http://localhost:4321/bn/contact
-// ============================================================================
 
-// 1. IMPORT CORE LAYOUT COMPONENTS
-// Note: We use '../../' to step back TWO folders into the src/ root.
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-
-// 2. IMPORT TRANSLATION DICTIONARY
 import { contactTranslations } from '../../utils/i18n.js';
 
-// 3. SELECT BENGALI LANGUAGE KEY ('bn')
-// We grab the Bengali dictionary ('bn') and assign it to variable 't'
 const t = contactTranslations.bn;
 ---
 
-<!-- BaseLayout wraps the entire page and sets the browser tab title in Bengali -->
 <BaseLayout title={t.pageTitle}>
-    
-    <!-- Render Top Navigation Header (It will auto-detect the /bn route!) -->
     <Header />
 
-    <!-- Main Content Wrapper -->
     <main class="section light">
         <div class="container">
             
-            <!-- SECTION HEADER: Title and Introduction -->
             <div style="text-align: center; margin-bottom: 2.5rem;">
                 <h2 style="font-size: 2.2rem; color: #0b3d91; margin-bottom: 0.8rem;">{t.heading}</h2>
                 <p style="max-width: 650px; margin: 0 auto; color: #555; line-height: 1.6;">{t.subheading}</p>
             </div>
 
-            <!-- TWO-COLUMN GRID: Direct Info vs. Form -->
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
                 
-                <!-- LEFT COLUMN: Direct Contact Information Cards -->
                 <div style="display: flex; flex-direction: column; gap: 1.5rem;">
                     
-                    <!-- Email Info Card -->
-                    <div style="background: #ffffff; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0b3d91; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-                        <h3 style="margin-top: 0; color: #0b3d91; font-size: 1.1rem;">✉️ {t.emailLabel}</h3>
-                        <p style="margin: 0.5rem 0 0 0; color: #333; word-break: break-all;">
-                            <a href={`mailto:${t.emailValue}`} style="color: #0b3d91; text-decoration: none; font-weight: 600;">
-                                {t.emailValue}
-                            </a>
-                        </p>
+                    <div style="background: #ffffff; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0077b5; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                        <h3 style="margin-top: 0; color: #0077b5; font-size: 1.1rem;">🔗 {t.linkedinLabel}</h3>
+                        <p style="margin: 0.5rem 0 1rem 0; color: #555; font-size: 0.95rem; line-height: 1.5;">{t.linkedinText}</p>
+                        <a 
+                            href={t.linkedinUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            style="display: inline-block; padding: 0.5rem 1rem; background: #0077b5; color: white; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.9rem;"
+                        >
+                            {t.linkedinBtn} ↗
+                        </a>
                     </div>
 
-                    <!-- Location Info Card -->
                     <div style="background: #ffffff; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0b3d91; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
                         <h3 style="margin-top: 0; color: #0b3d91; font-size: 1.1rem;">📍 {t.locationLabel}</h3>
                         <p style="margin: 0.5rem 0 0 0; color: #333; font-weight: 500;">{t.locationValue}</p>
@@ -59,14 +46,17 @@ const t = contactTranslations.bn;
 
                 </div>
 
-                <!-- RIGHT COLUMN: Interactive Contact Form -->
                 <div style="background: #ffffff; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.06);">
                     <h3 style="margin-top: 0; color: #0b3d91; margin-bottom: 1.5rem;">{t.formHeading}</h3>
                     
-                    <!-- Form Element -->
-                    <form action="#" method="POST" style="display: flex; flex-direction: column; gap: 1.2rem;">
+                    <form 
+                        name="contact" 
+                        method="POST" 
+                        data-netlify="true" 
+                        style="display: flex; flex-direction: column; gap: 1.2rem;"
+                    >
+                        <input type="hidden" name="form-name" value="contact" />
                         
-                        <!-- Field 1: Name Input -->
                         <div style="display: flex; flex-direction: column; gap: 0.4rem;">
                             <label for="name" style="font-weight: 600; color: #333; font-size: 0.95rem;">{t.nameLabel}</label>
                             <input 
@@ -79,7 +69,6 @@ const t = contactTranslations.bn;
                             />
                         </div>
 
-                        <!-- Field 2: Email Input -->
                         <div style="display: flex; flex-direction: column; gap: 0.4rem;">
                             <label for="email" style="font-weight: 600; color: #333; font-size: 0.95rem;">{t.emailFormLabel}</label>
                             <input 
@@ -92,7 +81,6 @@ const t = contactTranslations.bn;
                             />
                         </div>
 
-                        <!-- Field 3: Subject Input -->
                         <div style="display: flex; flex-direction: column; gap: 0.4rem;">
                             <label for="subject" style="font-weight: 600; color: #333; font-size: 0.95rem;">{t.subjectLabel}</label>
                             <input 
@@ -105,7 +93,6 @@ const t = contactTranslations.bn;
                             />
                         </div>
 
-                        <!-- Field 4: Textarea Message Input -->
                         <div style="display: flex; flex-direction: column; gap: 0.4rem;">
                             <label for="message" style="font-weight: 600; color: #333; font-size: 0.95rem;">{t.messageLabel}</label>
                             <textarea 
@@ -118,7 +105,6 @@ const t = contactTranslations.bn;
                             ></textarea>
                         </div>
 
-                        <!-- Submit Button -->
                         <button 
                             type="submit" 
                             class="btn" 
@@ -134,7 +120,5 @@ const t = contactTranslations.bn;
         </div>
     </main>
 
-    <!-- Render Footer -->
     <Footer />
-
 </BaseLayout>

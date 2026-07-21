@@ -59,72 +59,69 @@ export const homepageTranslations = {
 // ============================================================================
 // CONTACT PAGE TRANSLATIONS (src/utils/i18n.js)
 // ============================================================================
-// This dictionary holds every word and phrase displayed on the Contact page.
-// To change any text on the Contact page, simply edit the text inside the quotes below.
-// ============================================================================
 
 export const contactTranslations = {
   // --------------------------------------------------------------------------
   // ENGLISH DICTIONARY
   // --------------------------------------------------------------------------
   en: {
-    // Page Title (Appears in the browser tab)
     pageTitle: "Contact Me",
-    
-    // Main Section Headings
     heading: "Get in Touch",
-    subheading: "Have a question about IT systems, insurance planning, or continuous learning? Feel free to reach out using the form below or through direct contact.",
+    subheading: "Have a question about IT systems, insurance planning, or continuous learning? Send a secure message below or connect with me professionally.",
     
-    // Direct Contact Info Cards
-    emailLabel: "Email Me Directly",
-    emailValue: "santanu@santanumukherjee.com", // Adjust to your actual email
+    // Left Column Info Cards
+    linkedinLabel: "Professional Network",
+    linkedinText: "Connect with me on LinkedIn for IT consulting and professional updates.",
+    linkedinBtn: "View LinkedIn Profile",
+    linkedinUrl: "https://www.linkedin.com/in/santanu-mukherjee/", // Replace with your actual URL if different
+    
     locationLabel: "Location",
     locationValue: "Kolkata, West Bengal, India",
     
-    // Contact Form Field Labels
-    formHeading: "Send a Message",
-    nameLabel: "Your Name",
+    // Form Fields (Right Column)
+    formHeading: "Send a Direct Message",
+    nameLabel: "Your Full Name",
     namePlaceholder: "e.g., Rahul Sharma",
     emailFormLabel: "Your Email Address",
     emailPlaceholder: "e.g., rahul@example.com",
     subjectLabel: "Subject",
     subjectPlaceholder: "e.g., Question about Health Insurance",
-    messageLabel: "Message",
+    messageLabel: "Your Message",
     messagePlaceholder: "Write your message or inquiry here...",
     
-    // Form Submit Button
-    submitButton: "Send Message"
+    // Form Submit Button & Status
+    submitButton: "Send Message via Secure Form"
   },
 
   // --------------------------------------------------------------------------
   // BENGALI DICTIONARY (বাংলা সংস্করণ)
   // --------------------------------------------------------------------------
   bn: {
-    // Page Title (Appears in the browser tab)
     pageTitle: "যোগাযোগ",
-    
-    // Main Section Headings
     heading: "যোগাযোগ করুন",
-    subheading: "আইটি সিস্টেম, বীমা পরিকল্পনা, বা ক্রমাগত শিক্ষা সম্পর্কে কোনও প্রশ্ন আছে? নিচের ফর্মটি ব্যবহার করে বা সরাসরি আমার সাথে যোগাযোগ করুন।",
+    subheading: "আইটি সিস্টেম, বীমা পরিকল্পনা, বা শিক্ষার বিষয়ে কোনো প্রশ্ন আছে? নিচে একটি সুরক্ষিত বার্তা পাঠান অথবা পেশাদারভাবে সংযুক্ত হন।",
     
-    // Direct Contact Info Cards
-    emailLabel: "সরাসরি ইমেল করুন",
-    emailValue: "santanu@santanumukherjee.com",
+    // Left Column Info Cards
+    linkedinLabel: "পেশাদার নেটওয়ার্ক",
+    linkedinText: "আইটি কনসাল্টিং এবং পেশাদার আপডেটের জন্য লিঙ্কডইনে সংযোগ করুন।",
+    linkedinBtn: "লিঙ্কডইন প্রোফাইল দেখুন",
+    linkedinUrl: "https://www.linkedin.com/in/santanu-mukherjee/",
+    
     locationLabel: "অবস্থান",
     locationValue: "কলকাতা, পশ্চিমবঙ্গ, ভারত",
     
-    // Contact Form Field Labels
+    // Form Fields (Right Column)
     formHeading: "একটি বার্তা পাঠান",
-    nameLabel: "আপনার নাম",
+    nameLabel: "আপনার পূর্ণ নাম",
     namePlaceholder: "যেমন: রাহুল শর্মা",
     emailFormLabel: "আপনার ইমেল ঠিকানা",
     emailPlaceholder: "যেমন: rahul@example.com",
     subjectLabel: "বিষয়",
     subjectPlaceholder: "যেমন: স্বাস্থ্য বীমা সম্পর্কে প্রশ্ন",
-    messageLabel: "বার্তা",
+    messageLabel: "আপনার বার্তা",
     messagePlaceholder: "আপনার বার্তা বা জিজ্ঞাসা এখানে লিখুন...",
     
-    // Form Submit Button
+    // Form Submit Button & Status
     submitButton: "বার্তা পাঠান"
   }
 };
