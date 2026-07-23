@@ -1,0 +1,61 @@
+---
+/**
+ * Path: src/pages/bn/health-insurance/[slug].astro
+ */
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const allHealthPosts = await getCollection('health');
+
+  // 1. Get unique base slugs (e.g. "family-floater" from "family-floater-en.md" / "family-floater-bn.md")
+  const uniqueSlugs = [
+    ...new Set(allHealthPosts.map(p => p.id.replace(/\.md$/, '').replace(/-(en|bn)$/, '')))
+  ];
+
+  return uniqueSlugs.map(slug => {
+    // 2. Look for the Bengali version first
+    const bnPost = allHealthPosts.find(p => p.id === `${slug}-bn.md` || p.id === `${slug}-bn`);
+    
+    // 3. Fallback to English version if Bengali doesn't exist yet
+    const enPost = allHealthPosts.find(p => p.id === `${slug}-en.md` || p.id === `${slug}-en` || p.id === `${slug}.md`);
+
+    return {
+      params: { slug },
+      props: { 
+        post: bnPost || enPost, 
+        isFallback: !bnPost && !!enPost 
+      },
+    };
+  });
+}
+
+const { post, isFallback } = Astro.props;
+
+if (!post) {
+  return Astro.redirect('/404');
+}
+
+const { Content } = await render(post);
+---
+
+<BaseLayout title={post.data.title} description={post.data.description} lang="bn">
+  <Header />
+
+  <main style="max-width: 800px; margin: 3rem auto; padding: 0 1.25rem;">
+    <article class="markdown-body">
+      {isFallback && (
+        <div style="background: #fef3c7; border: 1px solid #f59e0b; color: #92400e; padding: 0.85rem; border-radius: 8px; margin-bottom: 1.5rem;">
+          ℹ️ এই পৃষ্ঠাটি বর্তমানে কেবল ইংরেজিতে উপলব্ধ। (This page is currently available in English only.)
+        </div>
+      )}
+
+      <h1>{post.data.title}</h1>
+      <Content />
+    </article>
+  </main>
+
+  <Footer />
+</BaseLayout>

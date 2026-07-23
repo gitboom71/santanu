@@ -5,7 +5,7 @@ lang: "en"
 category: "health-insurance"
 ---
 
-# Family Floater Health Insurance
+<!-- Family Floater Health Insurance -->
 ## A Quick Overview
 
 **A family floater** is a health insurance plan that extends the coverage to the entire family rather than just an individual. A floater plan brings all the members of the family under an umbrella cover, allowing each member to access benefits from a larger common pool. Moreover, such policies also provide convenience to policyholders by allowing them to get coverage for each family member for a single premium.
