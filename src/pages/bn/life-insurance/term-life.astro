@@ -1,0 +1,90 @@
+---
+/**
+ * ============================================================================
+ * FILE: src/pages/bn/life-insurance/term-life.astro
+ * PAGE: Bengali Term Life Insurance Spoke Page (/bn/life-insurance/term-life)
+ * SITE: Santanu's Space
+ * VERSION: 1.0.0
+ * 
+ * DESCRIPTION:
+ * Detailed Bengali guide on Term Assurance by Santanu Mukherjee (শান্তনু মুখার্জ্জী).
+ * 
+ * DEPENDENCIES:
+ * - src/layouts/BaseLayout.astro
+ * - src/components/Header.astro
+ * - src/components/Footer.astro
+ * ============================================================================
+ */
+
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+
+const pageTitle = "টার্ম লাইফ ইনসিওরেন্স গাইড";
+const pageDescription = "কম খরচে পরিবারের জন্য সঠিক টার্ম বীমা নির্বাচনের গাইডলাইন — শান্তনু মুখার্জ্জী।";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} lang="bn">
+  <Header />
+
+  <main>
+    <!-- HERO SECTION -->
+    <section style="background-color: #f8fafd; padding: 3.5rem 1rem; border-bottom: 1px solid #e2e8f0;">
+      <div style="max-width: 850px; margin: 0 auto; text-align: center;">
+        <a href="/bn/life-insurance" style="color: #0b3d91; font-weight: bold; text-decoration: none; font-size: 0.9rem;">← জীবন বীমা মূল পেজে ফিরে যান</a>
+        <h1 style="font-size: 2.4rem; color: #0b3d91; margin: 1rem 0 0.5rem 0;">
+          টার্ম লাইফ ইনসিওরেন্স (Term Life)
+        </h1>
+        <p style="color: #4a5568; font-size: 1.15rem; line-height: 1.6;">
+          সর্বনিম্ন প্রিমিয়ামে পরিবারের জন্য সর্বোচ্চ আর্থিক নিরাপত্তা সুনিশ্চিত করার উপায় — শান্তনু মুখার্জ্জী।
+        </p>
+      </div>
+    </section>
+
+    <!-- MAIN ARTICLE CONTENT -->
+    <section style="padding: 3rem 1rem;">
+      <div style="max-width: 800px; margin: 0 auto; color: #2d3748; line-height: 1.8;">
+        
+        <!-- CARD 1: WHAT IS TERM LIFE -->
+        <div style="background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem;">
+          <h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">১. টার্ম লাইফ ইনসিওরেন্স কী?</h2>
+          <p>
+            টার্ম ইনসিওরেন্স হলো জীবন বীমার বিশুদ্ধতম রূপ। এখানে অত্যন্ত কম প্রিমিয়ামে বড় অঙ্কের আর্থিক কভার (Sum Assured) পাওয়া যায়। পলিসির মেয়াদের মধ্যে বিমাকৃত ব্যক্তির দুর্ভাগ্যজনক মৃত্যু হলে নমিনি পূর্ণ অর্থ পান। এতে কোনো মেয়াদপূর্তি (Maturity) রিটার্ন না থাকায় এর প্রিমিয়াম সাধারণ পলিসির চেয়ে অনেক কম হয়।
+          </p>
+        </div>
+
+        <!-- CARD 2: HOW MUCH COVER -->
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+          <h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">২. আপনার কত টাকার কভার প্রয়োজন?</h2>
+          <p>
+            আর্থিক বিশেষজ্ঞদের মতে, টার্ম ইনসিওরেন্স কভার হওয়া উচিত আপনার <strong>বার্ষিক আয়ের অন্তত ১০ থেকে ১৫ গুণ</strong>, সাথে সমস্ত বর্তমান ঋণ যুক্ত করতে হবে।
+          </p>
+          <div style="background: #f0f4f9; padding: 1.2rem; border-left: 4px solid #0b3d91; border-radius: 4px; margin-top: 1rem;">
+            <strong>সহজ হিসাব:</strong><br />
+            <code>মোট কভার = (বার্ষিক আয় × ১২) + মোট ঋণ - বর্তমান সঞ্চয়</code>
+          </div>
+        </div>
+
+        <!-- CARD 3: KEY RIDERS TO CONSIDER -->
+        <div style="background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem;">
+          <h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">৩. গুরুত্বপূর্ণ রাইডার যা যোগ করা উচিত</h2>
+          <ul>
+            <li><strong>একসিডেন্টাল ডেথ বেনিফিট:</strong> দুর্ঘটনায় মৃত্যু হলে অতিরিক্ত অর্থ প্রদান।</li>
+            <li><strong>ক্রিটিক্যাল ইলনেস রাইডার:</strong> ক্যানসার বা হার্ট অ্যাটাকের মতো কঠিন রোগ ধরা পড়লে এককালীন আর্থিক সাহায্য।</li>
+            <li><strong>ওয়েভার অব প্রিমিয়াম:</strong> শারীরিক অক্ষমতা ঘটলে পরবর্তী সমস্ত প্রিমিয়াম মওকুফ।</li>
+          </ul>
+        </div>
+
+        <!-- CTA BOX -->
+        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #0b3d91; color: #ffffff; border-radius: 8px;">
+          <h3 style="margin-top: 0; color: #ffffff;">সঠিক টার্ম প্ল্যান বেছে নিতে সাহায্য চান?</h3>
+          <p style="color: #e2e8f0; margin-bottom: 1.5rem;">কোনো বাণিজ্যিক চাপ ছাড়াই আপনার সঠিক হিসাব জেনে নিন।</p>
+          <a href="/bn/contact" style="display: inline-block; background: #ffffff; color: #0b3d91; font-weight: bold; padding: 0.8rem 1.8rem; border-radius: 5px; text-decoration: none;">যোগাযোগ করুন →</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

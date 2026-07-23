@@ -1,0 +1,117 @@
+---
+/**
+ * ============================================================================
+ * FILE: src/pages/life-insurance/index.astro
+ * PAGE: English Life Insurance Main Hub (/life-insurance)
+ * SITE: Santanu's Space
+ * VERSION: 1.0.0
+ * 
+ * DESCRIPTION:
+ * Main landing page for the Life Insurance section. Breaks down life insurance
+ * into three structured spokes: Term Life, Endowment/Savings, and ULIPs.
+ * 
+ * DEPENDENCIES:
+ * - src/layouts/BaseLayout.astro
+ * - src/components/Header.astro
+ * - src/components/Footer.astro
+ * ============================================================================
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const pageTitle = "Life Insurance Knowledge Hub";
+const pageDescription = "Explore transparent, jargon-free guides on Term Life, Endowment Plans, and ULIPs to protect your family's financial future.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} lang="en">
+  <Header />
+
+  <main>
+    <!-- HERO SECTION -->
+    <section style="background-color: #f8fafd; padding: 3.5rem 1rem; text-align: center; border-bottom: 1px solid #e2e8f0;">
+      <div style="max-width: 850px; margin: 0 auto;">
+        <span style="background: #e2e8f0; color: #0b3d91; font-size: 0.85rem; font-weight: bold; padding: 0.3rem 0.8rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px;">
+          Financial Protection Pillar
+        </span>
+        <h1 style="font-size: 2.5rem; color: #0b3d91; margin: 1rem 0 0.5rem 0;">
+          Life Insurance Guide
+        </h1>
+        <p style="color: #4a5568; font-size: 1.15rem; line-height: 1.6; max-width: 700px; margin: 0 auto;">
+          Understanding life insurance shouldn't require reading fine print with a magnifying glass. Here is your roadmap to choosing the right cover for every stage of life.
+        </p>
+      </div>
+    </section>
+
+    <!-- MAIN SPOKES / CATEGORIES SECTION -->
+    <section style="padding: 3.5rem 1rem;">
+      <div style="max-width: 1000px; margin: 0 auto;">
+        <h2 style="text-align: center; color: #0b3d91; margin-bottom: 2.5rem; font-size: 1.8rem;">
+          Choose a Category to Explore
+        </h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem;">
+          
+          <!-- SPOKE 1: TERM ASSURANCE -->
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="font-size: 2.2rem; margin-bottom: 0.8rem;">🛡️</div>
+              <h3 style="color: #0b3d91; font-size: 1.35rem; margin: 0 0 0.5rem 0;">Term Assurance</h3>
+              <p style="color: #2b6cb0; font-size: 0.85rem; font-weight: bold; margin-bottom: 1rem;">Pure Protection • Maximum Coverage</p>
+              <p style="color: #4a5568; font-size: 0.95rem; line-height: 1.6;">
+                High life coverage at the lowest possible cost. Ensures your family's income replacement, loan payoff, and children's future if you're no longer around.
+              </p>
+            </div>
+            <a href="/life-insurance/term-life" style="margin-top: 1.5rem; display: inline-block; background: #0b3d91; color: #ffffff; text-align: center; font-weight: bold; padding: 0.75rem 1.2rem; border-radius: 6px; text-decoration: none;">
+              Explore Term Life →
+            </a>
+          </div>
+
+          <!-- SPOKE 2: ENDOWMENT & SAVINGS -->
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="font-size: 2.2rem; margin-bottom: 0.8rem;">🏦</div>
+              <h3 style="color: #0b3d91; font-size: 1.35rem; margin: 0 0 0.5rem 0;">Endowment & Savings</h3>
+              <p style="color: #2b6cb0; font-size: 0.85rem; font-weight: bold; margin-bottom: 1rem;">Protection + Guaranteed Savings</p>
+              <p style="color: #4a5568; font-size: 0.95rem; line-height: 1.6;">
+                Traditional policies (like LIC Jeevan Utsav & Labh) combining insurance cover with low-risk guaranteed returns and maturity bonuses.
+              </p>
+            </div>
+            <a href="/life-insurance/endowment-savings" style="margin-top: 1.5rem; display: inline-block; background: #0b3d91; color: #ffffff; text-align: center; font-weight: bold; padding: 0.75rem 1.2rem; border-radius: 6px; text-decoration: none;">
+              Explore Savings Plans →
+            </a>
+          </div>
+
+          <!-- SPOKE 3: ULIPs & MARKET-LINKED -->
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="font-size: 2.2rem; margin-bottom: 0.8rem;">📈</div>
+              <h3 style="color: #0b3d91; font-size: 1.35rem; margin: 0 0 0.5rem 0;">ULIPs & Market Plans</h3>
+              <p style="color: #2b6cb0; font-size: 0.85rem; font-weight: bold; margin-bottom: 1rem;">Investment + Protection</p>
+              <p style="color: #4a5568; font-size: 0.95rem; line-height: 1.6;">
+                Unit Linked Insurance Plans that invest a portion of your premium into equity or debt funds to generate long-term wealth along with cover.
+              </p>
+            </div>
+            <a href="/life-insurance/ulip-investments" style="margin-top: 1.5rem; display: inline-block; background: #0b3d91; color: #ffffff; text-align: center; font-weight: bold; padding: 0.75rem 1.2rem; border-radius: 6px; text-decoration: none;">
+              Explore ULIP Plans →
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- KEY RULE / GUIDING PRINCIPLE BOX -->
+    <section style="background: #f0f4f9; padding: 3rem 1rem;">
+      <div style="max-width: 800px; margin: 0 auto; background: #ffffff; border-left: 5px solid #0b3d91; padding: 2rem; border-radius: 0 8px 8px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+        <h3 style="color: #0b3d91; margin-top: 0; font-size: 1.3rem;">💡 How Much Coverage Do You Really Need?</h3>
+        <p style="color: #2d3748; line-height: 1.7; margin-bottom: 0;">
+          A simple rule of thumb for term insurance is <strong>10x to 15x your annual income</strong>, plus any existing debts (home loan, personal loan). Never treat life insurance purely as an investment—mix pure protection for security with dedicated investment instruments for wealth.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

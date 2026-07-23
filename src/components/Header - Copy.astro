@@ -7,7 +7,6 @@ const navItems = [
     { name: 'Projects', url: '/projects' },
     { name: 'Insurance', url: '/insurance' },
     { name: 'Learning', url: '/learning' },
-    { name: 'Blog', url: '/blog' },
     { name: 'Contact', url: '/contact' }
 ];
 
@@ -53,8 +52,7 @@ const toggleTitle = isBengali ? 'Switch to English' : 'বাংলা সংস
         
         // Match active status against the computed localized path
         const isActive = clean(currentPath) === clean(localizedUrl) || 
-                         (item.name === 'Insurance' && currentPath.includes('insurance')) ||
-                         (item.name === 'Blog' && currentPath.includes('blog'));
+                         (item.name === 'Insurance' && currentPath.includes('insurance'));
 
         // Handle Insurance dropdown configuration cleanly without repeating links
         if (item.name === 'Insurance') {

@@ -1,0 +1,17 @@
+INSURANCE KNOWLEDGE HUB CATEGORIZATION (LIC Framework Adaptation):
+
+1. Term Assurance Plans (Pure Protection):
+   - Purpose: Income replacement, family financial security.
+   - Target Pages: /life-insurance/term-life & /bn/life-insurance/term-life
+
+2. Endowment & Savings Plans (Guaranteed Payouts):
+   - Purpose: Savings + life cover (e.g., LIC Jeevan Utsav, Jeevan Labh).
+   - Target Pages: /life-insurance/endowment-savings & /bn/life-insurance/endowment-savings
+
+3. Unit Linked Plans - ULIPs (Market-Linked Growth):
+   - Purpose: Protection combined with equity/debt market investment.
+   - Target Pages: /life-insurance/ulip-investments & /bn/life-insurance/ulip-investments
+
+4. Health & Mediclaim Coverage:
+   - Purpose: Hospitalization, cashless claims, family floaters, super top-ups.
+   - Target Pages: /health-insurance/ & /bn/health-insurance/

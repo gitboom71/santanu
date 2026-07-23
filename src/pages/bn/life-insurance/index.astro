@@ -1,0 +1,116 @@
+---
+/**
+ * ============================================================================
+ * FILE: src/pages/bn/life-insurance/index.astro
+ * PAGE: Bengali Life Insurance Main Hub (/bn/life-insurance)
+ * SITE: Santanu's Space 
+ * VERSION: 1.0.0
+ * 
+ * DESCRIPTION:
+ * Official Bengali hub page for Life Insurance guidance by Santanu Mukherjee (শান্তনু মুখার্জ্জী).
+ * 
+ * DEPENDENCIES:
+ * - src/layouts/BaseLayout.astro
+ * - src/components/Header.astro
+ * - src/components/Footer.astro
+ * ============================================================================
+ */
+
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+
+const pageTitle = "জীবন বীমা জ্ঞান কেন্দ্র";
+const pageDescription = "টার্ম লাইফ, এন্ডোমেন্ট প্ল্যান এবং ইউএলআইপি সম্পর্কে সহজ ও তথ্যভিত্তিক নির্দেশিকা। শান্তনু মুখার্জ্জীর সাথে জানুন আপনার পরিবারের সঠিক সুরক্ষা।";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} lang="bn">
+  <Header />
+
+  <main>
+    <!-- HERO SECTION -->
+    <section style="background-color: #f8fafd; padding: 3.5rem 1rem; text-align: center; border-bottom: 1px solid #e2e8f0;">
+      <div style="max-width: 850px; margin: 0 auto;">
+        <span style="background: #e2e8f0; color: #0b3d91; font-size: 0.85rem; font-weight: bold; padding: 0.3rem 0.8rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px;">
+          আর্থিক নিরাপত্তার মূল ভিত্তি
+        </span>
+        <h1 style="font-size: 2.5rem; color: #0b3d91; margin: 1rem 0 0.5rem 0;">
+          জীবন বীমা নির্দেশিকা (Life Insurance Guide)
+        </h1>
+        <p style="color: #4a5568; font-size: 1.15rem; line-height: 1.6; max-width: 700px; margin: 0 auto;">
+          জীবন বীমা নির্বাচন করা কঠিন কোনো বিষয় নয়। জটিল শর্তাবলী এড়িয়ে আপনার জীবনের প্রতিটি ধাপের জন্য সঠিক পলিসি বেছে নেওয়ার সহজ গাইডলাইন — শান্তনু মুখার্জ্জী।
+        </p>
+      </div>
+    </section>
+
+    <!-- MAIN SPOKES / CATEGORIES SECTION -->
+    <section style="padding: 3.5rem 1rem;">
+      <div style="max-width: 1000px; margin: 0 auto;">
+        <h2 style="text-align: center; color: #0b3d91; margin-bottom: 2.5rem; font-size: 1.8rem;">
+          আপনার প্রয়োজনীয় বিভাগটি বেছে নিন
+        </h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem;">
+          
+          <!-- SPOKE 1: TERM ASSURANCE -->
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="font-size: 2.2rem; margin-bottom: 0.8rem;">🛡️</div>
+              <h3 style="color: #0b3d91; font-size: 1.35rem; margin: 0 0 0.5rem 0;">টার্ম ইন্স্যুরেন্স (Term Life)</h3>
+              <p style="color: #2b6cb0; font-size: 0.85rem; font-weight: bold; margin-bottom: 1rem;">সর্বোচ্চ সুরক্ষা • সর্বনিম্ন প্রিমিয়াম</p>
+              <p style="color: #4a5568; font-size: 0.95rem; line-height: 1.6;">
+                কম খরচে বিপুল পরিমাণের আর্থিক সুরক্ষা। আপনার অনুপস্থিতিতে পরিবারের আয় সুনিশ্চিত করা এবং ঋণ পরিশোধের সেরা মাধ্যম।
+              </p>
+            </div>
+            <a href="/bn/life-insurance/term-life" style="margin-top: 1.5rem; display: inline-block; background: #0b3d91; color: #ffffff; text-align: center; font-weight: bold; padding: 0.75rem 1.2rem; border-radius: 6px; text-decoration: none;">
+              টার্ম লাইফ সম্পর্কে জানুন →
+            </a>
+          </div>
+
+          <!-- SPOKE 2: ENDOWMENT & SAVINGS -->
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="font-size: 2.2rem; margin-bottom: 0.8rem;">🏦</div>
+              <h3 style="color: #0b3d91; font-size: 1.35rem; margin: 0 0 0.5rem 0;">এন্ডোমেন্ট ও সেভিংস প্ল্যান</h3>
+              <p style="color: #2b6cb0; font-size: 0.85rem; font-weight: bold; margin-bottom: 1rem;">সুরক্ষা + নিশ্চিত সঞ্চয়</p>
+              <p style="color: #4a5568; font-size: 0.95rem; line-height: 1.6;">
+                ঐতিহ্যবাহী এলআইসি (LIC) পলিসি যা লাইফ কভারের সাথে সাথে মেয়াদ শেষে বোনাস ও নিশ্চিত অর্থ প্রদান করে।
+              </p>
+            </div>
+            <a href="/bn/life-insurance/endowment-savings" style="margin-top: 1.5rem; display: inline-block; background: #0b3d91; color: #ffffff; text-align: center; font-weight: bold; padding: 0.75rem 1.2rem; border-radius: 6px; text-decoration: none;">
+              সেভিংস প্ল্যান জানুন →
+            </a>
+          </div>
+
+          <!-- SPOKE 3: ULIPs & MARKET-LINKED -->
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="font-size: 2.2rem; margin-bottom: 0.8rem;">📈</div>
+              <h3 style="color: #0b3d91; font-size: 1.35rem; margin: 0 0 0.5rem 0;">ইউএলআইপি (ULIP) প্ল্যান</h3>
+              <p style="color: #2b6cb0; font-size: 0.85rem; font-weight: bold; margin-bottom: 1rem;">বিনিয়োগ + জীবন বীমা</p>
+              <p style="color: #4a5568; font-size: 0.95rem; line-height: 1.6;">
+                প্রিমিয়ামের একটি অংশ শেয়ার বাজার বা ফান্ডে বিনিয়োগ করে দীর্ঘমেয়াদে ভালো রিটার্ন ও বীমা সুবিধা প্রদান করে।
+              </p>
+            </div>
+            <a href="/bn/life-insurance/ulip-investments" style="margin-top: 1.5rem; display: inline-block; background: #0b3d91; color: #ffffff; text-align: center; font-weight: bold; padding: 0.75rem 1.2rem; border-radius: 6px; text-decoration: none;">
+              ইউএলআইপি সম্পর্কে জানুন →
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- KEY RULE / GUIDING PRINCIPLE BOX -->
+    <section style="background: #f0f4f9; padding: 3rem 1rem;">
+      <div style="max-width: 800px; margin: 0 auto; background: #ffffff; border-left: 5px solid #0b3d91; padding: 2rem; border-radius: 0 8px 8px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+        <h3 style="color: #0b3d91; margin-top: 0; font-size: 1.3rem;">💡 আপনার কত টাকার টার্ম বীমা প্রয়োজন?</h3>
+        <p style="color: #2d3748; line-height: 1.7; margin-bottom: 0;">
+          সাধারণ হিসাব অনুযায়ী, টার্ম ইনসিওরেন্সের কভার আপনার <strong>বার্ষিক আয়ের অন্তত ১০ থেকে ১৫ গুণ</strong> হওয়া উচিত, যার সাথে বর্তমান সব ধরনের ঋণ যোগ করা প্রয়োজন। বীমাকে শুধুমাত্র বিনিয়োগ হিসেবে না দেখে মূল সুরক্ষার হাতিয়ার হিসেবে দেখা বুদ্ধিমানের কাজ।
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

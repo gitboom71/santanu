@@ -1,0 +1,67 @@
+---
+// ============================================================================
+// BENGALI INSURANCE PAGE (src/pages/bn/insurance.astro)
+// ============================================================================
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import InsuranceFAQ from '../../components/InsuranceFAQ.astro';
+---
+
+<BaseLayout title="বীমা পরিকল্পনা ও পরামর্শ | সান্তনু মুখার্জি">
+    <Header />
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="section light" style="text-align: center; padding: 3rem 1rem;">
+            <div class="container">
+                <h1 style="font-size: 2.3rem; color: #0b3d91; margin-bottom: 0.8rem;">
+                    বীমা ও আর্থিক নিরাপত্তা পরিকল্পনা
+                </h1>
+                <p style="max-width: 700px; margin: 0 auto; color: #555; font-size: 1.1rem; line-height: 1.6;">
+                    আপনার পরিবারের ভবিষ্যৎ সুরক্ষিত রাখতে স্বাস্থ্য বীমা, জীবন বীমা এবং সঞ্চয় প্রকল্পের সঠিক পথপ্রদর্শন।
+                </p>
+            </div>
+        </section>
+
+        <!-- SERVICES OVERVIEW -->
+        <section class="section">
+            <div class="container">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem;">
+                    
+                    <!-- Term Life Insurance -->
+                    <div style="background: #fff; padding: 1.8rem; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                        <h3 style="color: #0b3d91; margin-top: 0;">🛡️ টার্ম লাইফ ইনস্যুরেন্স</h3>
+                        <p style="color: #555; line-height: 1.6; font-size: 0.95rem;">
+                            আপনার অনুপস্থিতিতে পরিবারের আর্থিক স্থায়িত্ব বজায় রাখতে সবচেয়ে সাশ্রয়ী জীবন বীমা পরিকল্পনা।
+                        </p>
+                    </div>
+
+                    <!-- Health Insurance -->
+                    <div style="background: #fff; padding: 1.8rem; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                        <h3 style="color: #0b3d91; margin-top: 0;">🏥 স্বাস্থ্য বীমা (Health Insurance)</h3>
+                        <p style="color: #555; line-height: 1.6; font-size: 0.95rem;">
+                            জরুরি চিকিৎসার খচর ও হাসপাতালের বিলের হাত থেকে পরিবারের সঞ্চয়কে রক্ষা করতে সম্পূর্ণ ক্যাশলেস কভারেজ।
+                        </p>
+                    </div>
+
+                    <!-- Family & Retirement -->
+                    <div style="background: #fff; padding: 1.8rem; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                        <h3 style="color: #0b3d91; margin-top: 0;">👨‍👩‍👧‍👦 অবসর ও পরিবার পরিকল্পনা</h3>
+                        <p style="color: #555; line-height: 1.6; font-size: 0.95rem;">
+                            সন্তানদের শিক্ষা, বিবাহ এবং আপনার অবসর জীবনের জন্য দীর্ঘমেয়াদী সুরক্ষিত আর্থিক লক্ষ্য তৈরি করুন।
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- BENGALI INTERACTIVE FAQ ACCORDION -->
+        <InsuranceFAQ lang="bn" />
+        
+    </main>
+
+    <Footer />
+</BaseLayout>

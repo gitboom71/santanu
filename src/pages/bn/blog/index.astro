@@ -1,0 +1,214 @@
+---
+/**
+ * Bengali Blog Listing / Index Page
+ * Path: /bn/blog
+ */
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+
+const allPosts = await getCollection('blog');
+
+// Extract unique base slugs
+const uniqueSlugs = [
+  ...new Set(allPosts.map(p => p.id.replace(/\.md$/, '').replace(/-(en|bn)$/, '')))
+];
+
+// Fallback logic: Show Bengali version if available, otherwise show English version
+const posts = uniqueSlugs.map(slug => {
+  const bnPost = allPosts.find(p => p.id === `${slug}-bn.md` || p.id === `${slug}-bn`);
+  const enPost = allPosts.find(p => p.id === `${slug}-en.md` || p.id === `${slug}-en` || p.id === `${slug}.md`);
+  return {
+    slug,
+    post: bnPost || enPost,
+    isBengali: !!bnPost,
+  };
+}).filter(item => item.post !== undefined);
+
+// Sort posts by date (newest first)
+posts.sort((a, b) => new Date(b.post!.data.pubDate).valueOf() - new Date(a.post!.data.pubDate).valueOf());
+---
+
+<BaseLayout title="ব্লগ - শান্তনু'স স্পেস" description="ব্যক্তিগত অর্থসংস্থান ও বীমা সংক্রান্ত নিবন্ধ ও গাইড।" lang="bn">
+  <Header />
+
+  <!-- Hero Banner -->
+  <section class="blog-hero">
+    <div class="hero-container">
+      <span class="badge">প্রবন্ধ এবং নির্দেশিকা</span>
+      <h1>শান্তনুর ব্লগ</h1>
+      <p>স্বাস্থ্য ও জীবন বীমা সম্পর্কিত সহজ ও ব্যবহারিক গাইড।</p>
+    </div>
+  </section>
+
+  <!-- Blog Cards Grid -->
+  <main class="blog-main">
+    <div class="posts-grid">
+      {posts.map(({ slug, post, isBengali }) => {
+        const formattedDate = new Date(post!.data.pubDate).toLocaleDateString('bn-IN', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        });
+
+        return (
+          <article class="post-card">
+            <div class="card-content">
+              <div class="card-meta">
+                <span class="card-category">গাইড</span>
+                <span class="card-date">{formattedDate}</span>
+              </div>
+              
+              <h2 class="card-title">
+                <a href={`/bn/blog/${slug}`}>{post!.data.title}</a>
+              </h2>
+
+              <p class="card-description">{post!.data.description}</p>
+
+              {!isBengali && (
+                <span class="en-notice">
+                  🌐 ইংরেজি সংস্করণ (English Version)
+                </span>
+              )}
+              
+              <div class="card-footer">
+                <span class="author-name">লেখক: {post!.data.author || 'শান্তনু'}</span>
+                <a href={`/bn/blog/${slug}`} class="read-more">পড়ুন &rarr;</a>
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .blog-hero {
+    background: linear-gradient(135deg, #0b3d91 0%, #1e5bb8 100%);
+    color: #ffffff;
+    padding: 4rem 1rem;
+    text-align: center;
+  }
+  .hero-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .badge {
+    background: rgba(255, 255, 255, 0.15);
+    color: #e2e8f0;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .blog-hero h1 {
+    font-size: 2.75rem;
+    margin: 1rem 0 0.5rem 0;
+    font-weight: 800;
+  }
+  .blog-hero p {
+    font-size: 1.15rem;
+    color: #cbd5e1;
+    margin: 0;
+  }
+
+  .blog-main {
+    max-width: 1100px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+  }
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  .post-card {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1);
+  }
+  .card-content {
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+  }
+  .card-category {
+    background: #e0f2fe;
+    color: #0369a1;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+  }
+  .card-date {
+    color: #64748b;
+  }
+  .card-title {
+    font-size: 1.35rem;
+    line-height: 1.4;
+    margin: 0.5rem 0;
+  }
+  .card-title a {
+    color: #0f172a;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .card-title a:hover {
+    color: #0b3d91;
+  }
+  .card-description {
+    color: #475569;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+  }
+  .en-notice {
+    display: inline-block;
+    font-size: 0.8rem;
+    color: #b45309;
+    background: #fef3c7;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    width: fit-content;
+  }
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 1rem;
+    font-size: 0.9rem;
+  }
+  .author-name {
+    color: #64748b;
+    font-weight: 500;
+  }
+  .read-more {
+    color: #0b3d91;
+    font-weight: 700;
+    text-decoration: none;
+  }
+</style>

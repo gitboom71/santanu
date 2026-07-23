@@ -1,0 +1,83 @@
+---
+/**
+ * ============================================================================
+ * FILE: src/pages/bn/health-insurance/cashless-riders.astro
+ * PAGE: Bengali Cashless Claims & Health Riders Spoke Page (/bn/health-insurance/cashless-riders)
+ * SITE: Santanu's Space
+ * VERSION: 1.0.0
+ * 
+ * DESCRIPTION:
+ * Detailed Bengali guide on Cashless Hospitalization and Health Riders by Santanu Mukherjee (শান্তনু মুখার্জ্জী).
+ * 
+ * DEPENDENCIES:
+ * - src/layouts/BaseLayout.astro
+ * - src/components/Header.astro
+ * - src/components/Footer.astro
+ * ============================================================================
+ */
+
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+
+const pageTitle = "ক্যাশলেস ক্লিম ও হেলথ রাইডার গাইড";
+const pageDescription = "ক্যাশলেস চিকিৎসা পদ্ধতি এবং প্রয়োজনীয় হেলথ রাইডার সম্পর্কে তথ্য — শান্তনু মুখার্জ্জী।";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} lang="bn">
+  <Header />
+
+  <main>
+    <!-- HERO SECTION -->
+    <section style="background-color: #f8fafd; padding: 3.5rem 1rem; border-bottom: 1px solid #e2e8f0;">
+      <div style="max-width: 850px; margin: 0 auto; text-align: center;">
+        <a href="/bn/health-insurance" style="color: #0b3d91; font-weight: bold; text-decoration: none; font-size: 0.9rem;">← স্বাস্থ্য বীমা মূল পেজে ফিরে যান</a>
+        <h1 style="font-size: 2.4rem; color: #0b3d91; margin: 1rem 0 0.5rem 0;">
+          ক্যাশলেস চিকিৎসা ও প্রয়োজনীয় রাইডার
+        </h1>
+        <p style="color: #4a5568; font-size: 1.15rem; line-height: 1.6;">
+          ক্যাশলেস হাসপাতাল প্রক্রিয়া এবং অতিরিক্ত সুবিধা (Riders) যুক্ত করার সম্পূর্ণ গাইড — শান্তনু মুখার্জ্জী।
+        </p>
+      </div>
+    </section>
+
+    <!-- MAIN ARTICLE CONTENT -->
+    <section style="padding: 3rem 1rem;">
+      <div style="max-width: 800px; margin: 0 auto; color: #2d3748; line-height: 1.8;">
+        
+        <!-- CARD 1: CASHLESS PROCESS -->
+        <div style="background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem;">
+          <h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">১. ক্যাশলেস প্রসেস কীভাবে কাজ করে?</h2>
+          <p>
+            ক্যাশলেস চিকিৎসায় হাসপাতাল বিল সরাসরি বিমা কোম্পানির কাছ থেকে বুঝে নেয়, গ্রাহককে নিজের পকেট থেকে বড় অঙ্কের টাকা দিতে হয় না।
+          </p>
+          <ol style="padding-left: 1.2rem;">
+            <li><strong>পরিকল্পিত ভর্তি (Planned Admission):</strong> ৪৮-৭২ ঘণ্টা আগে হাসপাতালের TPA ডেস্কে প্রি-অথরাইজেশন ফর্ম জমা দিন।</li>
+            <li><strong>জরুরি ভর্তি (Emergency Admission):</strong> হাসপাতালে ভর্তির ২৪ ঘণ্টার মধ্যে বিমা কোম্পানি বা TPA ডেস্কে খবর দিন।</li>
+            <li><strong>অনুমোদন (Pre-Auth Approval):</strong> প্রাথমিক অনুমোদনের পর হাসপাতাল থেকে ছুটি (Discharge) নেওয়ার সময় কোম্পানি সমস্ত অনুমোদিত বিল সরাসরি পরিশোধ করে।</li>
+          </ol>
+        </div>
+
+        <!-- CARD 2: ESSENTIAL HEALTH RIDERS -->
+        <div style="background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem;">
+          <h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">২. গুরুত্বপূর্ণ হেলথ রাইডার্স</h2>
+          <ul>
+            <li><strong>কনজিউমেবলস কভার (Consumables Cover):</strong> গ্লাভস, মাস্ক, সিরিঞ্জ ইত্যাদির মতো নন-মেডিকেল খরচের কভার দেয় যা সাধারণ পলিসিতে বাতিল করা হয় (হাসপাতাল বিলের ১০-১৫% এই খরচে যায়)।</li>
+            <li><strong>ডেইলি ক্যাশ অ্যালটমেন্ট (Hospital Daily Cash):</strong> হাসপাতালে ভর্তির দিনগুলোতে পরিবারের যাতায়াত ও অনাহূত খরচের জন্য প্রতিদিন নির্দিষ্ট টাকা পাওয়া যায়।</li>
+            <li><strong>জোন আপগ্রেড (Zone Upgrade):</strong> মেট্রো শহরের বড় হাসপাতালে চিকিৎসার ক্ষেত্রে কো-পেমেন্ট বা বাড়তি খরচ কাটছাঁট এড়াতে সাহায্য করে।</li>
+          </ul>
+        </div>
+
+        <!-- CTA BOX -->
+        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #0b3d91; color: #ffffff; border-radius: 8px;">
+          <h3 style="margin-top: 0; color: #ffffff;">মেডিকেল ক্লেম সংক্রান্ত সাহায্য প্রয়োজন?</h3>
+          <p style="color: #e2e8f0; margin-bottom: 1.5rem;">প্রি-অথরাইজেশন বা হাসপাতাল সম্পর্কিত নির্দেশনার জন্য যোগাযোগ করুন।</p>
+          <a href="/bn/contact" style="display: inline-block; background: #ffffff; color: #0b3d91; font-weight: bold; padding: 0.8rem 1.8rem; border-radius: 5px; text-decoration: none;">যোগাযোগ করুন →</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

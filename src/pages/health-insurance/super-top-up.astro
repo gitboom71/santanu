@@ -1,0 +1,89 @@
+---
+/**
+ * ============================================================================
+ * FILE: src/pages/health-insurance/super-top-up.astro
+ * PAGE: Super Top-Up Health Insurance Spoke Page (/health-insurance/super-top-up)
+ * SITE: Santanu's Space
+ * VERSION: 1.0.0
+ * 
+ * DESCRIPTION:
+ * Comprehensive guide on Super Top-Up plans, deductible limits, and how to 
+ * multiply health coverage at low cost.
+ * 
+ * DEPENDENCIES:
+ * - src/layouts/BaseLayout.astro
+ * - src/components/Header.astro
+ * - src/components/Footer.astro
+ * ============================================================================
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const pageTitle = "Super Top-Up Health Insurance Guide";
+const pageDescription = "Learn how Super Top-Up plans drastically boost your health cover for a fraction of the cost using deductibles.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} lang="en">
+  <Header />
+
+  <main>
+    <!-- HERO SECTION -->
+    <section style="background-color: #f8fafd; padding: 3.5rem 1rem; border-bottom: 1px solid #e2e8f0;">
+      <div style="max-width: 850px; margin: 0 auto; text-align: center;">
+        <a href="/health-insurance" style="color: #0b3d91; font-weight: bold; text-decoration: none; font-size: 0.9rem;">← Back to Health Insurance Hub</a>
+        <h1 style="font-size: 2.4rem; color: #0b3d91; margin: 1rem 0 0.5rem 0;">
+          Super Top-Up Health Insurance
+        </h1>
+        <p style="color: #4a5568; font-size: 1.15rem; line-height: 1.6;">
+          Multiply your total medical cover to ₹50 Lakhs or ₹1 Crore for a fraction of the standard premium.
+        </p>
+      </div>
+    </section>
+
+    <!-- MAIN ARTICLE CONTENT -->
+    <section style="padding: 3rem 1rem;">
+      <div style="max-width: 800px; margin: 0 auto; color: #2d3748; line-height: 1.8;">
+        
+        <!-- CARD 1: WHAT IS A SUPER TOP-UP -->
+        <div style="background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem;">
+          <h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">1. What is a Super Top-Up Policy?</h2>
+          <p>
+            A Super Top-Up policy acts as a secondary layer of financial protection. It kicks in once your medical bills cross a predefined threshold called a <strong>Deductible</strong>. Because you or your base policy pay the initial deductible amount, insurance companies offer high Super Top-Up coverage at extremely low premiums.
+          </p>
+        </div>
+
+        <!-- CARD 2: TOP-UP vs SUPER TOP-UP -->
+        <div style="background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem;">
+          <h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">2. Regular Top-Up vs. Super Top-Up</h2>
+          <p>
+            This distinction is crucial when filing multiple claims in a single year:
+          </p>
+          <ul>
+            <li><strong>Regular Top-Up:</strong> The deductible applies to <em>each individual claim</em> during the year.</li>
+            <li><strong>Super Top-Up:</strong> The deductible applies to the <em>cumulative total of all claims</em> made throughout the policy year.</li>
+          </ul>
+        </div>
+
+        <!-- CARD 3: HOW TO STRUCTURE -->
+        <div style="background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem;">
+          <h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">3. Ideal Strategy: The Base + Super Top-Up Combo</h2>
+          <p>
+            Combine a <strong>₹5 Lakh or ₹10 Lakh Base Policy</strong> with a <strong>₹40 Lakh or ₹90 Lakh Super Top-Up</strong> (matching the deductible to your base cover). This combo provides ₹50 Lakhs to ₹1 Crore in protection while saving up to 60% compared to buying a ₹1 Crore base policy alone.
+          </p>
+        </div>
+
+        <!-- CTA BOX -->
+        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #0b3d91; color: #ffffff; border-radius: 8px;">
+          <h3 style="margin-top: 0; color: #ffffff;">Want to upgrade your cover cost-effectively?</h3>
+          <p style="color: #e2e8f0; margin-bottom: 1.5rem;">Let's design a high-cover Super Top-Up plan tailored to your existing base policy.</p>
+          <a href="/contact" style="display: inline-block; background: #ffffff; color: #0b3d91; font-weight: bold; padding: 0.8rem 1.8rem; border-radius: 5px; text-decoration: none;">Get a Recommendation →</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

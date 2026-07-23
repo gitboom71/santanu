@@ -1,0 +1,115 @@
+---
+/**
+ * ============================================================================
+ * FILE: src/pages/bn/about.astro
+ * PAGE: Bengali About Page (আমার সম্পর্কে)
+ * SITE: Santanu's Space (দ্য শান্তনু মুখার্জ্জী ইনিশিয়েটিভ)
+ * VERSION: 1.0.0
+ * 
+ * DESCRIPTION:
+ * Official Bengali "About Me" page for Santanu Mukherjee (শান্তনু মুখার্জ্জী).
+ * Replaces the legacy about.md file to align fully with Astro layout standards,
+ * including shared Header, Footer, ViewTransitions, and bilingual metadata.
+ *
+ * DEPENDENCIES:
+ * - src/layouts/BaseLayout.astro
+ * - src/components/Header.astro
+ * - src/components/Footer.astro
+ * ============================================================================
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+// ----------------------------------------------------------------------------
+// PAGE METADATA CONFIGURATION
+// These variables are injected into BaseLayout to build HTML <title> & <meta>
+// ----------------------------------------------------------------------------
+const pageTitle = "আমার সম্পর্কে";
+const pageDescription = "শান্তনু মুখার্জ্জী - আইটি পেশাদার এবং আর্থিক ও বীমা সচেতনতা উপদেষ্টা। জানুন আমার অভিজ্ঞতা ও দৃষ্টিভঙ্গি।";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} lang="bn">
+  <!-- SITE HEADER (Navigation Bar) -->
+  <Header />
+
+  <main>
+    <!-- ====================================================================
+         SECTION 1: HERO HEADER
+         Presents the page heading and top-level personal statement.
+         ==================================================================== -->
+    <section class="section light" style="text-align: center; padding: 3.5rem 1rem; background-color: #f8fafd;">
+      <div class="container" style="max-width: 800px; margin: 0 auto;">
+        <h1 style="font-size: 2.4rem; color: #0b3d91; margin-bottom: 0.8rem;">
+          আমার সম্পর্কে (About Me)
+        </h1>
+        <p style="color: #555; font-size: 1.15rem; line-height: 1.6;">
+          প্রযুক্তিগত অভিজ্ঞতা এবং সঠিক আর্থিক পরিকল্পনার মাধ্যমে সাধারণ মানুষের জীবনকে সহজ ও সুরক্ষিত করার একটি প্রয়াস — শান্তনু মুখার্জ্জী।
+        </p>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION 2: DETAILED PROFILE & MISSION CONTENT
+         Breakdown of IT background and financial literacy goals.
+         ==================================================================== -->
+    <section class="section" style="padding: 3rem 1rem;">
+      <div class="container" style="max-width: 800px; margin: 0 auto; line-height: 1.8; color: #333;">
+        
+        <!-- BLOCK A: IT Professional Background -->
+        <div style="background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+          <h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">👨‍💻 পেশাগত পটভূমি ও প্রযুক্তিগত অভিজ্ঞতা</h2>
+          <p>
+            তথ্যপ্রযুক্তি (IT) শিল্পে দীর্ঘদিনের অভিজ্ঞতার মাধ্যমে আমি জটিল সিস্টেম বিশ্লেষণ, তথ্যনির্ভর সিদ্ধান্ত গ্রহণ এবং পরিষ্কার যোগাযোগের গুরুত্ব উপলব্ধি করেছি। প্রযুক্তির সঠিক ব্যবহার কীভাবে মানুষের দৈনন্দিন সমস্যা সমাধান করতে পারে, তা-ই আমার কাজের মূল প্রেরণা।
+          </p>
+        </div>
+
+        <!-- BLOCK B: Insurance Awareness Mission -->
+        <div style="background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+          <h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">🛡️ বীমা ও আর্থিক সচেতনতা মিশন</h2>
+          <p>
+            বীমা কোনো জটিল বাণিজ্যিক চুক্তি হওয়া উচিত নয়; এটি প্রতিটি পরিবারের জন্য এক মৌলিক আর্থিক নিরাপত্তা বলয়। ভারতীয় পরিবারগুলোর জন্য সঠিক জীবন ও স্বাস্থ্য বীমা বেছে নেওয়ার প্রক্রিয়াটি সহজ ও স্বচ্ছ করে তোলাই 'দ্য শান্তনু মুখার্জ্জী ইনিশিয়েটিভ'-এর মূল লক্ষ্য।
+          </p>
+          <p>
+            আমি কোনো জটিল পলিসি শব্দ ব্যবহার না করে, সহজ-সরল ভাষার মাধ্যমে তথ্য প্রদান করি যাতে প্রত্যেকে নিজ প্রয়োজন অনুযায়ী সঠিক সিদ্ধান্ত নিতে পারেন।
+          </p>
+        </div>
+
+        <!-- ================================================================
+             SECTION 3: CORE VALUES GRID
+             Two-column card grid displaying core guiding principles.
+             ================================================================ -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+          
+          <!-- Value Card 1: Transparency -->
+          <div style="background: #f0f4f9; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0b3d91;">
+            <h3 style="color: #0b3d91; margin-top: 0;">স্বচ্ছতা (Transparency)</h3>
+            <p style="font-size: 0.95rem; margin-bottom: 0;">কোনো গোপন শর্ত বা বিভ্রান্তিকর তথ্য নয়—শুধুমাত্র প্রকৃত ও নির্ভুল জ্ঞান।</p>
+          </div>
+
+          <!-- Value Card 2: Simplicity -->
+          <div style="background: #f0f4f9; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0b3d91;">
+            <h3 style="color: #0b3d91; margin-top: 0;">সহজ ব্যাখ্যা (Simplicity)</h3>
+            <p style="font-size: 0.95rem; margin-bottom: 0;">জটিল বীমা আইন ও পলিসির ভাষা সাধারণ মানুষের বোধগম্য ভাষায় রূপান্তর।</p>
+          </div>
+
+        </div>
+
+        <!-- ================================================================
+             SECTION 4: CALL TO ACTION (CTA)
+             Encourages visitors to contact via the Bengali contact form (/bn/contact).
+             ================================================================ -->
+        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #0b3d91; color: #ffffff; border-radius: 8px;">
+          <h3 style="margin-top: 0; color: #ffffff;">কোনো প্রশ্ন বা পরামর্শের জন্য যোগাযোগ করুন</h3>
+          <p style="color: #e2e8f0; margin-bottom: 1.5rem;">আপনার পরিবারের নিরাপত্তার জন্য সঠিক পরিকল্পনা তৈরিতে সাহায্য করতে পেরে আনন্দিত হব।</p>
+          <a href="/bn/contact" style="display: inline-block; background: #ffffff; color: #0b3d91; font-weight: bold; padding: 0.8rem 1.8rem; border-radius: 5px; text-decoration: none;">যোগাযোগ করুন →</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- SITE FOOTER -->
+  <Footer />
+</BaseLayout>

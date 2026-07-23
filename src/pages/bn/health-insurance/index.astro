@@ -1,0 +1,116 @@
+---
+/**
+ * ============================================================================
+ * FILE: src/pages/bn/health-insurance/index.astro
+ * PAGE: Bengali Health Insurance Main Hub (/bn/health-insurance)
+ * SITE: Santanu's Space
+ * VERSION: 1.0.0
+ * 
+ * DESCRIPTION:
+ * Official Bengali hub page for Health Insurance guidance by Santanu Mukherjee (শান্তনু মুখার্জ্জী).
+ * 
+ * DEPENDENCIES:
+ * - src/layouts/BaseLayout.astro
+ * - src/components/Header.astro
+ * - src/components/Footer.astro
+ * ============================================================================
+ */
+
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+
+const pageTitle = "স্বাস্থ্য বীমা জ্ঞান কেন্দ্র";
+const pageDescription = "মেডিক্লেম, ফ্যামিলি ফ্লোটার, সুপার টপ-আপ এবং ক্যাশলেস চিকিৎসার স্পষ্ট ও নির্ভুল গাইডলাইন — শান্তনু মুখার্জ্জী।";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} lang="bn">
+  <Header />
+
+  <main>
+    <!-- HERO SECTION -->
+    <section style="background-color: #f8fafd; padding: 3.5rem 1rem; text-align: center; border-bottom: 1px solid #e2e8f0;">
+      <div style="max-width: 850px; margin: 0 auto;">
+        <span style="background: #e2e8f0; color: #0b3d91; font-size: 0.85rem; font-weight: bold; padding: 0.3rem 0.8rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px;">
+          সঞ্চয় সুরক্ষার মূল স্তম্ভ
+        </span>
+        <h1 style="font-size: 2.5rem; color: #0b3d91; margin: 1rem 0 0.5rem 0;">
+          স্বাস্থ্য বীমা নির্দেশিকা (Health Insurance Guide)
+        </h1>
+        <p style="color: #4a5568; font-size: 1.15rem; line-height: 1.6; max-width: 700px; margin: 0 auto;">
+          আকস্মিক চিকিৎসার খরচ যেন আপনার জীবনের সমস্ত সঞ্চয় নিঃশেষ না করে দেয়। আপনার ও পরিবারের জন্য সঠিক মেডিক্লেম এবং সুপার টপ-আপ নির্বাচন করার পদ্ধতি জানুন — শান্তনু মুখার্জ্জী।
+        </p>
+      </div>
+    </section>
+
+    <!-- MAIN SPOKES / CATEGORIES SECTION -->
+    <section style="padding: 3.5rem 1rem;">
+      <div style="max-width: 1000px; margin: 0 auto;">
+        <h2 style="text-align: center; color: #0b3d91; margin-bottom: 2.5rem; font-size: 1.8rem;">
+          আপনার প্রয়োজনীয় বিভাগটি বেছে নিন
+        </h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem;">
+          
+          <!-- SPOKE 1: FAMILY FLOATER & MEDICLAIM -->
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="font-size: 2.2rem; margin-bottom: 0.8rem;">❤️</div>
+              <h3 style="color: #0b3d91; font-size: 1.35rem; margin: 0 0 0.5rem 0;">ফ্যামিলি ফ্লোটার ও মেডিক্লেম</h3>
+              <p style="color: #2b6cb0; font-size: 0.85rem; font-weight: bold; margin-bottom: 1rem;">মূল কভারেজ • হাসপাতাল খরচ</p>
+              <p style="color: #4a5568; font-size: 0.95rem; line-height: 1.6;">
+                একটিমাত্র পলিসির মাধ্যমে পরিবারের সকল সদস্যের চিকিৎসার খরচ কভার করার সহজ নিয়মাবলী ও সুবিধা সম্পর্কে জানুন।
+              </p>
+            </div>
+            <a href="/bn/health-insurance/family-floater" style="margin-top: 1.5rem; display: inline-block; background: #0b3d91; color: #ffffff; text-align: center; font-weight: bold; padding: 0.75rem 1.2rem; border-radius: 6px; text-decoration: none;">
+              ফ্যামিলি ফ্লোটার জানুন →
+            </a>
+          </div>
+
+          <!-- SPOKE 2: SUPER TOP-UP & RIDERS -->
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="font-size: 2.2rem; margin-bottom: 0.8rem;">🚀</div>
+              <h3 style="color: #0b3d91; font-size: 1.35rem; margin: 0 0 0.5rem 0;">সুপার টপ-আপ ও রাইডার</h3>
+              <p style="color: #2b6cb0; font-size: 0.85rem; font-weight: bold; margin-bottom: 1rem;">উচ্চ কভার • নামমাত্র প্রিমিয়াম</p>
+              <p style="color: #4a5568; font-size: 0.95rem; line-height: 1.6;">
+                কম খরচে কীভাবে ৫ লাখ টাকার হেলথ কভারকে ৫০ লাখ টাকা বা তার বেশি বাড়ানো যায় তা সুপার টপ-আপের মাধ্যমে বুঝুন।
+              </p>
+            </div>
+            <a href="/bn/health-insurance/riders-topups" style="margin-top: 1.5rem; display: inline-block; background: #0b3d91; color: #ffffff; text-align: center; font-weight: bold; padding: 0.75rem 1.2rem; border-radius: 6px; text-decoration: none;">
+              সুপার টপ-আপ জানুন →
+            </a>
+          </div>
+
+          <!-- SPOKE 3: CASHLESS & CRITICAL ILLNESS -->
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="font-size: 2.2rem; margin-bottom: 0.8rem;">🏥</div>
+              <h3 style="color: #0b3d91; font-size: 1.35rem; margin: 0 0 0.5rem 0;">ক্যাশলেস সুবিধা ও জটিল রোগ</h3>
+              <p style="color: #2b6cb0; font-size: 0.85rem; font-weight: bold; margin-bottom: 1rem;">নেটওয়ার্ক হাসপাতাল • এককালীন পে-আউট</p>
+              <p style="color: #4a5568; font-size: 0.95rem; line-height: 1.6;">
+                হাসপাতালে ক্যাশলেস চিকিৎসার প্রক্রিয়া, পূর্ববর্তী রোগের ওয়েটিং পিরিয়ড এবং ক্রিটিক্যাল ইলনেস রাইডারের গুরুত্ব।
+              </p>
+            </div>
+            <a href="/bn/health-insurance/riders-topups" style="margin-top: 1.5rem; display: inline-block; background: #0b3d91; color: #ffffff; text-align: center; font-weight: bold; padding: 0.75rem 1.2rem; border-radius: 6px; text-decoration: none;">
+              ক্লেম প্রক্রিয়া জানুন →
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- KEY RULE / GUIDING PRINCIPLE BOX -->
+    <section style="background: #f0f4f9; padding: 3rem 1rem;">
+      <div style="max-width: 800px; margin: 0 auto; background: #ffffff; border-left: 5px solid #0b3d91; padding: 2rem; border-radius: 0 8px 8px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+        <h3 style="color: #0b3d91; margin-top: 0; font-size: 1.3rem;">💡 চিকিৎসা খরচ ও সঠিক কভারেজ টিপস</h3>
+        <p style="color: #2d3748; line-height: 1.7; margin-bottom: 0;">
+          ভারতে প্রতি বছর চিকিৎসার খরচ আনুমানিক ১০-১৪% হারে বৃদ্ধি পাচ্ছে। শুধুমাত্র ৫ লাখ টাকার বেস পলিসির ওপর ভরসা না করে, একটি <strong>বেস পলিসি (৫-১০ লাখ)</strong>-র সাথে <strong>সুপার টপ-আপ (৪৫-৯০ লাখ)</strong> যুক্ত করা বুদ্ধিমানের কাজ।
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

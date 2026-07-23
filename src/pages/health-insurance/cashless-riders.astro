@@ -1,0 +1,84 @@
+---
+/**
+ * ============================================================================
+ * FILE: src/pages/health-insurance/cashless-riders.astro
+ * PAGE: Cashless Claims & Health Riders Spoke Page (/health-insurance/cashless-riders)
+ * SITE: Santanu's Space
+ * VERSION: 1.0.0
+ * 
+ * DESCRIPTION:
+ * Detailed guide on cashless hospital claim procedures, network hospital 
+ * verification, and critical health insurance add-ons.
+ * 
+ * DEPENDENCIES:
+ * - src/layouts/BaseLayout.astro
+ * - src/components/Header.astro
+ * - src/components/Footer.astro
+ * ============================================================================
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const pageTitle = "Cashless Claims & Health Riders Guide";
+const pageDescription = "Master the cashless hospital authorization process and learn which health insurance riders are actually worth adding.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} lang="en">
+  <Header />
+
+  <main>
+    <!-- HERO SECTION -->
+    <section style="background-color: #f8fafd; padding: 3.5rem 1rem; border-bottom: 1px solid #e2e8f0;">
+      <div style="max-width: 850px; margin: 0 auto; text-align: center;">
+        <a href="/health-insurance" style="color: #0b3d91; font-weight: bold; text-decoration: none; font-size: 0.9rem;">← Back to Health Insurance Hub</a>
+        <h1 style="font-size: 2.4rem; color: #0b3d91; margin: 1rem 0 0.5rem 0;">
+          Cashless Process & Important Riders
+        </h1>
+        <p style="color: #4a5568; font-size: 1.15rem; line-height: 1.6;">
+          How cashless hospital admissions work and how essential riders complete your health coverage.
+        </p>
+      </div>
+    </section>
+
+    <!-- MAIN ARTICLE CONTENT -->
+    <section style="padding: 3rem 1rem;">
+      <div style="max-width: 800px; margin: 0 auto; color: #2d3748; line-height: 1.8;">
+        
+        <!-- CARD 1: CASHLESS PROCESS -->
+        <div style="background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem;">
+          <h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">1. How Cashless Authorization Works</h2>
+          <p>
+            Under cashless hospitalization, the insurance company pays eligible medical bills directly to the network hospital.
+          </p>
+          <ol style="padding-left: 1.2rem;">
+            <li><strong>Planned Admission:</strong> Submit the pre-authorization form at the hospital's TPA desk 48-72 hours in advance.</li>
+            <li><strong>Emergency Admission:</strong> Notify the insurer/TPA desk within 24 hours of hospital admission.</li>
+            <li><strong>Pre-Auth Approval:</strong> The insurer sends an initial approval letter, settling the final bill directly upon discharge.</li>
+          </ol>
+        </div>
+
+        <!-- CARD 2: ESSENTIAL HEALTH RIDERS -->
+        <div style="background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem;">
+          <h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">2. Key Health Insurance Riders</h2>
+          <ul>
+            <li><strong>Consumables Cover:</strong> Covers non-medical items (gloves, PPE kits, masks, syringes) that standard policies exclude and often make up 10-15% of the total hospital bill.</li>
+            <li><strong>Hospital Daily Cash:</strong> Provides a fixed daily allowance to cover incidental non-medical expenses incurred by family members during hospitalization.</li>
+            <li><strong>Zone Upgrade Rider:</strong> Eliminates co-payment penalties if you seek treatment in Tier-1/Metro hospital zones.</li>
+          </ul>
+        </div>
+
+        <!-- CTA BOX -->
+        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #0b3d91; color: #ffffff; border-radius: 8px;">
+          <h3 style="margin-top: 0; color: #ffffff;">Need help during a medical claim?</h3>
+          <p style="color: #e2e8f0; margin-bottom: 1.5rem;">Reach out for assistance with pre-authorizations and network hospital queries.</p>
+          <a href="/contact" style="display: inline-block; background: #ffffff; color: #0b3d91; font-weight: bold; padding: 0.8rem 1.8rem; border-radius: 5px; text-decoration: none;">Contact Santanu →</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

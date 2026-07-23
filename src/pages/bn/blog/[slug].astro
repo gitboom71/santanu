@@ -1,0 +1,210 @@
+---
+/**
+ * Dynamic Bengali Blog Post Template with Graceful Fallback
+ * Path: /bn/blog/[slug]
+ */
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+
+  // Extract unique base slugs (e.g., "5-insurance-mistakes" from "5-insurance-mistakes-en.md")
+  const uniqueSlugs = [
+    ...new Set(allPosts.map(p => p.id.replace(/\.md$/, '').replace(/-(en|bn)$/, '')))
+  ];
+
+  return uniqueSlugs.map(slug => {
+    // 1. Look for a Bengali version first
+    const bnPost = allPosts.find(p => p.id === `${slug}-bn.md` || p.id === `${slug}-bn`);
+    
+    // 2. Look for the English fallback version
+    const enPost = allPosts.find(p => p.id === `${slug}-en.md` || p.id === `${slug}-en` || p.id === `${slug}.md`);
+
+    return {
+      params: { slug },
+      props: { 
+        post: bnPost || enPost, 
+        isFallback: !bnPost && !!enPost 
+      },
+    };
+  });
+}
+
+const { post, isFallback } = Astro.props;
+
+// If neither version exists for some reason, throw a clean 404
+if (!post) {
+  return Astro.redirect('/404');
+}
+
+const { Content } = await render(post);
+
+const formattedDate = new Date(post.data.pubDate).toLocaleDateString('bn-IN', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<BaseLayout title={post.data.title} description={post.data.description} lang="bn">
+  <Header />
+
+  <main class="article-container">
+    <a href="/bn/blog" class="back-link">&larr; ব্লগে ফিরে যান</a>
+
+    <article class="article-card">
+      {isFallback && (
+        <div class="fallback-banner">
+          <span>ℹ️</span>
+          <p>এই নিবন্ধটি বর্তমানে কেবল ইংরেজিতে উপলব্ধ। (This article is currently available in English only.)</p>
+        </div>
+      )}
+
+      <header class="article-header">
+        <span class="category-tag">গাইড</span>
+        <h1>{post.data.title}</h1>
+        <p class="article-subtitle">{post.data.description}</p>
+        
+        <div class="meta-row">
+          <div class="author-info">
+            <div class="avatar">{post.data.author ? post.data.author.charAt(0) : 'S'}</div>
+            <div>
+              <span class="author-name">{post.data.author || 'Santanu Mukhopadhyay'}</span>
+              <span class="pub-date">প্রকাশিত: {formattedDate}</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="markdown-body">
+        <Content />
+      </div>
+    </article>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .article-container {
+    max-width: 800px;
+    margin: 3rem auto;
+    padding: 0 1.25rem;
+  }
+  .back-link {
+    display: inline-block;
+    color: #0b3d91;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Fallback Notification Banner */
+  .fallback-banner {
+    background-color: #fef3c7;
+    border: 1px solid #f59e0b;
+    color: #92400e;
+    padding: 0.85rem 1.25rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  .fallback-banner p {
+    margin: 0;
+  }
+
+  /* Article Card Styling */
+  .article-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .category-tag {
+    background: #e0f2fe;
+    color: #0369a1;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  .article-header h1 {
+    font-size: 2.25rem;
+    color: #0f172a;
+    line-height: 1.3;
+    margin: 0 0 0.75rem 0;
+    font-weight: 800;
+  }
+  .article-subtitle {
+    font-size: 1.15rem;
+    color: #475569;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  .meta-row {
+    border-top: 1px solid #f1f5f9;
+    border-bottom: 1px solid #f1f5f9;
+    padding: 1rem 0;
+    margin-bottom: 2.5rem;
+  }
+  .author-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .avatar {
+    width: 42px;
+    height: 42px;
+    background: #0b3d91;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  .author-name {
+    display: block;
+    font-weight: 700;
+    color: #1e293b;
+    font-size: 0.95rem;
+  }
+  .pub-date {
+    display: block;
+    color: #64748b;
+    font-size: 0.85rem;
+  }
+
+  .markdown-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #334155;
+  }
+  .markdown-body :global(h2) {
+    font-size: 1.6rem;
+    color: #0f172a;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  .markdown-body :global(h3) {
+    font-size: 1.3rem;
+    color: #1e293b;
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .markdown-body :global(p) {
+    margin-bottom: 1.5rem;
+  }
+</style>

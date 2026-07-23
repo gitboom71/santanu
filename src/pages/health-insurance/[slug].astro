@@ -1,0 +1,45 @@
+---
+/**
+ * Dynamic Route for English Health Insurance Articles (Astro 5)
+ * Path: /health-insurance/[slug]
+ */
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const healthEntries = await getCollection('health');
+
+  return healthEntries
+    .filter(entry => entry.data.lang === 'en' || !entry.data.lang)
+    .map(entry => {
+      // Clean filename ID to get URL slug (e.g., "family-floater-en.md" -> "family-floater")
+      const cleanSlug = entry.id
+        .replace(/\.md$/, '')
+        .replace(/-en$/, '');
+
+      return {
+        params: { slug: cleanSlug },
+        props: { entry },
+      };
+    });
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={entry.data.title || "Health Insurance"} description={entry.data.description || ""} lang="en">
+  <Header />
+
+  <main style="max-width: 800px; margin: 3rem auto; padding: 0 1rem; line-height: 1.8; color: #2d3748;">
+    <a href="/health-insurance" style="color: #0b3d91; font-weight: bold; text-decoration: none;">← Back to Health Insurance Hub</a>
+    
+    <article style="margin-top: 1.5rem; background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0;">
+      <Content />
+    </article>
+  </main>
+
+  <Footer />
+</BaseLayout>

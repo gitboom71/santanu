@@ -1,0 +1,48 @@
+---
+/**
+ * Blog Listing / Index Page
+ * Path: /blog
+ */
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+// Fetch all posts in the blog collection
+const allPosts = await getCollection('blog');
+const englishPosts = allPosts.filter(post => post.data.lang === 'en' || !post.data.lang);
+---
+
+<BaseLayout title="Blog - Santanu's Space" description="Articles and guides on personal finance and insurance." lang="en">
+  <Header />
+
+  <main style="max-width: 900px; margin: 3rem auto; padding: 0 1rem; color: #2d3748;">
+    <h1 style="color: #0b3d91; font-size: 2.2rem; margin-bottom: 0.5rem;">Santanu's Blog</h1>
+    <p style="color: #4a5568; margin-bottom: 2rem;">Insights and practical guides on health and life coverage.</p>
+
+    {englishPosts.length === 0 ? (
+      <p>No blog posts found yet in <code>src/content/blog/</code>.</p>
+    ) : (
+      <div style="display: grid; gap: 1.5rem;">
+        {englishPosts.map(post => {
+          const cleanSlug = post.id.replace(/\.md$/, '').replace(/-en$/, '');
+          return (
+            <article style="background: #ffffff; padding: 1.5rem; border-radius: 8px; border: 1px solid #e2e8f0;">
+              <h2 style="margin: 0 0 0.5rem 0; font-size: 1.4rem;">
+                <a href={`/blog/${cleanSlug}`} style="color: #1a365d; text-decoration: none;">
+                  {post.data.title}
+                </a>
+              </h2>
+              <p style="color: #4a5568; margin-bottom: 1rem;">{post.data.description}</p>
+              <a href={`/blog/${cleanSlug}`} style="color: #0b3d91; font-weight: bold; text-decoration: none;">
+                Read Article →
+              </a>
+            </article>
+          );
+        })}
+      </div>
+    )}
+  </main>
+
+  <Footer />
+</BaseLayout>

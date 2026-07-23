@@ -1,0 +1,117 @@
+---
+/**
+ * ============================================================================
+ * FILE: src/pages/health-insurance/index.astro
+ * PAGE: English Health Insurance Main Hub (/health-insurance)
+ * SITE: Santanu's Space
+ * VERSION: 1.0.0
+ * 
+ * DESCRIPTION:
+ * Main landing page for the Health Insurance section. Breaks down mediclaim,
+ * family floaters, super top-ups, and critical illness benefits.
+ * 
+ * DEPENDENCIES:
+ * - src/layouts/BaseLayout.astro
+ * - src/components/Header.astro
+ * - src/components/Footer.astro
+ * ============================================================================
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const pageTitle = "Health Insurance Knowledge Hub";
+const pageDescription = "Transparent guides on Mediclaim, Family Floaters, Super Top-Ups, and Cashless Hospitalization to protect your savings from medical emergencies.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} lang="en">
+  <Header />
+
+  <main>
+    <!-- HERO SECTION -->
+    <section style="background-color: #f8fafd; padding: 3.5rem 1rem; text-align: center; border-bottom: 1px solid #e2e8f0;">
+      <div style="max-width: 850px; margin: 0 auto;">
+        <span style="background: #e2e8f0; color: #0b3d91; font-size: 0.85rem; font-weight: bold; padding: 0.3rem 0.8rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px;">
+          Savings Protection Pillar
+        </span>
+        <h1 style="font-size: 2.5rem; color: #0b3d91; margin: 1rem 0 0.5rem 0;">
+          Health Insurance Guide
+        </h1>
+        <p style="color: #4a5568; font-size: 1.15rem; line-height: 1.6; max-width: 700px; margin: 0 auto;">
+          Medical emergencies should affect your health, not shatter your lifetime savings. Learn how to choose the right mediclaim and super top-up coverage for your family.
+        </p>
+      </div>
+    </section>
+
+    <!-- MAIN SPOKES / CATEGORIES SECTION -->
+    <section style="padding: 3.5rem 1rem;">
+      <div style="max-width: 1000px; margin: 0 auto;">
+        <h2 style="text-align: center; color: #0b3d91; margin-bottom: 2.5rem; font-size: 1.8rem;">
+          Choose a Health Coverage Topic
+        </h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem;">
+          
+          <!-- SPOKE 1: FAMILY FLOATER & MEDICLAIM -->
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="font-size: 2.2rem; margin-bottom: 0.8rem;">❤️</div>
+              <h3 style="color: #0b3d91; font-size: 1.35rem; margin: 0 0 0.5rem 0;">Family Floater & Individual</h3>
+              <p style="color: #2b6cb0; font-size: 0.85rem; font-weight: bold; margin-bottom: 1rem;">Base Coverage • Hospitalization</p>
+              <p style="color: #4a5568; font-size: 0.95rem; line-height: 1.6;">
+                Understand how base health policies cover pre/post-hospitalization, room rent limits, and shared sum insured across family members.
+              </p>
+            </div>
+            <a href="/health-insurance/family-floater" style="margin-top: 1.5rem; display: inline-block; background: #0b3d91; color: #ffffff; text-align: center; font-weight: bold; padding: 0.75rem 1.2rem; border-radius: 6px; text-decoration: none;">
+              Explore Family Floaters →
+            </a>
+          </div>
+
+          <!-- SPOKE 2: SUPER TOP-UP & RIDERS -->
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="font-size: 2.2rem; margin-bottom: 0.8rem;">🚀</div>
+              <h3 style="color: #0b3d91; font-size: 1.35rem; margin: 0 0 0.5rem 0;">Super Top-Ups & Riders</h3>
+              <p style="color: #2b6cb0; font-size: 0.85rem; font-weight: bold; margin-bottom: 1rem;">High Cover • Low Premium</p>
+              <p style="color: #4a5568; font-size: 0.95rem; line-height: 1.6;">
+                Learn how deductibles work and how a Super Top-Up policy can boost your sum insured from ₹5 Lakhs to ₹50+ Lakhs at a fraction of the cost.
+              </p>
+            </div>
+            <a href="/health-insurance/riders-topups" style="margin-top: 1.5rem; display: inline-block; background: #0b3d91; color: #ffffff; text-align: center; font-weight: bold; padding: 0.75rem 1.2rem; border-radius: 6px; text-decoration: none;">
+              Explore Super Top-Ups →
+            </a>
+          </div>
+
+          <!-- SPOKE 3: CASHLESS & CRITICAL ILLNESS -->
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="font-size: 2.2rem; margin-bottom: 0.8rem;">🏥</div>
+              <h3 style="color: #0b3d91; font-size: 1.35rem; margin: 0 0 0.5rem 0;">Cashless Claims & Riders</h3>
+              <p style="color: #2b6cb0; font-size: 0.85rem; font-weight: bold; margin-bottom: 1rem;">Network Hospitals • Illness Payouts</p>
+              <p style="color: #4a5568; font-size: 0.95rem; line-height: 1.6;">
+                How cashless approval works at network hospitals, waiting periods for pre-existing conditions, and critical illness lump-sum riders.
+              </p>
+            </div>
+            <a href="/health-insurance/riders-topups" style="margin-top: 1.5rem; display: inline-block; background: #0b3d91; color: #ffffff; text-align: center; font-weight: bold; padding: 0.75rem 1.2rem; border-radius: 6px; text-decoration: none;">
+              Learn Claim Process →
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- KEY RULE / GUIDING PRINCIPLE BOX -->
+    <section style="background: #f0f4f9; padding: 3rem 1rem;">
+      <div style="max-width: 800px; margin: 0 auto; background: #ffffff; border-left: 5px solid #0b3d91; padding: 2rem; border-radius: 0 8px 8px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+        <h3 style="color: #0b3d91; margin-top: 0; font-size: 1.3rem;">💡 Medical Inflation & Protection Tip</h3>
+        <p style="color: #2d3748; line-height: 1.7; margin-bottom: 0;">
+          With medical costs rising at 10%–14% annually in India, a basic ₹5 Lakh policy may not be enough for major treatments. Pair a <strong>Base Policy (₹5 Lakhs - ₹10 Lakhs)</strong> with a <strong>Super Top-Up (₹45 Lakhs - ₹90 Lakhs)</strong> for complete peace of mind.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
