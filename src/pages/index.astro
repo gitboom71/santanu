@@ -3,6 +3,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+
+// Import hero image from assets for auto-optimization & WebP conversion
+import heroImg from '../assets/DP_for_wapp.png';
 
 // Import the translation database
 import { homepageTranslations } from '../utils/i18n.js';
@@ -15,80 +19,89 @@ const t = homepageTranslations.en;
     
     <Header />
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container hero-content">
-            <!-- Left Side Text -->
-            <div class="hero-text">
-                <h2>{t.heroTitle}</h2>
-                <p>{t.heroText}</p>
-                <a href="/about" class="btn">
-                    {t.heroCta}
-                </a>
-            </div>
-            <!-- Right Side Image -->
-            <div class="hero-image">
-                <img src="/images/DP_for_wapp.png" alt="Santanu Mukherjee Logo">
-            </div>
-        </div>
-    </section>
-
-    <!-- About Preview Section -->
-    <section class="section">
-        <div class="container">
-            <h2>{t.aboutTitle}</h2>
-            <p>{t.aboutText}</p>
-        </div>
-    </section>
-
-    <!-- Mission Section -->
-    <section class="section light">
-        <div class="container">
-            <h2>{t.missionTitle}</h2>
-            <p>{t.missionText}</p>
-        </div>
-    </section>
-
-    <!-- Statistics Section -->
-    <section class="section">
-        <div class="container">
-            <div class="cards">
-                <div class="card">
-                    <h3>{t.stat1Title}</h3>
-                    <p>{t.stat1Desc}</p>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-content">
+                <!-- Left Side Text -->
+                <div class="hero-text">
+                    <h2>{t.heroTitle}</h2>
+                    <p>{t.heroText}</p>
+                    <a href="/about" class="btn">
+                        {t.heroCta}
+                    </a>
                 </div>
-                <div class="card">
-                    <h3>{t.stat2Title}</h3>
-                    <p>{t.stat2Desc}</p>
-                </div>
-                <div class="card">
-                    <h3>{t.stat3Title}</h3>
-                    <p>{t.stat3Desc}</p>
+                <!-- Right Side Image -->
+                <div class="hero-image">
+                    <Image 
+                        src={heroImg} 
+                        alt="Santanu Mukherjee Logo" 
+                        width={400} 
+                        height={400} 
+                        loading="eager" 
+                        fetchpriority="high" 
+                    />
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Focus Areas Section -->
-    <section class="section light">
-        <div class="container">
-            <h2>{t.focusTitle}</h2>
-            <div class="cards">
-                <div class="card">
-                    <h3>{t.focus1Title}</h3>
-                    <p>{t.focus1Desc}</p>
-                </div>
-                <div class="card">
-                    <h3>{t.focus2Title}</h3>
-                    <p>{t.focus2Desc}</p>
-                </div>
-                <div class="card">
-                    <h3>{t.focus3Title}</h3>
-                    <p>{t.focus3Desc}</p>
+        <!-- About Preview Section -->
+        <section class="section">
+            <div class="container">
+                <h2>{t.aboutTitle}</h2>
+                <p>{t.aboutText}</p>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section class="section light">
+            <div class="container">
+                <h2>{t.missionTitle}</h2>
+                <p>{t.missionText}</p>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="section">
+            <div class="container">
+                <div class="cards">
+                    <div class="card">
+                        <h3>{t.stat1Title}</h3>
+                        <p>{t.stat1Desc}</p>
+                    </div>
+                    <div class="card">
+                        <h3>{t.stat2Title}</h3>
+                        <p>{t.stat2Desc}</p>
+                    </div>
+                    <div class="card">
+                        <h3>{t.stat3Title}</h3>
+                        <p>{t.stat3Desc}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Focus Areas Section -->
+        <section class="section light">
+            <div class="container">
+                <h2>{t.focusTitle}</h2>
+                <div class="cards">
+                    <div class="card">
+                        <h3>{t.focus1Title}</h3>
+                        <p>{t.focus1Desc}</p>
+                    </div>
+                    <div class="card">
+                        <h3>{t.focus2Title}</h3>
+                        <p>{t.focus2Desc}</p>
+                    </div>
+                    <div class="card">
+                        <h3>{t.focus3Title}</h3>
+                        <p>{t.focus3Desc}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <Footer />
 
