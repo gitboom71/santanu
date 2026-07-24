@@ -1,7 +1,8 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro:schema'; // Updated import to remove Astro 5+ deprecation warnings
 import { glob } from 'astro/loaders';
 
-// Existing collections...
+// Health Collection
 const healthCollection = defineCollection({
   loader: glob({ pattern: '**/[^_]*.md', base: "./src/content/health" }),
   schema: z.object({
@@ -9,9 +10,12 @@ const healthCollection = defineCollection({
     description: z.string().optional(),
     lang: z.string().optional(),
     category: z.string().optional(),
+    pubDate: z.date().or(z.string().transform((val) => new Date(val))).optional(),
+    author: z.string().optional(),
   }),
 });
 
+// Life Collection
 const lifeCollection = defineCollection({
   loader: glob({ pattern: '**/[^_]*.md', base: "./src/content/life" }),
   schema: z.object({
@@ -19,10 +23,12 @@ const lifeCollection = defineCollection({
     description: z.string().optional(),
     lang: z.string().optional(),
     category: z.string().optional(),
+    pubDate: z.date().or(z.string().transform((val) => new Date(val))).optional(),
+    author: z.string().optional(),
   }),
 });
 
-// NEW: Blog collection definition
+// Blog collection definition
 const blogCollection = defineCollection({
   loader: glob({ pattern: '**/[^_]*.md', base: "./src/content/blog" }),
   schema: z.object({

@@ -1,0 +1,91 @@
+---
+/**
+ * ============================================================================
+ * FILE: src/pages/life-insurance/term-life.astro
+ * PAGE: Term Life Insurance Spoke Page (/life-insurance/term-life)
+ * SITE: Santanu's Space
+ * VERSION: 1.0.0
+ * 
+ * DESCRIPTION:
+ * Detailed guide on Term Assurance, cover calculations, claim settlement 
+ * ratio importance, and key riders.
+ * 
+ * DEPENDENCIES:
+ * - src/layouts/BaseLayout.astro
+ * - src/components/Header.astro
+ * - src/components/Footer.astro
+ * ============================================================================
+ */
+
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+
+const pageTitle = "Term Life Insurance Guide";
+const pageDescription = "Learn how pure term insurance provides high financial cover at low premiums to safeguard your family's future.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} lang="en">
+  <Header />
+
+  <main>
+    <!-- HERO SECTION -->
+    <section style="background-color: #f8fafd; padding: 3.5rem 1rem; border-bottom: 1px solid #e2e8f0;">
+      <div style="max-width: 850px; margin: 0 auto; text-align: center;">
+        <a href="/life-insurance" style="color: #0b3d91; font-weight: bold; text-decoration: none; font-size: 0.9rem;">← Back to Life Insurance Hub</a>
+        <h1 style="font-size: 2.4rem; color: #0b3d91; margin: 1rem 0 0.5rem 0;">
+          Term Life Insurance (Pure Protection)
+        </h1>
+        <p style="color: #4a5568; font-size: 1.15rem; line-height: 1.6;">
+          Maximum financial security for your family at the lowest possible cost.
+        </p>
+      </div>
+    </section>
+
+    <!-- MAIN ARTICLE CONTENT -->
+    <section style="padding: 3rem 1rem;">
+      <div style="max-width: 800px; margin: 0 auto; color: #2d3748; line-height: 1.8;">
+        
+        <!-- CARD 1: WHAT IS TERM LIFE -->
+        <div style="background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem;">
+          <h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">1. What is Term Life Insurance?</h2>
+          <p>
+            Term insurance is the purest form of life insurance. You pay a small annual premium to secure a large payout (Sum Assured) for your nominee if you pass away during the policy term. Unlike traditional investment policies, term plans do not have maturity payouts if you survive the term, keeping premiums extremely affordable.
+          </p>
+        </div>
+
+        <!-- CARD 2: HOW MUCH COVER -->
+        <div style="background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem;">
+          <h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">2. How Much Cover Do You Need?</h2>
+          <p>
+            The recommended cover amount is <strong>10x to 15x your annual income</strong> plus any unpaid liabilities (home loans, car loans, personal debts).
+          </p>
+          <div style="background: #f0f4f9; padding: 1.2rem; border-left: 4px solid #0b3d91; border-radius: 4px; margin-top: 1rem;">
+            <strong>Quick Formula:</strong><br />
+            <code>Total Cover = (Annual Income × 12) + Total Outstanding Loans - Existing Assets</code>
+          </div>
+        </div>
+
+        <!-- CARD 3: KEY RIDERS TO CONSIDER -->
+        <div style="background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem;">
+          <h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">3. Essential Riders to Add</h2>
+          <ul>
+            <li><strong>Accidental Death Benefit:</strong> Provides an additional payout if death occurs due to an accident.</li>
+            <li><strong>Critical Illness Rider:</strong> Provides a lump-sum payout upon diagnosis of major illnesses like cancer or heart attack.</li>
+            <li><strong>Waiver of Premium:</strong> Waives future premiums if you suffer permanent disability.</li>
+          </ul>
+        </div>
+
+        <!-- CTA BOX -->
+        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #0b3d91; color: #ffffff; border-radius: 8px;">
+          <h3 style="margin-top: 0; color: #ffffff;">Need help choosing the right term plan?</h3>
+          <p style="color: #e2e8f0; margin-bottom: 1.5rem;">Let's calculate your exact requirement without sales pressure.</p>
+          <a href="/contact" style="display: inline-block; background: #ffffff; color: #0b3d91; font-weight: bold; padding: 0.8rem 1.8rem; border-radius: 5px; text-decoration: none;">Get in Touch →</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

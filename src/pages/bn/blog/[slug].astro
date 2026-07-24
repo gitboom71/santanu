@@ -1,7 +1,7 @@
 ---
 /**
  * Dynamic Bengali Blog Post Template with Graceful Fallback
- * Path: /bn/blog/[slug]
+ * Path: src/pages/bn/blog/[slug].astro
  */
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
@@ -42,11 +42,13 @@ if (!post) {
 
 const { Content } = await render(post);
 
-const formattedDate = new Date(post.data.pubDate).toLocaleDateString('bn-IN', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric'
-});
+const formattedDate = post.data.pubDate
+  ? new Date(post.data.pubDate).toLocaleDateString('bn-IN', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    })
+  : null;
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description} lang="bn">
@@ -66,19 +68,20 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('bn-IN', {
       <header class="article-header">
         <span class="category-tag">গাইড</span>
         <h1>{post.data.title}</h1>
-        <p class="article-subtitle">{post.data.description}</p>
+        {post.data.description && <p class="article-subtitle">{post.data.description}</p>}
         
         <div class="meta-row">
           <div class="author-info">
             <div class="avatar">{post.data.author ? post.data.author.charAt(0) : 'S'}</div>
             <div>
               <span class="author-name">{post.data.author || 'Santanu Mukhopadhyay'}</span>
-              <span class="pub-date">প্রকাশিত: {formattedDate}</span>
+              {formattedDate && <span class="pub-date">প্রকাশিত: {formattedDate}</span>}
             </div>
           </div>
         </div>
       </header>
 
+      <!-- 👇 MARKDOWN CONTAINER FOR GLOBAL SPACING 👇 -->
       <div class="markdown-body">
         <Content />
       </div>
@@ -185,26 +188,5 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('bn-IN', {
     display: block;
     color: #64748b;
     font-size: 0.85rem;
-  }
-
-  .markdown-body {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #334155;
-  }
-  .markdown-body :global(h2) {
-    font-size: 1.6rem;
-    color: #0f172a;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-  }
-  .markdown-body :global(h3) {
-    font-size: 1.3rem;
-    color: #1e293b;
-    margin-top: 1.75rem;
-    margin-bottom: 0.75rem;
-  }
-  .markdown-body :global(p) {
-    margin-bottom: 1.5rem;
   }
 </style>

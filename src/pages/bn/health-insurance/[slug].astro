@@ -1,5 +1,6 @@
 ---
 /**
+ * Dynamic Bengali Health Insurance Article Template
  * Path: src/pages/bn/health-insurance/[slug].astro
  */
 import { getCollection, render } from 'astro:content';
@@ -39,23 +40,165 @@ if (!post) {
 }
 
 const { Content } = await render(post);
+
+const formattedDate = post.data.pubDate
+  ? new Date(post.data.pubDate).toLocaleDateString('bn-IN', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    })
+  : null;
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description} lang="bn">
   <Header />
 
-  <main style="max-width: 800px; margin: 3rem auto; padding: 0 1.25rem;">
-    <article class="markdown-body">
+  <main class="article-container">
+    <a href="/bn/health-insurance" class="back-link">&larr; স্বাস্থ্য বীমায় ফিরে যান</a>
+
+    <article class="article-card">
       {isFallback && (
-        <div style="background: #fef3c7; border: 1px solid #f59e0b; color: #92400e; padding: 0.85rem; border-radius: 8px; margin-bottom: 1.5rem;">
-          ℹ️ এই পৃষ্ঠাটি বর্তমানে কেবল ইংরেজিতে উপলব্ধ। (This page is currently available in English only.)
+        <div class="fallback-banner">
+          <span>ℹ️</span>
+          <p>এই নিবন্ধটি বর্তমানে কেবল ইংরেজিতে উপলব্ধ। (This article is currently available in English only.)</p>
         </div>
       )}
 
-      <h1>{post.data.title}</h1>
-      <Content />
+      <header class="article-header">
+        <span class="category-tag">স্বাস্থ্য বীমা</span>
+        <h1>{post.data.title}</h1>
+        {post.data.description && <p class="article-subtitle">{post.data.description}</p>}
+        
+        <div class="meta-row">
+          <div class="author-info">
+            <div class="avatar">{post.data.author ? post.data.author.charAt(0) : 'S'}</div>
+            <div>
+              <span class="author-name">{post.data.author || 'Santanu Mukhopadhyay'}</span>
+              {formattedDate && <span class="pub-date">প্রকাশিত: {formattedDate}</span>}
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- 👇 MARKDOWN CONTAINER FOR GLOBAL SPACING 👇 -->
+      <div class="markdown-body">
+        <Content />
+      </div>
     </article>
   </main>
 
   <Footer />
 </BaseLayout>
+
+<style>
+  .article-container {
+    max-width: 800px;
+    margin: 3rem auto;
+    padding: 0 1.25rem;
+  }
+  .back-link {
+    display: inline-block;
+    color: #0b3d91;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Fallback Notification Banner */
+  .fallback-banner {
+    background-color: #fef3c7;
+    border: 1px solid #f59e0b;
+    color: #92400e;
+    padding: 0.85rem 1.25rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  .fallback-banner p {
+    margin: 0;
+  }
+
+  /* Article Card Styling */
+  .article-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+  }
+  
+ .category-tag {
+    background: #e0f2fe;
+    color: #0369a1;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  
+  /* Article Header Styling (Fixes dark background issue) */
+  .article-header {
+    background: #ffffff !important; /* Force white background */
+    padding: 0 0 1.5rem 0;
+    margin-bottom: 2rem;
+  }
+  
+  .article-header h1 {
+    font-size: 2.25rem;
+    color: #0f172a !important; /* High contrast heading */
+    line-height: 1.3;
+    margin: 0 0 0.75rem 0;
+    font-weight: 800;
+  }
+  
+  .article-subtitle {
+    font-size: 1.15rem;
+    color: #475569 !important; /* Visible subtitle text */
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  
+  .meta-row {
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 1rem 0;
+  }
+  
+  .author-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .avatar {
+    width: 42px;
+    height: 42px;
+    background: #0b3d91;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  
+  .author-name {
+    display: block;
+    font-weight: 700;
+    color: #1e293b !important;
+    font-size: 0.95rem;
+  }
+  
+ .pub-date {
+    display: block;
+    color: #64748b !important;
+    font-size: 0.85rem;
+  }
+</style>

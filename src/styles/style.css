@@ -862,3 +862,171 @@ nav a.lang-toggle:hover {
     color: #111e30 !important;
     transform: translateY(-1px);
 }
+/* ==========================================
+   MARKDOWN CONTENT TYPOGRAPHY & SPACING
+   ========================================== */
+
+.markdown-body {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #334155;
+}
+
+/* Headings Spacing */
+.markdown-body h2 {
+  font-size: 1.65rem;
+  color: #0f172a;
+  margin-top: 2.5rem;      /* Gives top breathing room above section titles */
+  margin-bottom: 1.15rem;   /* Gap between title and paragraph */
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.markdown-body h3 {
+  font-size: 1.35rem;
+  color: #1e293b;
+  margin-top: 2rem;
+  margin-bottom: 0.85rem;
+  font-weight: 600;
+}
+
+/* Paragraph Spacing */
+.markdown-body p {
+  margin-top: 0;
+  margin-bottom: 1.6rem;   /* Generous space between paragraphs */
+}
+
+/* List Spacing */
+.markdown-body ul,
+.markdown-body ol {
+  margin-top: 0;
+  margin-bottom: 1.6rem;
+  padding-left: 1.5rem;
+}
+
+.markdown-body li {
+  margin-bottom: 0.5rem;   /* Space between list items */
+}
+
+/* Blockquote / Callout Box Spacing */
+.markdown-body blockquote {
+  margin: 2rem 0;
+  padding: 1rem 1.25rem;
+  background-color: #f8fafc;
+  border-left: 4px solid #0b3d91;
+  border-radius: 0 8px 8px 0;
+}
+
+.markdown-body blockquote p {
+  margin-bottom: 0;
+}
+/* =========================================================
+   PREVENT NAVBAR CSS BLEEDING ON CLIENT-SIDE NAVIGATION
+   ========================================================= */
+
+/* Force article header to be transparent inside article cards */
+.article-card header.article-header,
+.article-card div.article-header,
+.article-card .article-header {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Ensure text elements remain dark and readable */
+.article-card .article-header h1 {
+  color: #0f172a !important;
+}
+
+.article-card .article-header .article-subtitle {
+  color: #475569 !important;
+}
+
+.article-card .article-header .author-name {
+  color: #1e293b !important;
+}
+
+.article-card .article-header .pub-date {
+  color: #64748b !important;
+}
+/* =========================================================
+   STICKY MAIN NAVIGATION HEADER
+   ========================================================= */
+
+/* Make the top site header stick to the top on scroll */
+body > header,
+header:not(.article-header) {
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Keeps navbar floating above all scrolling page content */
+  background-color: #0b3d91; /* Keeps navbar background solid so text below doesn't bleed through */
+}
+/* =========================================================
+   STICKY SITE HEADER & NAVIGATION
+   ========================================================= */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Keeps entire header floating above content */
+  background-color: #0b3d91; /* Prevents text underneath from showing through */
+  width: 100%;
+}
+/* =========================================================
+   COMPACT STICKY HEADER (SLIM VERSION)
+   ========================================================= */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #0b3d91;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Tighten top banner section */
+.header-top {
+  padding: 0.4rem 0; /* Reduced from default padding */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Compact Logo and Subtitle */
+.logo {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem; /* Places title and tagline side-by-side horizontally */
+}
+
+.logo h1 {
+  font-size: 1.25rem !important; /* Smaller header title */
+  margin: 0 !important;
+  line-height: 1.1;
+  color: #ffffff;
+}
+
+.logo p {
+  font-size: 0.75rem !important; /* Smaller tagline */
+  margin: 0 !important;
+  opacity: 0.85;
+  color: #e2e8f0;
+}
+
+/* Compact Navigation Links */
+nav {
+  padding: 0.25rem 0; /* Slim vertical height */
+}
+
+nav a,
+nav .dropdown-btn {
+  padding: 0.35rem 0.75rem !important; /* Slimmer buttons */
+  font-size: 0.9rem !important;
+}
+
+/* Responsive adjustment for small screens */
+@media (max-width: 640px) {
+  .logo {
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+}
