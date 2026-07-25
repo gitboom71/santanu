@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test:site": "astro check && astro build && linkinator dist --recurse --skip \"^http\""
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
@@ -17,6 +18,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "linkinator": "^8.0.2",
     "typescript": "^6.0.3"
   }
 }
