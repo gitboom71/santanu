@@ -16,64 +16,77 @@ const t = homepageTranslations.en;
 ---
 
 <BaseLayout title={t.title}>
-    
+    <!-- Google Ownership Verification -->
+    <meta name="google-site-verification" content="J46AE7qtW861R5WPls8Ju_9DLlIJ-KW7lqcqjeIaTU4" slot="head" />
+
     <Header />
-<meta name="google-site-verification" content="J46AE7qtW861R5WPls8Ju_9DLlIJ-KW7lqcqjeIaTU4" />
-    <main>
+
+    <main class="page-wrapper">
         <!-- Hero Section -->
-        <section class="hero">
-            <div class="container hero-content">
+        <section class="hero-section">
+            <div class="container hero-grid">
                 <!-- Left Side Text -->
                 <div class="hero-text">
-                    <h2>{t.heroTitle}</h2>
-                    <p>{t.heroText}</p>
-                    <a href="/about" class="btn">
-                        {t.heroCta}
-                    </a>
+                    <span class="hero-badge">Welcome to Santanu's Space</span>
+                    <h1 class="hero-title">{t.heroTitle}</h1>
+                    <p class="hero-description">{t.heroText}</p>
+                    <div class="hero-actions">
+                        <a href="/about" class="btn btn-primary">
+                            {t.heroCta}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
+                    </div>
                 </div>
                 <!-- Right Side Image -->
-                <div class="hero-image">
-                    <Image 
-                        src={heroImg} 
-                        alt="Santanu Mukherjee Logo" 
-                        width={400} 
-                        height={400} 
-                        loading="eager" 
-                        fetchpriority="high" 
-                    />
+                <div class="hero-image-wrapper">
+                    <div class="image-frame">
+                        <Image 
+                            src={heroImg} 
+                            alt="Santanu Mukherjee Logo" 
+                            width={340} 
+                            height={340} 
+                            loading="eager" 
+                            fetchpriority="high"
+                            class="hero-img" 
+                        />
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- About Preview Section -->
-        <section class="section">
-            <div class="container">
-                <h2>{t.aboutTitle}</h2>
-                <p>{t.aboutText}</p>
+        <section class="content-section">
+            <div class="container text-center max-w-2xl">
+                <h2 class="section-heading">{t.aboutTitle}</h2>
+                <p class="section-body lead">{t.aboutText}</p>
             </div>
         </section>
 
         <!-- Mission Section -->
-        <section class="section light">
-            <div class="container">
-                <h2>{t.missionTitle}</h2>
-                <p>{t.missionText}</p>
+        <section class="content-section section-light">
+            <div class="container text-center max-w-2xl">
+                <span class="section-subtitle">Core Philosophy</span>
+                <h2 class="section-heading">{t.missionTitle}</h2>
+                <p class="section-body lead">{t.missionText}</p>
             </div>
         </section>
 
         <!-- Statistics Section -->
-        <section class="section">
+        <section class="content-section">
             <div class="container">
-                <div class="cards">
-                    <div class="card">
+                <div class="cards-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">01</div>
                         <h3>{t.stat1Title}</h3>
                         <p>{t.stat1Desc}</p>
                     </div>
-                    <div class="card">
+                    <div class="stat-card">
+                        <div class="stat-number">02</div>
                         <h3>{t.stat2Title}</h3>
                         <p>{t.stat2Desc}</p>
                     </div>
-                    <div class="card">
+                    <div class="stat-card">
+                        <div class="stat-number">03</div>
                         <h3>{t.stat3Title}</h3>
                         <p>{t.stat3Desc}</p>
                     </div>
@@ -82,19 +95,24 @@ const t = homepageTranslations.en;
         </section>
 
         <!-- Focus Areas Section -->
-        <section class="section light">
+        <section class="content-section section-light">
             <div class="container">
-                <h2>{t.focusTitle}</h2>
-                <div class="cards">
-                    <div class="card">
+                <div class="text-center max-w-2xl mb-12">
+                    <h2 class="section-heading">{t.focusTitle}</h2>
+                </div>
+                <div class="cards-grid">
+                    <div class="focus-card">
+                        <div class="card-icon">💻</div>
                         <h3>{t.focus1Title}</h3>
                         <p>{t.focus1Desc}</p>
                     </div>
-                    <div class="card">
+                    <div class="focus-card">
+                        <div class="card-icon">🛡️</div>
                         <h3>{t.focus2Title}</h3>
                         <p>{t.focus2Desc}</p>
                     </div>
-                    <div class="card">
+                    <div class="focus-card">
+                        <div class="card-icon">📚</div>
                         <h3>{t.focus3Title}</h3>
                         <p>{t.focus3Desc}</p>
                     </div>
@@ -104,5 +122,230 @@ const t = homepageTranslations.en;
     </main>
 
     <Footer />
-
 </BaseLayout>
+
+<style>
+    /* Theme matched to Header & SM Logo */
+    :root {
+        --color-bg-main: #f8fafc;          /* Soft slate tint */
+        --color-bg-card: #ffffff;          /* Pure white cards */
+        --color-bg-light: #f1f5f9;         /* Accent section background */
+        --color-primary: #0f2b5c;          /* Exact Header Deep Navy */
+        --color-primary-hover: #183e80;    /* Hover state navy */
+        --color-gold: #d4af37;             /* Matches SM logo gold accents */
+        --color-text-dark: #0f172a;        /* High contrast text */
+        --color-text-muted: #475569;      /* Easy-reading slate */
+        --color-border: #e2e8f0;           /* Soft dividing borders */
+        --shadow-sm: 0 2px 4px rgba(15, 43, 92, 0.04);
+        --shadow-hover: 0 16px 32px -8px rgba(15, 43, 92, 0.12);
+        --radius-lg: 16px;
+        --radius-md: 10px;
+    }
+
+    .page-wrapper {
+        background-color: var(--color-bg-main);
+        color: var(--color-text-dark);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    /* Layout Utility Classes */
+    .container {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    .max-w-2xl {
+        max-width: 768px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .text-center { text-align: center; }
+    .mb-12 { margin-bottom: 3rem; }
+
+    /* Content Sections */
+    .content-section {
+        padding: 4.5rem 0;
+    }
+
+    .section-light {
+        background-color: var(--color-bg-light);
+        border-top: 1px solid var(--color-border);
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    /* Headings & Text */
+    .section-subtitle {
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: var(--color-gold);
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .section-heading {
+        font-size: 2.25rem;
+        font-weight: 800;
+        color: var(--color-primary);
+        letter-spacing: -0.02em;
+        margin-bottom: 1.25rem;
+        line-height: 1.25;
+    }
+
+    .section-body {
+        font-size: 1.125rem;
+        line-height: 1.75;
+        color: var(--color-text-muted);
+    }
+
+    .lead {
+        font-size: 1.25rem;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        padding: 5.5rem 0 4.5rem;
+        background: linear-gradient(180deg, #ffffff 0%, var(--color-bg-main) 100%);
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        align-items: center;
+    }
+
+    @media (min-width: 768px) {
+        .hero-grid {
+            grid-template-columns: 1.2fr 0.8fr;
+        }
+    }
+
+    .hero-badge {
+        display: inline-block;
+        padding: 0.4rem 1rem;
+        background-color: #f0f4fa;
+        color: var(--color-primary);
+        font-size: 0.875rem;
+        font-weight: 600;
+        border-radius: 9999px;
+        margin-bottom: 1.25rem;
+        border: 1px solid #d0deee;
+    }
+
+    .hero-title {
+        font-size: clamp(2.25rem, 5vw, 3.25rem);
+        font-weight: 800;
+        line-height: 1.15;
+        color: var(--color-primary);
+        letter-spacing: -0.03em;
+        margin-bottom: 1.25rem;
+    }
+
+    .hero-description {
+        font-size: 1.2rem;
+        line-height: 1.7;
+        color: var(--color-text-muted);
+        margin-bottom: 2rem;
+    }
+
+    .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background-color: var(--color-primary);
+        color: #ffffff;
+        padding: 0.875rem 2rem;
+        font-size: 1.05rem;
+        font-weight: 600;
+        border-radius: var(--radius-md);
+        text-decoration: none;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 12px rgba(15, 43, 92, 0.2);
+    }
+
+    .btn-primary:hover {
+        background-color: var(--color-primary-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(15, 43, 92, 0.3);
+    }
+
+    /* Hero Image Frame */
+    .hero-image-wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+    .image-frame {
+        position: relative;
+        padding: 10px;
+        background: #ffffff;
+        border-radius: 50%;
+        box-shadow: var(--shadow-sm);
+        border: 2px solid var(--color-border);
+    }
+
+    .hero-img {
+        border-radius: 50%;
+        display: block;
+        object-fit: cover;
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+    }
+
+    /* Cards */
+    .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+    }
+
+    .stat-card, .focus-card {
+        background: var(--color-bg-card);
+        padding: 2.5rem 2rem;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--color-border);
+        box-shadow: var(--shadow-sm);
+        transition: all 0.3s ease;
+    }
+
+    .stat-card:hover, .focus-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-hover);
+        border-color: #cbd5e1;
+    }
+
+    .stat-number {
+        font-size: 2.25rem;
+        font-weight: 800;
+        color: var(--color-gold);
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-card h3, .focus-card h3 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--color-primary);
+        margin-bottom: 0.75rem;
+    }
+
+    .stat-card p, .focus-card p {
+        color: var(--color-text-muted);
+        line-height: 1.6;
+        font-size: 1rem;
+    }
+
+    .card-icon {
+        font-size: 2rem;
+        margin-bottom: 1.25rem;
+        display: inline-block;
+        padding: 0.75rem;
+        background: var(--color-bg-light);
+        border-radius: var(--radius-md);
+    }
+</style>
