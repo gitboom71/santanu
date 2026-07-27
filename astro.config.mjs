@@ -5,6 +5,6 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   // Astro uses 'site' to construct absolute URLs in your sitemap
-  site: 'https://santanumukherjee.netlify.app', 
+  site: 'https://santanumukherjee.vercel.app', 
   integrations: [sitemap()],
 });
