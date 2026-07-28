@@ -209,17 +209,22 @@ const t = homepageTranslations.bn;
         background: linear-gradient(180deg, #ffffff 0%, var(--color-bg-main) 100%);
         border-bottom: 1px solid var(--color-border);
     }
-
+/* Prevents grid blowout from long text */
+    .hero-text, .hero-image-wrapper {
+        min-width: 0;
+    }
     .hero-grid {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 3rem;
+        gap: 2.5rem;
         align-items: center;
     }
 
+   /* Fallback for smaller mobile screens so it wraps cleanly on phones */
     @media (min-width: 768px) {
         .hero-grid {
-            grid-template-columns: 1.2fr 0.8fr;
+            /* Text gets 60% width, Image gets 40% */
+            grid-template-columns: 1.2fr 0.8fr; 
         }
     }
 
@@ -236,11 +241,13 @@ const t = homepageTranslations.bn;
     }
 
     .hero-title {
-        font-size: clamp(2.25rem, 5vw, 3.25rem);
+        font-size: clamp(2rem, 3.5vw, 2.6rem);
         font-weight: 800;
-        line-height: 1.2;
+        line-height: 1.3;
         color: var(--color-primary);
-        letter-spacing: -0.02em;
+        letter-spacing: normal;
+        white-space: normal;   /* Allows safe wrapping so layout never breaks */
+        text-wrap: balance;    /* Distributes words evenly across lines */
         margin-bottom: 1.25rem;
     }
 
@@ -249,6 +256,15 @@ const t = homepageTranslations.bn;
         line-height: 1.7;
         color: var(--color-text-muted);
         margin-bottom: 2rem;
+    }
+	.hero-title {
+        font-size: clamp(1.85rem, 4vw, 2.65rem); /* Scaled slightly for Bengali visual weight */
+        font-weight: 800;
+        line-height: 1.35;                      /* Extra breathing room for matras & glyphs */
+        color: var(--color-primary);
+        letter-spacing: normal;                 /* Keeps Bengali ligatures clean */
+        text-wrap: balance;                     /* Balances line lengths automatically */
+        margin-bottom: 1.25rem;
     }
 
     .btn-primary {

@@ -1,6 +1,9 @@
 // src/utils/i18n.ts
 
-// --- Types ---
+// ============================================================================
+// TYPES & INTERFACES
+// ============================================================================
+
 export interface NavTranslation {
   home: string;
   about: string;
@@ -41,6 +44,43 @@ export interface FooterTranslation {
   privacy: string;
   terms: string;
 }
+
+export interface ContactTranslation {
+  pageTitle: string;
+  heading: string;
+  subheading: string;
+  linkedinLabel: string;
+  linkedinText: string;
+  linkedinBtn: string;
+  linkedinUrl: string;
+  locationLabel: string;
+  locationValue: string;
+  formHeading: string;
+  nameLabel: string;
+  namePlaceholder: string;
+  emailFormLabel: string;
+  emailPlaceholder: string;
+  subjectLabel: string;
+  subjectPlaceholder: string;
+  messageLabel: string;
+  messagePlaceholder: string;
+  submitButton: string;
+}
+
+export interface InsuranceFaqItem {
+  question: string;
+  answer: string;
+}
+
+export interface InsuranceFaqTranslation {
+  sectionTitle: string;
+  sectionSubheading: string;
+  faqs: InsuranceFaqItem[];
+}
+
+// ============================================================================
+// TRANSLATION DICTIONARIES
+// ============================================================================
 
 // --- Navigation Translations ---
 export const navTranslations: Record<string, NavTranslation> = {
@@ -97,7 +137,7 @@ export const homepageTranslations: Record<string, HomepageTranslation> = {
   },
   bn: {
     title: "শান্তনু মুখার্জি | আইটি পেশাদার এবং বীমা উপদেষ্টা",
-    heroTitle: "প্রযুক্তি, বিশ্বাস এবং আর্থিক সমৃদ্ধির মেলবন্ধন",
+    heroTitle: "প্রযুক্তি, আস্থা ও সমৃদ্ধি ",
     heroText: "আমার ডিজিটাল স্পেসে আপনাকে স্বাগতম। প্রায় ৩০ বছরের আইটি অভিজ্ঞতা এবং বীমা উপদেষ্টার কাজের মাধ্যমে, আমি মানুষকে ডিজিটাল ও আর্থিক বিষয়ে সঠিক দিকনির্দেশনা দিই।",
     heroCta: "আমার পরিচিতি দেখুন",
 
@@ -135,5 +175,107 @@ export const footerTranslations: Record<string, FooterTranslation> = {
     rights: "সর্বস্বত্ব সংরক্ষিত।",
     privacy: "গোপনীয়তা নীতি",
     terms: "ব্যবহারের শর্তাবলী",
+  },
+};
+
+// --- Contact Page Translations ---
+export const contactTranslations: Record<string, ContactTranslation> = {
+  en: {
+    pageTitle: "Contact Me",
+    heading: "Get in Touch",
+    subheading: "Have a question about IT systems, insurance planning, or continuous learning? Send a secure message below or connect with me professionally.",
+    
+    linkedinLabel: "Professional Network",
+    linkedinText: "Connect with me on LinkedIn for IT consulting and professional updates.",
+    linkedinBtn: "View LinkedIn Profile",
+    linkedinUrl: "https://www.linkedin.com/in/santanumukherjee/",
+    
+    locationLabel: "Location",
+    locationValue: "Kolkata, West Bengal, India",
+    
+    formHeading: "Send a Direct Message",
+    nameLabel: "Your Full Name",
+    namePlaceholder: "e.g., Rahul Sharma",
+    emailFormLabel: "Your Email Address",
+    emailPlaceholder: "e.g., rahul@example.com",
+    subjectLabel: "Subject",
+    subjectPlaceholder: "e.g., Question about Health Insurance",
+    messageLabel: "Your Message",
+    messagePlaceholder: "Write your message or inquiry here...",
+    
+    submitButton: "Send Message via Secure Form",
+  },
+  bn: {
+    pageTitle: "যোগাযোগ",
+    heading: "যোগাযোগ করুন",
+    subheading: "আইটি সিস্টেম, বীমা পরিকল্পনা, বা শিক্ষার বিষয়ে কোনো প্রশ্ন আছে? নিচে একটি সুরক্ষিত বার্তা পাঠান অথবা পেশাদারভাবে সংযুক্ত হন।",
+    
+    linkedinLabel: "পেশাদার নেটওয়ার্ক",
+    linkedinText: "আইটি কনসাল্টিং এবং পেশাদার আপডেটের জন্য লিঙ্কডইনে সংযোগ করুন।",
+    linkedinBtn: "লিঙ্কডইন প্রোফাইল দেখুন",
+    linkedinUrl: "https://www.linkedin.com/in/santanu-mukherjee/",
+    
+    locationLabel: "অবস্থান",
+    locationValue: "কলকাতা, পশ্চিমবঙ্গ, ভারত",
+    
+    formHeading: "একটি বার্তা পাঠান",
+    nameLabel: "আপনার পূর্ণ নাম",
+    namePlaceholder: "যেমন: রাহুল শর্মা",
+    emailFormLabel: "আপনার ইমেল ঠিকানা",
+    emailPlaceholder: "যেমন: rahul@example.com",
+    subjectLabel: "বিষয়",
+    subjectPlaceholder: "যেমন: স্বাস্থ্য বীমা সম্পর্কে প্রশ্ন",
+    messageLabel: "আপনার বার্তা",
+    messagePlaceholder: "আপনার বার্তা বা জিজ্ঞাসা এখানে লিখুন...",
+    
+    submitButton: "বার্তা পাঠান",
+  },
+};
+
+// --- Insurance FAQ Translations ---
+export const insuranceFaqTranslations: Record<string, InsuranceFaqTranslation> = {
+  en: {
+    sectionTitle: "Frequently Asked Questions",
+    sectionSubheading: "Clear answers to common questions about life, health, and family insurance planning.",
+    faqs: [
+      {
+        question: "What is the key difference between Health and Term Life Insurance?",
+        answer: "Health Insurance pays for medical emergencies, hospital bills, and treatments during your lifetime. Term Life Insurance provides a guaranteed financial lump sum to your family/dependents in the event of your untimely death.",
+      },
+      {
+        question: "How does Cashless Hospitalization work during an emergency?",
+        answer: "With a network hospital, you present your insurance e-card and ID. The hospital's insurance desk sends a pre-authorization request directly to the insurer. Once approved, the insurance company settles the bill directly with the hospital.",
+      },
+      {
+        question: "What is No Claim Bonus (NCB) and why is it valuable?",
+        answer: "NCB is a reward given by insurance companies for every year you don't file a claim. In health insurance, it increases your sum insured (often up to 50%-100% extra coverage) at no extra cost. In motor insurance, it reduces your renewal premium.",
+      },
+      {
+        question: "How do I ensure my claims won't get rejected in the future?",
+        answer: "Always practice complete disclosure: full transparency regarding existing medical conditions, past surgeries, smoking/drinking habits, and accurate family history when filling out your proposal form.",
+      },
+    ],
+  },
+  bn: {
+    sectionTitle: "সাধারণ প্রশ্নাবলী (FAQ)",
+    sectionSubheading: "জীবন, স্বাস্থ্য এবং পারিবারিক বীমা পরিকল্পনা সংক্রান্ত সাধারণ প্রশ্নের স্পষ্ট উত্তর।",
+    faqs: [
+      {
+        question: "স্বাস্থ্য বীমা এবং টার্ম লাইফ বীমার মধ্যে প্রধান পার্থক্য কী?",
+        answer: "স্বাস্থ্য বীমা আপনার জীবদ্দশায় চিকিৎসার খরচ এবং হাসপাতালের বিল বহন করে। টার্ম লাইফ বীমা আপনার অনুপস্থিতিতে পরিবারের আর্থিক নিরাপত্তার জন্য এককালীন অর্থ প্রদান করে।",
+      },
+      {
+        question: "জরুরি অবস্থায় ক্যাশলেস হসপিটালাইজেশন কীভাবে কাজ করে?",
+        answer: "নেটওয়ার্ক হাসপাতালে আপনার বীমা ই-কার্ড দেখানোর পর, হাসপাতাল সরাসরি বীমা কোম্পানির কাছে অনুমোদনের জন্য পাঠায়। অনুমোদন পেলেই বীমা কোম্পানি সরাসরি হাসপাতালের বিল মেটায়।",
+      },
+      {
+        question: "নো ক্লেম বোনাস (NCB) কী এবং এটি কেন গুরুত্বপূর্ণ?",
+        answer: "দাবি বা ক্লেম না করা বছরের জন্য বীমা কোম্পানি এই বোনাস দেয়। স্বাস্থ্য বীমায় এটি আপনার কভারেজের পরিমাণ বাড়িয়ে দেয়, আর মোটর বীমায় নবায়ন প্রিমিয়াম কমিয়ে দেয়।",
+      },
+      {
+        question: "ভবিষ্যতে আমার ক্লেম যেন বাতিল না হয় তা কীভাবে নিশ্চিত করব?",
+        answer: "বীমা ফর্ম পূরণ করার সময় পূর্বে বিদ্যমান শারীরিক অবস্থা, পুরনো অস্ত্রোপচার এবং পারিবারিক স্বাস্থ্যের তথ্য সম্পূর্ণ সততার সাথে প্রকাশ করা উচিত।",
+      },
+    ],
   },
 };
