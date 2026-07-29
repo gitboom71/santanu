@@ -4,16 +4,7 @@
  * FILE: src/pages/life-insurance/term-life.astro
  * PAGE: Term Life Insurance Spoke Page (/life-insurance/term-life)
  * SITE: Santanu's Space
- * VERSION: 1.0.0
- * 
- * DESCRIPTION:
- * Detailed guide on Term Assurance, cover calculations, claim settlement 
- * ratio importance, and key riders.
- * 
- * DEPENDENCIES:
- * - src/layouts/BaseLayout.astro
- * - src/components/Header.astro
- * - src/components/Footer.astro
+ * VERSION: 1.1.0
  * ============================================================================
  */
 
@@ -64,6 +55,13 @@ const pageDescription = "Learn how pure term insurance provides high financial c
             <strong>Quick Formula:</strong><br />
             <code>Total Cover = (Annual Income × 12) + Total Outstanding Loans - Existing Assets</code>
           </div>
+
+          <!-- NEW: CALCULATOR LINK BUTTON -->
+          <div style="margin-top: 1.5rem; text-align: center;">
+            <a href="/life-insurance/calculator" style="display: inline-block; background: #15803d; color: #ffffff; font-weight: bold; padding: 0.8rem 1.6rem; border-radius: 6px; text-decoration: none; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+              🧮 Calculate Your Coverage Need (HLV) →
+            </a>
+          </div>
         </div>
 
         <!-- CARD 3: KEY RIDERS TO CONSIDER -->
@@ -79,8 +77,16 @@ const pageDescription = "Learn how pure term insurance provides high financial c
         <!-- CTA BOX -->
         <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #0b3d91; color: #ffffff; border-radius: 8px;">
           <h3 style="margin-top: 0; color: #ffffff;">Need help choosing the right term plan?</h3>
-          <p style="color: #e2e8f0; margin-bottom: 1.5rem;">Let's calculate your exact requirement without sales pressure.</p>
-          <a href="/contact" style="display: inline-block; background: #ffffff; color: #0b3d91; font-weight: bold; padding: 0.8rem 1.8rem; border-radius: 5px; text-decoration: none;">Get in Touch →</a>
+          <p style="color: #e2e8f0; margin-bottom: 1.5rem;">Calculate your exact requirement first, or get in touch for personalized guidance.</p>
+          
+          <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="/life-insurance/calculator" style="display: inline-block; background: #15803d; color: #ffffff; font-weight: bold; padding: 0.8rem 1.8rem; border-radius: 5px; text-decoration: none;">
+              Calculate Cover →
+            </a>
+            <a href="/contact" style="display: inline-block; background: #ffffff; color: #0b3d91; font-weight: bold; padding: 0.8rem 1.8rem; border-radius: 5px; text-decoration: none;">
+              Get in Touch →
+            </a>
+          </div>
         </div>
 
       </div>

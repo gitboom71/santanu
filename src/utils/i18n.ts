@@ -184,15 +184,15 @@ export const contactTranslations: Record<string, ContactTranslation> = {
     pageTitle: "Contact Me",
     heading: "Get in Touch",
     subheading: "Have a question about IT systems, insurance planning, or continuous learning? Send a secure message below or connect with me professionally.",
-    
+
     linkedinLabel: "Professional Network",
     linkedinText: "Connect with me on LinkedIn for IT consulting and professional updates.",
     linkedinBtn: "View LinkedIn Profile",
     linkedinUrl: "https://www.linkedin.com/in/santanumukherjee/",
-    
+
     locationLabel: "Location",
     locationValue: "Kolkata, West Bengal, India",
-    
+
     formHeading: "Send a Direct Message",
     nameLabel: "Your Full Name",
     namePlaceholder: "e.g., Rahul Sharma",
@@ -202,22 +202,22 @@ export const contactTranslations: Record<string, ContactTranslation> = {
     subjectPlaceholder: "e.g., Question about Health Insurance",
     messageLabel: "Your Message",
     messagePlaceholder: "Write your message or inquiry here...",
-    
+
     submitButton: "Send Message via Secure Form",
   },
   bn: {
     pageTitle: "যোগাযোগ",
     heading: "যোগাযোগ করুন",
     subheading: "আইটি সিস্টেম, বীমা পরিকল্পনা, বা শিক্ষার বিষয়ে কোনো প্রশ্ন আছে? নিচে একটি সুরক্ষিত বার্তা পাঠান অথবা পেশাদারভাবে সংযুক্ত হন।",
-    
+
     linkedinLabel: "পেশাদার নেটওয়ার্ক",
     linkedinText: "আইটি কনসাল্টিং এবং পেশাদার আপডেটের জন্য লিঙ্কডইনে সংযোগ করুন।",
     linkedinBtn: "লিঙ্কডইন প্রোফাইল দেখুন",
     linkedinUrl: "https://www.linkedin.com/in/santanu-mukherjee/",
-    
+
     locationLabel: "অবস্থান",
     locationValue: "কলকাতা, পশ্চিমবঙ্গ, ভারত",
-    
+
     formHeading: "একটি বার্তা পাঠান",
     nameLabel: "আপনার পূর্ণ নাম",
     namePlaceholder: "যেমন: রাহুল শর্মা",
@@ -227,7 +227,7 @@ export const contactTranslations: Record<string, ContactTranslation> = {
     subjectPlaceholder: "যেমন: স্বাস্থ্য বীমা সম্পর্কে প্রশ্ন",
     messageLabel: "আপনার বার্তা",
     messagePlaceholder: "আপনার বার্তা বা জিজ্ঞাসা এখানে লিখুন...",
-    
+
     submitButton: "বার্তা পাঠান",
   },
 };
@@ -278,4 +278,36 @@ export const insuranceFaqTranslations: Record<string, InsuranceFaqTranslation> =
       },
     ],
   },
+};
+export const calculatorTranslations = {
+  en: {
+    title: "Human Life Value & Insurance Need Calculator",
+    subtitle: "Calculate the exact life insurance coverage required to safeguard your family's financial future.",
+    monthlyExpense: "Monthly Family Expenses (\u20B9)",
+    existingCover: "Existing Life Insurance Cover (\u20B9)",
+    totalLiabilities: "Total Loans & Liabilities (Home, Car, Personal) (\u20B9)",
+    existingSavings: "Liquid Savings & Investments (\u20B9)",
+    calculateBtn: "Calculate Required Coverage",
+    resultHeader: "Your Estimated Financial Security Need",
+    recommendedCover: "Recommended Insurance Coverage:",
+    shortfallNotice: "Insurance Protection Shortfall:",
+    adequateNotice: "Your current coverage and savings adequately fulfill your family's financial protection needs!",
+    disclaimer: "Note: This calculation uses the standard Human Life Value (HLV) income replacement model (15× annual expenses + liabilities - existing protection). Consult Santanu Mukherjee for tailored financial planning.",
+    ctaConsult: "Schedule a Consultation with Santanu",
+  },
+  bn: {
+    title: "হিউম্যান লাইফ ভ্যালু ও বীমা প্রয়োজন ক্যালকুলেটর",
+    subtitle: "আপনার পরিবারের আর্থিক ভবিষ্যৎ সুরক্ষিত রাখতে ঠিক কত টাকার লাইফ ইন্স্যুরেন্স কভারেজ প্রয়োজন তা হিসাব করুন।",
+    monthlyExpense: "মাসিক পারিবারিক খরচ (\u20B9)",
+    existingCover: "বর্তমান জীবন বীমা কভারেজ (\u20B9)",
+    totalLiabilities: "মোট ঋণ ও দেনা (হোম লোন, পার্সোনাল লোন ইত্যাদি) (\u20B9)",
+    existingSavings: "বর্তমান সঞ্চয় ও তরল বিনিয়োগ (\u20B9)",
+    calculateBtn: "প্রয়োজনীয় কভারেজ হিসাব করুন",
+    resultHeader: "আপনার আনুমানিক বীমার প্রয়োজনীয়তা",
+    recommendedCover: "সুপারিশকৃত বীমা কভারেজ:",
+    shortfallNotice: "বীমার ঘাটতি চিহ্নিত হয়েছে:",
+    adequateNotice: "আপনার বর্তমান বীমা কভারেজ এবং সঞ্চয় আপনার পরিবারের আর্থিক নিরাপত্তার জন্য পর্যাপ্ত!",
+    disclaimer: "নোট: এই হিসাবটি স্ট্যান্ডার্ড হিউম্যান লাইফ ভ্যালু (HLV) ইনকাম রিপ্লেসমেন্ট মডেল (১৫ গুণ বার্ষিক খরচ + ঋণ - বর্তমান সুরক্ষা) অনুসরণ করে তৈরি। আপনার জন্য সঠিক পরিকল্পনার জন্য শান্তনু মুখার্জ্জীর সাথে কথা বলুন।",
+    ctaConsult: "শান্তনু মুখার্জ্জীর সাথে পরামর্শের সময় নির্ধারণ করুন",
+  }
 };
