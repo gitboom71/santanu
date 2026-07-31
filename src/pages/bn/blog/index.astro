@@ -8,6 +8,19 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 
+// Helper function for Anandabazar-style Bengali dates
+function formatBnDate(dateInput: Date | string) {
+  const dateObj = new Date(dateInput);
+  
+  const rawDate = dateObj.toLocaleDateString('bn-IN', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+
+  // Removes the comma to get "৩০ জুলাই ২০২৬"
+  return rawDate.replace(',', '');
+}
 const allPosts = await getCollection('blog');
 
 // Extract unique base slugs
@@ -46,11 +59,14 @@ posts.sort((a, b) => new Date(b.post!.data.pubDate).valueOf() - new Date(a.post!
   <main class="blog-main">
     <div class="posts-grid">
       {posts.map(({ slug, post, isBengali }) => {
-        const formattedDate = new Date(post!.data.pubDate).toLocaleDateString('bn-IN', {
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric'
-        });
+        // Anandabazar Patrika style date format (e.g., "২২ জুলাই ২০২৬")
+        const formattedDate = new Date(post!.data.pubDate)
+          .toLocaleDateString('bn-IN', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })
+          .replace(',', '');
 
         return (
           <article class="post-card">
