@@ -1,97 +1,71 @@
 ---
 /**
  * ============================================================================
- * FILE: src/pages/bn/life-insurance/term-life.astro
- * PAGE: Bengali Term Life Insurance Spoke Page (/bn/life-insurance/term-life)
+ * FILE: src/pages/bn/life-insurance/calculator.astro
+ * PAGE: Bengali HLV Calculator Page (/bn/life-insurance/calculator)
  * SITE: Santanu's Space
- * VERSION: 1.1.0
+ * VERSION: 1.2.0
  * ============================================================================
  */
 
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import Header from '../../../components/Header.astro';
-import Footer from '../../../components/Footer.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import HLVCalculator from '@/components/HLVCalculator.astro';
 
-const pageTitle = "টার্ম লাইফ ইনস্যুরেন্স গাইড";
-const pageDescription = "জানুন কীভাবে টার্ম ইনস্যুরেন্স কম প্রিমিয়ামে বড় আর্থিক নিরাপত্তা নিশ্চিত করে আপনার পরিবারের ভবিষ্যৎ সুরক্ষিত করে।";
+const pageTitle = "হিউম্যান লাইফ ভ্যালু (HLV) ক্যালকুলেটর | লাইফ ইনস্যুরেন্স";
+const pageDescription = "হিউম্যান লাইফ ভ্যালু (HLV) পদ্ধতির সাহায্যে আপনার পরিবারের জন্য সঠিক টার্ম ইনস্যুরেন্স কভারেজ হিসাব করুন।";
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription} lang="bn">
   <Header />
 
-  <main>
-  
-    <!-- HERO SECTION -->
-    <section style="background-color: #f8fafd; padding: 3.5rem 1rem; border-bottom: 1px solid #e2e8f0;">
-      <div style="max-width: 850px; margin: 0 auto; text-align: center;">
-        <a href="/bn/life-insurance" style="color: #0b3d91; font-weight: bold; text-decoration: none; font-size: 0.9rem;">← জীবন বীমা মূল পাতায় ফিরে যান</a>
-        <h1 style="font-size: 2.4rem; color: #0b3d91; margin: 1rem 0 0.5rem 0;">
-          টার্ম লাইফ ইনস্যুরেন্স (Term Life)
-        </h1>
-        <p style="color: #4a5568; font-size: 1.15rem; line-height: 1.6;">
-          সর্বনিম্ন প্রিমিয়ামে পরিবারের জন্য সর্বোচ্চ আর্থিক নিরাপত্তা নিশ্চিত করার উপায় — শান্তনু মুখার্জী।
+  <main style="background-color: #f8fafd; padding: 2.5rem 1rem; min-height: 80vh;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      
+      <!-- 1. BREADCRUMB / BACK LINK -->
+      <nav style="margin-bottom: 1.5rem; font-size: 0.9rem;">
+        <a href="/bn/life-insurance/term-life" style="color: #0b3d91; font-weight: 600; text-decoration: none;">
+          ← টার্ম লাইফ গাইড-এ ফিরে যান
+        </a>
+        <span style="color: #94a3b8; margin: 0 0.5rem;">|</span>
+        <a href="/bn/life-insurance" style="color: #64748b; text-decoration: none;">
+          লাইফ ইনস্যুরেন্স মূল পাতা
+        </a>
+      </nav>
+
+      <!-- 2. THE CALCULATOR COMPONENT -->
+      <HLVCalculator lang="bn" />
+
+      <!-- 3. RELATED GUIDES & NEXT STEPS -->
+      <div style="margin-top: 3rem; padding: 2rem; background: #ffffff; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+        <h3 style="color: #0b3d91; margin-top: 0; font-size: 1.25rem;">
+          কভারেজ হিসাব করার পর আপনার করণীয় কী?
+        </h3>
+        <p style="color: #475569; line-height: 1.6;">
+          আপনার প্রয়োজনীয় বিমার সঠিক পরিমাণ জানার পর, পরবর্তী ধাপ হলো সঠিক পলিসি কাঠামো ও রাইডার নির্বাচন করা।
         </p>
+
+        <ul style="color: #334155; line-height: 1.8; padding-left: 1.2rem; margin-bottom: 1.5rem;">
+          <li>
+            <a href="/bn/life-insurance/term-life" style="color: #0b3d91; font-weight: 600; text-decoration: underline;">
+              টার্ম লাইফ ইনস্যুরেন্স গাইড পড়ুন
+            </a> 
+            — ক্লেম সেটেলমেন্ট রেশিও, গুরুত্বপূর্ণ রাইডার এবং ট্যাক্স সুবিধা সম্পর্কে বিস্তারিত জানুন।
+          </li>
+          <li>
+            <strong>ব্যক্তিগত পরামর্শ পান:</strong> আপনার প্রয়োজন অনুযায়ী সঠিক প্ল্যান বেছে নিতে উপরের ক্যালকুলেটর থেকে সরাসরি আমাদের সাথে যোগাযোগ করুন।
+          </li>
+        </ul>
+
+        <div style="text-align: center; border-top: 1px solid #f1f5f9; padding-top: 1.25rem; margin-top: 1rem;">
+          <a href="/bn/life-insurance" style="display: inline-block; color: #0b3d91; font-weight: bold; text-decoration: none;">
+            সকল লাইফ ইনস্যুরেন্স গাইড দেখুন →
+          </a>
+        </div>
       </div>
-    </section>
 
-    <!-- MAIN ARTICLE CONTENT -->
-    <section style="padding: 3rem 1rem;">
-      <div style="max-width: 800px; margin: 0 auto; color: #2d3748; line-height: 1.8;">
-        
-        <!-- CARD 1: WHAT IS TERM LIFE -->
-        <div style="background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem;">
-          <h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">১. টার্ম লাইফ ইনস্যুরেন্স কী?</h2>
-          <p>
-            টার্ম ইনস্যুরেন্স হলো জীবন বীমার বিশুদ্ধতম রূপ। এখানে আপনি অত্যন্ত কম প্রিমিয়ামে বড় অঙ্কের আর্থিক কভার (Sum Assured) পেতে পারেন। পলিসির মেয়াদের মধ্যে বিমাকৃত ব্যক্তির দুর্ভাগ্যজনক মৃত্যু হলে মনোনীত ব্যক্তি (Nominee) এই টাকা পান। এতে কোনো মেয়াদপূর্তি (Maturity) রিটার্ন না থাকায় এর প্রিমিয়াম সাধারণ পলিসির চেয়ে অনেক কম হয়।
-          </p>
-        </div>
-
-        <!-- CARD 2: HOW MUCH COVER -->
-        <div style="background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem;">
-          <h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">২. আপনার কত টাকার কভার প্রয়োজন?</h2>
-          <p>
-            আর্থিক বিশেষজ্ঞদের মতে, টার্ম ইনস্যুরেন্সের কভার হওয়া উচিত আপনার বার্ষিক আয়ের অন্তত <strong>১০ থেকে ১৫ গুণ</strong>, সাথে সমস্ত বর্তমান ঋণ যুক্ত করতে হবে।
-          </p>
-          <div style="background: #f0f4f9; padding: 1.2rem; border-left: 4px solid #0b3d91; border-radius: 4px; margin-top: 1rem;">
-            <strong>সহজ হিসাব:</strong><br />
-            <code>মোট কভার = (বার্ষিক আয় × ১২) + মোট ঋণ - বর্তমান সম্পদ</code>
-          </div>
-
-          <!-- CALCULATOR BUTTON FOR BENGALI PAGE -->
-          <div style="margin-top: 1.5rem; text-align: center;">
-            <a href="/bn/life-insurance/calculator" style="display: inline-block; background: #15803d; color: #ffffff; font-weight: bold; padding: 0.8rem 1.6rem; border-radius: 6px; text-decoration: none; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-              🧮 আপনার প্রয়োজনীয় কভার হিসাব করুন (HLV) →
-            </a>
-          </div>
-        </div>
-
-        <!-- CARD 3: KEY RIDERS -->
-        <div style="background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem;">
-          <h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">৩. গুরুত্বপূর্ণ রাইডার যা যোগ করা উচিত</h2>
-          <ul>
-            <li><strong>একসিডেন্টাল ডেথ বেনিফিট:</strong> দুর্ঘটনায় মৃত্যু হলে অতিরিক্ত অর্থ প্রদান।</li>
-            <li><strong>ক্রিটিক্যাল ইলনেস রাইডার:</strong> ক্যান্সার বা হার্ট অ্যাটাকের মতো মারাত্মক রোগ ধরা পড়লে এককালীন অর্থ সাহায্য।</li>
-            <li><strong>ওয়েভার অব প্রিমিয়াম:</strong> শারীরিক অক্ষমতা ঘটলে পরবর্তী সমস্ত প্রিমিয়াম মকুব।</li>
-          </ul>
-        </div>
-
-        <!-- DUAL CTA BOX FOR BENGALI PAGE -->
-        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #0b3d91; color: #ffffff; border-radius: 8px;">
-          <h3 style="margin-top: 0; color: #ffffff;">সঠিক টার্ম প্ল্যান বেছে নিতে সাহায্য চান?</h3>
-          <p style="color: #e2e8f0; margin-bottom: 1.5rem;">প্রথমে আপনার প্রয়োজনীয় কভার হিসাব করুন, অথবা সরাসরি আমাদের সাথে যোগাযোগ করুন।</p>
-          
-          <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-            <a href="/bn/life-insurance/calculator" style="display: inline-block; background: #15803d; color: #ffffff; font-weight: bold; padding: 0.8rem 1.8rem; border-radius: 5px; text-decoration: none;">
-              কভার হিসাব করুন →
-            </a>
-            <a href="/bn/contact" style="display: inline-block; background: #ffffff; color: #0b3d91; font-weight: bold; padding: 0.8rem 1.8rem; border-radius: 5px; text-decoration: none;">
-              যোগাযোগ করুন →
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </section>
+    </div>
   </main>
 
   <Footer />

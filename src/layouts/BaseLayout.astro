@@ -20,6 +20,7 @@ const {
 const pageTitle = title ? `${title} | ${SITE.title}` : SITE.title;
 ---
 
+<!doctype html>
 <html lang={lang}>
     <head>
         <meta
@@ -39,9 +40,68 @@ const pageTitle = title ? `${title} | ${SITE.title}` : SITE.title;
 
         <!-- ASTRO VIEW TRANSITIONS -->
         <ClientRouter />
+
+        <!-- ⚡ ANTI-FLASH INLINE SCRIPT (Prevents white flash on dark mode reload) -->
+        <script is:inline>
+            (function () {
+                const savedTheme = localStorage.getItem("theme");
+                if (savedTheme) {
+                    document.documentElement.setAttribute(
+                        "data-theme",
+                        savedTheme,
+                    );
+                } else if (
+                    window.matchMedia("(prefers-color-scheme: dark)").matches
+                ) {
+                    document.documentElement.setAttribute("data-theme", "dark");
+                } else {
+                    document.documentElement.setAttribute(
+                        "data-theme",
+                        "light",
+                    );
+                }
+            })();
+        </script>
     </head>
     <body>
         <!-- Everything from your pages will be injected here -->
         <slot />
     </body>
 </html>
+
+<!-- GLOBAL THEME VARIABLES -->
+<style is:global>
+    /* Default / Light Mode */
+    :root {
+        --bg-main: #f8fafd;
+        --bg-card: #ffffff;
+        --text-heading: #1f2937;
+        --text-body: #374151;
+        --text-muted: #6b7280;
+        --border-color: #e2e8f0;
+        --bg-highlight: #f0fdf4;
+        --brand-primary: #0b3d91;
+        --brand-accent: #15803d;
+    }
+
+    /* Dark Mode Overrides */
+    [data-theme="dark"] {
+        --bg-main: #0f172a;
+        --bg-card: #1e293b;
+        --text-heading: #f8fafc;
+        --text-body: #e2e8f0;
+        --text-muted: #94a3b8;
+        --border-color: #334155;
+        --bg-highlight: #064e3b;
+        --brand-primary: #60a5fa;
+        --brand-accent: #4ade80;
+    }
+
+    body {
+        background-color: var(--bg-main);
+        color: var(--text-body);
+        transition:
+            background-color 0.25s ease,
+            color 0.25s ease;
+    }
+</style>

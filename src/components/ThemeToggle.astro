@@ -1,0 +1,105 @@
+---
+/**
+ * Component: ThemeToggle.astro
+ * Dynamically updates theme, icons, tooltips, and preserves state across Astro page transitions.
+ */
+---
+
+<button
+    id="theme-toggle"
+    class="theme-toggle-btn"
+    type="button"
+    aria-label="Switch to Dark Mode"
+    title="Switch to Dark Mode"
+>
+    <span class="icon sun-icon" id="sun-icon" aria-hidden="true">☀️</span>
+    <span class="icon moon-icon" id="moon-icon" aria-hidden="true">🌙</span>
+</button>
+
+<script>
+    function applyTheme(theme) {
+        // 1. Set attribute on html element
+        document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", theme);
+
+        const toggleBtn = document.getElementById("theme-toggle");
+        const sunIcon = document.getElementById("sun-icon");
+        const moonIcon = document.getElementById("moon-icon");
+
+        const isDark = theme === "dark";
+        const newLabel = isDark
+            ? "Switch to Light Mode"
+            : "Switch to Dark Mode";
+
+        // 2. Update button accessibility label & tooltip
+        if (toggleBtn) {
+            toggleBtn.setAttribute("title", newLabel);
+            toggleBtn.setAttribute("aria-label", newLabel);
+        }
+
+        // 3. Explicitly toggle icon visibility
+        if (sunIcon && moonIcon) {
+            sunIcon.style.display = isDark ? "inline-block" : "none";
+            moonIcon.style.display = isDark ? "none" : "inline-block";
+        }
+    }
+
+    function initThemeToggle() {
+        // Determine active theme from document attribute or localStorage
+        const currentTheme =
+            document.documentElement.getAttribute("data-theme") ||
+            localStorage.getItem("theme") ||
+            (window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light");
+
+        applyTheme(currentTheme);
+
+        const toggleBtn = document.getElementById("theme-toggle");
+        if (toggleBtn) {
+            toggleBtn.onclick = () => {
+                const activeTheme =
+                    document.documentElement.getAttribute("data-theme") ||
+                    "light";
+                const nextTheme = activeTheme === "dark" ? "light" : "dark";
+                applyTheme(nextTheme);
+            };
+        }
+    }
+
+    // Run on initial load and register Astro lifecycle hooks
+    initThemeToggle();
+    document.addEventListener("astro:page-load", initThemeToggle);
+    document.addEventListener("astro:after-swap", () => {
+        const savedTheme = localStorage.getItem("theme") || "light";
+        applyTheme(savedTheme);
+    });
+</script>
+
+<style>
+    .theme-toggle-btn {
+        background: var(--bg-white, #ffffff);
+        border: 1px solid var(--border-light, #eeeeee);
+        color: var(--text-main, #333333);
+        border-radius: 20px;
+        padding: 0.35rem 0.75rem;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.25s ease;
+        box-shadow: 0 2px 8px var(--shadow-color, rgba(0, 0, 0, 0.1));
+    }
+
+    .theme-toggle-btn:hover {
+        background: var(--highlight, #ffd700);
+        color: var(--text-dark-active, #111e30);
+        transform: scale(1.05);
+    }
+
+    .icon {
+        font-size: 1.1rem;
+        line-height: 1;
+        user-select: none;
+    }
+</style>

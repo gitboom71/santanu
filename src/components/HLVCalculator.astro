@@ -42,26 +42,84 @@ const contactPath = lang === "bn" ? "/bn/contact" : "/contact";
   <p class="subtitle">{t.subtitle}</p>
 
   <form id="hlv-form" class="calc-form">
+    <!-- 1. CURRENT AGE -->
     <div class="form-group">
-      <label for="age">{t.ageLabel}: <span id="age-val" class="badge">30</span></label>
-      <input type="range" id="age" min="18" max="60" value="30" />
+      <div class="label-row">
+        <label for="age-num">{t.ageLabel}</label>
+        <input 
+          type="number" 
+          id="age-num" 
+          min="18" 
+          max="65" 
+          value="30" 
+          class="num-input-small"
+        />
+      </div>
+      <input type="range" id="age-slider" min="18" max="65" value="30" />
     </div>
 
+    <!-- 2. RETIREMENT AGE -->
     <div class="form-group">
-      <label for="retireAge"
-        >{t.retireAgeLabel}: <span id="retire-val" class="badge">60</span></label
-      >
-      <input type="range" id="retireAge" min="40" max="75" value="60" />
+      <div class="label-row">
+        <label for="retire-num">{t.retireAgeLabel}</label>
+        <input 
+          type="number" 
+          id="retire-num" 
+          min="40" 
+          max="75" 
+          value="60" 
+          class="num-input-small"
+        />
+      </div>
+      <input type="range" id="retire-slider" min="40" max="75" value="60" />
     </div>
 
+    <!-- 3. ANNUAL INCOME -->
     <div class="form-group">
-      <label for="income">{t.incomeLabel}</label>
-      <input type="number" id="income" value="800000" step="50000" />
+      <div class="label-row">
+        <label for="income-num">{t.incomeLabel}</label>
+        <input 
+          type="number" 
+          id="income-num" 
+          min="100000" 
+          max="10000000" 
+          step="10000" 
+          value="800000" 
+          class="num-input-large"
+        />
+      </div>
+      <input 
+        type="range" 
+        id="income-slider" 
+        min="100000" 
+        max="5000000" 
+        step="50000" 
+        value="800000" 
+      />
     </div>
 
+    <!-- 4. LIABILITIES -->
     <div class="form-group">
-      <label for="liabilities">{t.liabilitiesLabel}</label>
-      <input type="number" id="liabilities" value="500000" step="50000" />
+      <div class="label-row">
+        <label for="liabilities-num">{t.liabilitiesLabel}</label>
+        <input 
+          type="number" 
+          id="liabilities-num" 
+          min="0" 
+          max="20000000" 
+          step="10000" 
+          value="500000" 
+          class="num-input-large"
+        />
+      </div>
+      <input 
+        type="range" 
+        id="liabilities-slider" 
+        min="0" 
+        max="10000000" 
+        step="50000" 
+        value="500000" 
+      />
     </div>
   </form>
 
@@ -86,64 +144,83 @@ const contactPath = lang === "bn" ? "/bn/contact" : "/contact";
 
 <script>
   function setupCalculator() {
-    const ageInput = document.getElementById("age") as HTMLInputElement;
-    const retireInput = document.getElementById("retireAge") as HTMLInputElement;
-    const incomeInput = document.getElementById("income") as HTMLInputElement;
-    const liabilitiesInput = document.getElementById("liabilities") as HTMLInputElement;
+    // Sliders
+    const ageSlider = document.getElementById("age-slider") as HTMLInputElement;
+    const retireSlider = document.getElementById("retire-slider") as HTMLInputElement;
+    const incomeSlider = document.getElementById("income-slider") as HTMLInputElement;
+    const liabilitiesSlider = document.getElementById("liabilities-slider") as HTMLInputElement;
 
-    const ageVal = document.getElementById("age-val");
-    const retireVal = document.getElementById("retire-val");
+    // Direct Number Inputs
+    const ageNum = document.getElementById("age-num") as HTMLInputElement;
+    const retireNum = document.getElementById("retire-num") as HTMLInputElement;
+    const incomeNum = document.getElementById("income-num") as HTMLInputElement;
+    const liabilitiesNum = document.getElementById("liabilities-num") as HTMLInputElement;
+
+    // Display & Button
     const resultDisplay = document.getElementById("hlv-result");
     const enquiryBtn = document.getElementById("enquiry-btn") as HTMLAnchorElement;
 
+    if (!ageSlider || !ageNum || !resultDisplay) return;
+
+    // Synchronize Slider <-> Number Input
+    function syncInputs(
+      slider: HTMLInputElement, 
+      num: HTMLInputElement, 
+      source: "slider" | "num"
+    ) {
+      if (source === "slider") {
+        num.value = slider.value;
+      } else {
+        slider.value = num.value;
+      }
+      calculateHLV();
+    }
+
     function calculateHLV() {
-      if (
-        !ageInput ||
-        !retireInput ||
-        !incomeInput ||
-        !liabilitiesInput ||
-        !resultDisplay
-      )
-        return;
+      const age = parseInt(ageNum.value, 10) || 0;
+      const retireAge = parseInt(retireNum.value, 10) || 0;
+      const income = parseFloat(incomeNum.value) || 0;
+      const liabilities = parseFloat(liabilitiesNum.value) || 0;
 
-      const age = parseInt(ageInput.value, 10);
-      const retireAge = parseInt(retireInput.value, 10);
-      const income = parseFloat(incomeInput.value) || 0;
-      const liabilities = parseFloat(liabilitiesInput.value) || 0;
-
-      // Ensure retirement age is greater than current age
+      // Ensure retirement age is at least 1 year ahead of current age
       const workingYears = Math.max(1, retireAge - age);
 
-      // HLV Calculation: Income Replacement Factor (70% of income * remaining working years) + Liabilities
+      // HLV Formula: (70% Net Income * Working Years) + Liabilities
       const netReplacementIncome = income * 0.7;
       const hlvCoverage = netReplacementIncome * workingYears + liabilities;
 
-      // Format in Indian Numbering System (Lakhs / Crores)
+      // Format in Indian Currency (Lakhs/Crores)
       const formattedNumber = new Intl.NumberFormat("en-IN", {
         style: "currency",
         currency: "INR",
         maximumFractionDigits: 0,
       }).format(hlvCoverage);
 
-      if (ageVal) ageVal.innerText = age.toString();
-      if (retireVal) retireVal.innerText = retireAge.toString();
       resultDisplay.innerText = formattedNumber;
 
-      // Update CTA Link dynamically with calculated coverage
+      // Dynamic URL parameter update
       if (enquiryBtn) {
         const baseUrl = enquiryBtn.getAttribute("data-base-url") || "/contact";
         enquiryBtn.href = `${baseUrl}?coverage=${encodeURIComponent(formattedNumber)}`;
       }
     }
 
-    [ageInput, retireInput, incomeInput, liabilitiesInput].forEach((input) => {
-      input?.addEventListener("input", calculateHLV);
+    // Attach Bi-Directional Event Listeners
+    const pairs = [
+      { slider: ageSlider, num: ageNum },
+      { slider: retireSlider, num: retireNum },
+      { slider: incomeSlider, num: incomeNum },
+      { slider: liabilitiesSlider, num: liabilitiesNum },
+    ];
+
+    pairs.forEach(({ slider, num }) => {
+      slider?.addEventListener("input", () => syncInputs(slider, num, "slider"));
+      num?.addEventListener("input", () => syncInputs(slider, num, "num"));
     });
 
     calculateHLV();
   }
 
-  // Runs on initial page load and after Astro ViewTransitions navigation
   setupCalculator();
   document.addEventListener("astro:page-load", setupCalculator);
 </script>
@@ -154,7 +231,7 @@ const contactPath = lang === "bn" ? "/bn/contact" : "/contact";
     border: 1px solid var(--border-color, #e5e7eb);
     border-radius: 12px;
     padding: 2rem;
-    max-width: 600px;
+    max-width: 620px;
     margin: 2rem auto;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     color: #1f2937;
@@ -171,47 +248,66 @@ const contactPath = lang === "bn" ? "/bn/contact" : "/contact";
   }
 
   .form-group {
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.6rem;
+  }
+
+  .label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
   }
 
   label {
     font-weight: 600;
     font-size: 0.95rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    color: #374151;
   }
 
-  .badge {
-    background: #e0f2fe;
-    color: #0369a1;
-    padding: 0.1rem 0.6rem;
-    border-radius: 999px;
-    font-size: 0.875rem;
+  /* Direct Numeric Inputs Styling */
+  .num-input-small,
+  .num-input-large {
+    padding: 0.4rem 0.6rem;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #0b3d91;
+    background: #f8fafc;
+    text-align: right;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
   }
 
+  .num-input-small {
+    width: 70px;
+  }
+
+  .num-input-large {
+    width: 140px;
+  }
+
+  .num-input-small:focus,
+  .num-input-large:focus {
+    border-color: #15803d;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.15);
+  }
+
+  /* Range Slider Styling */
   input[type="range"] {
     width: 100%;
     cursor: pointer;
     accent-color: #15803d;
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 3px;
   }
 
-  input[type="number"] {
-    padding: 0.6rem;
-    border: 1px solid var(--border-color, #d1d5db);
-    border-radius: 6px;
-    font-size: 1rem;
-    outline: none;
-  }
-
-  input[type="number"]:focus {
-    border-color: #15803d;
-    box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.15);
-  }
-
+  /* Result Box */
   .result-box {
     margin-top: 2rem;
     padding: 1.5rem;
