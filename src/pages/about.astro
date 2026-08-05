@@ -1,141 +1,143 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+// ============================================================================
+// ENGLISH ABOUT PAGE (src/pages/about.astro)
+// ============================================================================
 
-// This pulls in your styles from src/styles/style.css
-import '../styles/style.css'; 
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
 ---
 
-<BaseLayout title="About Santanu's Space">
-  
-  <!-- 1. This renders your header navigation at the top -->
-  
-<Header />
-  <main>
-    <!-- About Hero -->
-    <section class="hero">
-      <div class="container">
-        <h2>About Me</h2>
-        <p>Technology Professional • Insurance Advisor • Lifelong Learner</p>
-      </div>
-    </section>
+<BaseLayout title="About Me | Santanu Mukherjee">
+  <Header lang="en" />
 
-    <!-- Who I Am -->
-    <section class="section">
-      <div class="container">
-        <h2>Who I Am</h2>
-        <p>Hello, I'm Santanu Mukherjee.</p>
-        <p>
-          I have spent nearly three decades in Information Technology,
-          gaining experience in software, problem solving and continuous learning.
-        </p>
-        <p>
-          Alongside technology, I have chosen to work as an Insurance
-          Advisor because financial protection is one of the meaningful ways to serve people.
-        </p>
-        <p>
-          Santanu's Space brings together Technology, Insurance
-          and Learning with a commitment to lifelong growth.
-        </p>
-      </div>
-    </section>
+  <main class="about-page">
+    <div class="container">
+      
+      <!-- Hero Header -->
+      <section class="about-hero">
+        <h1>About Me</h1>
+        <p class="subtitle">Technology Professional • Insurance Advisor • Lifelong Learner</p>
+      </section>
 
-    <!-- Journey -->
-    <section class="section light">
-      <div class="container">
-        <h2>My Journey</h2>
-        <p>Technology taught me structured thinking.</p>
-        <p>Insurance taught me the importance of understanding people's needs.</p>
-        <p>Learning taught me that growth never ends.</p>
-      </div>
-    </section>
+      <!-- Content Grid -->
+      <div class="about-grid">
+        
+        <!-- Main Bio Card -->
+        <div class="card main-bio">
+          <h2>Who I Am</h2>
+          <p>
+            Hello, I'm <strong>Santanu Mukherjee</strong>. I have spent nearly three decades in Information Technology, gaining experience in software development, complex problem solving, and continuous system optimization.
+          </p>
+          <p>
+            Alongside technology, I serve as a licensed Insurance Advisor. Financial protection is one of the most meaningful ways to empower individuals and families, and my goal is to simplify these decisions through clarity and trust.
+          </p>
+        </div>
 
-    <!-- Why Insurance -->
-    <section class="section">
-      <div class="container">
-        <h2>Why Insurance</h2>
-        <p>Insurance is not simply about policies.</p>
-        <p>
-          It is about protecting families, planning for the future,
-          and creating financial confidence.
-        </p>
-        <p>My goal is to help people understand before they decide.</p>
-      </div>
-    </section>
-
-    <!-- Why Technology -->
-    <section class="section light">
-      <div class="container">
-        <h2>Why Technology</h2>
-        <p>Technology is constantly changing. Learning never stops.</p>
-        <p>
-          My IT background helps me approach challenges with curiosity,
-          discipline and structured thinking.
-        </p>
-      </div>
-    </section>
-
-    <!-- Values -->
-    <section class="section">
-      <div class="container">
-        <h2>Core Values</h2>
-        <div class="cards">
-          <div class="card">
-            <h3>Trust</h3>
-            <p>Relationships begin with trust.</p>
+        <!-- Pillars / Journey Cards -->
+        <div class="card-grid">
+          <div class="card info-card">
+            <h3>My Journey</h3>
+            <p>Technology taught me structured thinking and logical problem-solving. Insurance taught me the importance of listening and understanding people's real-world financial needs.</p>
           </div>
-          <div class="card">
-            <h3>Knowledge</h3>
-            <p>Learning creates confidence.</p>
+
+          <div class="card info-card">
+            <h3>Why Insurance?</h3>
+            <p>Insurance is not simply about policies—it is about protecting families, planning for the future, and building financial confidence before critical decisions need to be made.</p>
           </div>
-          <div class="card">
-            <h3>Service</h3>
-            <p>Helping people comes before selling.</p>
-          </div>
-          <div class="card">
-            <h3>Lifelong Learning</h3>
-            <p>Every day is an opportunity to improve.</p>
+
+          <div class="card info-card">
+            <h3>Why Technology?</h3>
+            <p>Technology is constantly evolving. My background helps me leverage modern tools, static web architectures, and automation to deliver value efficiently.</p>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Mission -->
-    <section class="section light">
-      <div class="container">
-        <h2>My Mission</h2>
-        <p>
-          To combine technology, financial awareness and continuous
-          learning to create meaningful value for people and society.
-        </p>
       </div>
-    </section>
-
-    <!-- Call to Action -->
-    <section class="section cta">
-      <div class="container">
-        <h2>Let's Learn Together</h2>
-        <p>
-          Thank you for visiting Santanu's Space.
-          I invite you to explore my journey, projects, and continuous learning.
-        </p>
-        <a href="/" class="btn">Back to Home</a>
-      </div>
-    </section>
-
-    <!-- Quote -->
-    <section class="section">
-      <div class="container">
-        <blockquote>
-          "Learning is a lifelong journey. Technology empowers us, and
-          insurance helps us protect what matters most."
-        </blockquote>
-      </div>
-    </section>
+    </div>
   </main>
 
-  <!-- 2. This renders your footer at the very bottom -->
-  <Footer />
-
+  <Footer lang="en" />
 </BaseLayout>
+
+<style>
+  /* About Page Specific Styles */
+  .about-page {
+    background-color: #f8fafc;
+    padding: 3rem 1.5rem;
+    min-height: 80vh;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .about-hero {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .about-hero h1 {
+    font-size: 2.4rem;
+    color: #0b3d91;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: #475569;
+    font-weight: 500;
+  }
+
+  .about-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .card {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+  }
+
+  .main-bio h2 {
+    color: #0b3d91;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+  }
+
+  .main-bio p {
+    color: #334155;
+    line-height: 1.7;
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+  }
+
+  .main-bio p:last-child {
+    margin-bottom: 0;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .info-card h3 {
+    color: #0077b5;
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+  }
+
+  .info-card p {
+    color: #475569;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin: 0;
+  }
+</style>

@@ -1,115 +1,143 @@
 ---
-/**
- * ============================================================================
- * FILE: src/pages/bn/about.astro
- * PAGE: Bengali About Page (আমার সম্পর্কে)
- * SITE: Santanu's Space (দ্য শান্তনু মুখার্জ্জী ইনিশিয়েটিভ)
- * VERSION: 1.0.0
- * 
- * DESCRIPTION:
- * Official Bengali "About Me" page for Santanu Mukherjee (শান্তনু মুখার্জ্জী).
- * Replaces the legacy about.md file to align fully with Astro layout standards,
- * including shared Header, Footer, ViewTransitions, and bilingual metadata.
- *
- * DEPENDENCIES:
- * - src/layouts/BaseLayout.astro
- * - src/components/Header.astro
- * - src/components/Footer.astro
- * ============================================================================
- */
+// ============================================================================
+// BENGALI ABOUT PAGE (src/pages/bn/about.astro)
+// ============================================================================
 
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-
-// ----------------------------------------------------------------------------
-// PAGE METADATA CONFIGURATION
-// These variables are injected into BaseLayout to build HTML <title> & <meta>
-// ----------------------------------------------------------------------------
-const pageTitle = "আমার সম্পর্কে";
-const pageDescription = "শান্তনু মুখার্জ্জী - আইটি পেশাদার এবং আর্থিক ও বীমা সচেতনতা উপদেষ্টা। জানুন আমার অভিজ্ঞতা ও দৃষ্টিভঙ্গি।";
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} lang="bn">
-  <!-- SITE HEADER (Navigation Bar) -->
-  <Header />
+<BaseLayout title="আমার সম্পর্কে | শান্তনু মুখার্জি">
+  <Header lang="bn" />
 
-  <main>
-    <!-- ====================================================================
-         SECTION 1: HERO HEADER
-         Presents the page heading and top-level personal statement.
-         ==================================================================== -->
-    <section class="section light" style="text-align: center; padding: 3.5rem 1rem; background-color: #f8fafd;">
-      <div class="container" style="max-width: 800px; margin: 0 auto;">
-        <h1 style="font-size: 2.4rem; color: #0b3d91; margin-bottom: 0.8rem;">
-          আমার সম্পর্কে (About Me)
-        </h1>
-        <p style="color: #555; font-size: 1.15rem; line-height: 1.6;">
-          প্রযুক্তিগত অভিজ্ঞতা এবং সঠিক আর্থিক পরিকল্পনার মাধ্যমে সাধারণ মানুষের জীবনকে সহজ ও সুরক্ষিত করার একটি প্রয়াস — শান্তনু মুখার্জ্জী।
-        </p>
-      </div>
-    </section>
+  <main class="about-page">
+    <div class="container">
+      
+      <!-- Hero Header -->
+      <section class="about-hero">
+        <h1>আমার সম্পর্কে</h1>
+        <p class="subtitle">আইটি পেশাদার • বীমা উপদেষ্টা • আজীবন শিক্ষার্থী</p>
+      </section>
 
-    <!-- ====================================================================
-         SECTION 2: DETAILED PROFILE & MISSION CONTENT
-         Breakdown of IT background and financial literacy goals.
-         ==================================================================== -->
-    <section class="section" style="padding: 3rem 1rem;">
-      <div class="container" style="max-width: 800px; margin: 0 auto; line-height: 1.8; color: #333;">
+      <!-- Content Grid -->
+      <div class="about-grid">
         
-        <!-- BLOCK A: IT Professional Background -->
-        <div style="background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
-          <h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">👨‍💻 পেশাগত পটভূমি ও প্রযুক্তিগত অভিজ্ঞতা</h2>
+        <!-- Main Bio Card -->
+        <div class="card main-bio">
+          <h2>আমি কে</h2>
           <p>
-            তথ্যপ্রযুক্তি (IT) শিল্পে দীর্ঘদিনের অভিজ্ঞতার মাধ্যমে আমি জটিল সিস্টেম বিশ্লেষণ, তথ্যনির্ভর সিদ্ধান্ত গ্রহণ এবং পরিষ্কার যোগাযোগের গুরুত্ব উপলব্ধি করেছি। প্রযুক্তির সঠিক ব্যবহার কীভাবে মানুষের দৈনন্দিন সমস্যা সমাধান করতে পারে, তা-ই আমার কাজের মূল প্রেরণা।
+            নমস্কার, আমি <strong>শান্তনু মুখার্জি</strong>। বিগত প্রায় তিন দশক ধরে আমি তথ্য প্রযুক্তি (IT) ক্ষেত্রে সফটওয়্যার ডেভেলপমেন্ট এবং জটিল সমস্যার সমাধানের কাজে যুক্ত আছি।
+          </p>
+          <p>
+            প্রযুক্তির পাশাপাশি, আমি একজন লাইসেন্সপ্রাপ্ত বীমা উপদেষ্টা হিসেবে কাজ করি। পরিবার ও পেশাজীবীদের সঠিক দিকনির্দেশনা এবং আর্থিক নিরাপত্তা দেওয়াই আমার মূল লক্ষ্য।
           </p>
         </div>
 
-        <!-- BLOCK B: Insurance Awareness Mission -->
-        <div style="background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
-          <h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">🛡️ বীমা ও আর্থিক সচেতনতা মিশন</h2>
-          <p>
-            বীমা কোনো জটিল বাণিজ্যিক চুক্তি হওয়া উচিত নয়; এটি প্রতিটি পরিবারের জন্য এক মৌলিক আর্থিক নিরাপত্তা বলয়। ভারতীয় পরিবারগুলোর জন্য সঠিক জীবন ও স্বাস্থ্য বীমা বেছে নেওয়ার প্রক্রিয়াটি সহজ ও স্বচ্ছ করে তোলাই 'দ্য শান্তনু মুখার্জ্জী ইনিশিয়েটিভ'-এর মূল লক্ষ্য।
-          </p>
-          <p>
-            আমি কোনো জটিল পলিসি শব্দ ব্যবহার না করে, সহজ-সরল ভাষার মাধ্যমে তথ্য প্রদান করি যাতে প্রত্যেকে নিজ প্রয়োজন অনুযায়ী সঠিক সিদ্ধান্ত নিতে পারেন।
-          </p>
-        </div>
-
-        <!-- ================================================================
-             SECTION 3: CORE VALUES GRID
-             Two-column card grid displaying core guiding principles.
-             ================================================================ -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
-          
-          <!-- Value Card 1: Transparency -->
-          <div style="background: #f0f4f9; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0b3d91;">
-            <h3 style="color: #0b3d91; margin-top: 0;">স্বচ্ছতা (Transparency)</h3>
-            <p style="font-size: 0.95rem; margin-bottom: 0;">কোনো গোপন শর্ত বা বিভ্রান্তিকর তথ্য নয়—শুধুমাত্র প্রকৃত ও নির্ভুল জ্ঞান।</p>
+        <!-- Pillars / Journey Cards -->
+        <div class="card-grid">
+          <div class="card info-card">
+            <h3>আমার অভিজ্ঞতা</h3>
+            <p>প্রযুক্তি আমাকে সুনির্দিষ্ট ও যুক্তিযুক্ত চিন্তাভাবনা শিখিয়েছে। অন্যদিকে, বীমা উপদেষ্টা হিসেবে কাজ করতে গিয়ে মানুষের বাস্তব আর্থিক চাহিদা বোঝা ও তা পূরণের অভিজ্ঞতা হয়েছে।</p>
           </div>
 
-          <!-- Value Card 2: Simplicity -->
-          <div style="background: #f0f4f9; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0b3d91;">
-            <h3 style="color: #0b3d91; margin-top: 0;">সহজ ব্যাখ্যা (Simplicity)</h3>
-            <p style="font-size: 0.95rem; margin-bottom: 0;">জটিল বীমা আইন ও পলিসির ভাষা সাধারণ মানুষের বোধগম্য ভাষায় রূপান্তর।</p>
+          <div class="card info-card">
+            <h3>কেন বীমা?</h3>
+            <p>বীমা কেবল কোনো পলিসি নয়—এটি পরিবারকে সুরক্ষিত রাখা, ভবিষ্যতের সঠিক পরিকল্পনা করা এবং সঠিক সিদ্ধান্তের মাধ্যমে আর্থিক নিশ্চিতকরণ তৈরি করার একটি মাধ্যম।</p>
           </div>
 
-        </div>
-
-        <!-- ================================================================
-             SECTION 4: CALL TO ACTION (CTA)
-             Encourages visitors to contact via the Bengali contact form (/bn/contact).
-             ================================================================ -->
-        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #0b3d91; color: #ffffff; border-radius: 8px;">
-          <h3 style="margin-top: 0; color: #ffffff;">কোনো প্রশ্ন বা পরামর্শের জন্য যোগাযোগ করুন</h3>
-          <p style="color: #e2e8f0; margin-bottom: 1.5rem;">আপনার পরিবারের নিরাপত্তার জন্য সঠিক পরিকল্পনা তৈরিতে সাহায্য করতে পেরে আনন্দিত হব।</p>
-          <a href="/bn/contact" style="display: inline-block; background: #ffffff; color: #0b3d91; font-weight: bold; padding: 0.8rem 1.8rem; border-radius: 5px; text-decoration: none;">যোগাযোগ করুন →</a>
+          <div class="card info-card">
+            <h3>কেন প্রযুক্তি?</h3>
+            <p>প্রযুক্তি প্রতিনিয়ত পরিবর্তিত হচ্ছে। আমার আইটি ব্যাকগ্রাউন্ড আমাকে আধুনিক ডিজিটাল টুলস ব্যবহার করে দ্রুত এবং নির্ভরযোগ্য পরিষেবা প্রদান করতে সাহায্য করে।</p>
+          </div>
         </div>
 
       </div>
-    </section>
+    </div>
   </main>
 
-  <!-- SITE FOOTER -->
-  <Footer />
+  <Footer lang="bn" />
 </BaseLayout>
+
+<style>
+  /* About Page Specific Styles */
+  .about-page {
+    background-color: #f8fafc;
+    padding: 3rem 1.5rem;
+    min-height: 80vh;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .about-hero {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .about-hero h1 {
+    font-size: 2.4rem;
+    color: #0b3d91;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: #475569;
+    font-weight: 500;
+  }
+
+  .about-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .card {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+  }
+
+  .main-bio h2 {
+    color: #0b3d91;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+  }
+
+  .main-bio p {
+    color: #334155;
+    line-height: 1.7;
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+  }
+
+  .main-bio p:last-child {
+    margin-bottom: 0;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .info-card h3 {
+    color: #0077b5;
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+  }
+
+  .info-card p {
+    color: #475569;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin: 0;
+  }
+</style>
