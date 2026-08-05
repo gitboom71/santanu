@@ -1,18 +1,184 @@
 ---
-// src/pages/[filename].astro
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+// ============================================================================
+// Projects Page data and layout for Santanu's Space date : 05-08-2026
+// PROJECTS PAGE (src/pages/projects.astro)
+// Purpose: Displays portfolio items grouped across Technology, Insurance, and Learning
+// ============================================================================
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 ---
 
-<BaseLayout>
-    <Header />
+<BaseLayout title="Projects | Santanu's Space">
+    <Header lang="en" />
 
-    <main class="container" style="padding: 4rem 0;">
-        <!-- Change this heading for each file (e.g., My Projects, Insurance Services, etc.) -->
-        <h2>Projects Page</h2>
-        <p>This page is ready for your amazing content!</p>
+    <main class="projects-page">
+        <div class="container">
+            <!-- PAGE HEADER -->
+            <header class="page-header">
+                <h1>Featured Initiatives & Projects</h1>
+                <p>
+                    A collection of technical solutions, financial advisory
+                    frameworks, and educational resources.
+                </p>
+            </header>
+
+            <!-- PROJECTS GRID -->
+            <div class="projects-grid">
+                <!-- CARD 1: Technology Initiative -->
+                <article class="project-card">
+                    <span class="category-badge tech">Technology</span>
+                    <h2>Modern Web Architectures</h2>
+                    <p>
+                        Designing high-performance, fast-loading static and
+                        hybrid websites using Astro, responsive CSS, and
+                        decoupled deployments on Vercel.
+                    </p>
+                    <div class="tech-stack">
+                        <span>Astro</span>
+                        <span>JavaScript</span>
+                        <span>Vercel</span>
+                    </div>
+                </article>
+
+                <!-- CARD 2: Insurance Advisory -->
+                <article class="project-card">
+                    <span class="category-badge insurance">Insurance</span>
+                    <h2>Financial Protection Frameworks</h2>
+                    <p>
+                        Developing structured evaluation guides and coverage
+                        planning frameworks to help families assess term life
+                        and health insurance options.
+                    </p>
+                    <div class="tech-stack">
+                        <span>Life Insurance</span>
+                        <span>Health Insurance</span>
+                        <span>Risk Advisory</span>
+                    </div>
+                </article>
+
+                <!-- CARD 3: Learning & Mentorship -->
+                <article class="project-card">
+                    <span class="category-badge learning">Learning</span>
+                    <h2>Technical & SQL Learning Guides</h2>
+                    <p>
+                        Authoring practical tutorials and reference materials
+                        focusing on database query logic, SQL development, and
+                        foundational IT skills.
+                    </p>
+                    <div class="tech-stack">
+                        <span>SQL</span>
+                        <span>Database Logic</span>
+                        <span>Tutorials</span>
+                    </div>
+                </article>
+            </div>
+        </div>
     </main>
 
-    <Footer />
+    <Footer lang="en" />
 </BaseLayout>
+
+<!-- SCOPED STYLES -->
+<style>
+    .projects-page {
+        background-color: #f8fafc;
+        padding: 3.5rem 1.5rem;
+        min-height: 80vh;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    .page-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .page-header h1 {
+        font-size: 2.2rem;
+        color: #0d47a1;
+        margin-bottom: 0.5rem;
+        font-weight: 800;
+    }
+
+    .page-header p {
+        font-size: 1.1rem;
+        color: #475569;
+    }
+
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.75rem;
+    }
+
+    .project-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 2rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .category-badge {
+        align-self: flex-start;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 0.25rem 0.65rem;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+    }
+
+    .category-badge.tech {
+        background: #e0f2fe;
+        color: #0369a1;
+    }
+
+    .category-badge.insurance {
+        background: #fef3c7;
+        color: #b45309;
+    }
+
+    .category-badge.learning {
+        background: #dcfce7;
+        color: #15803d;
+    }
+
+    .project-card h2 {
+        font-size: 1.3rem;
+        color: #0f172a;
+        margin: 0 0 0.75rem 0;
+    }
+
+    .project-card p {
+        color: #475569;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        flex-grow: 1;
+    }
+
+    .tech-stack {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .tech-stack span {
+        background: #f1f5f9;
+        color: #475569;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.2rem 0.55rem;
+        border-radius: 4px;
+    }
+</style>
