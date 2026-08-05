@@ -3,11 +3,13 @@
 // BENGALI CONTACT PAGE (src/pages/bn/contact.astro)
 // ============================================================================
 
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { contactTranslations } from '../../utils/i18n.js';
+// Component & Layout Imports (using @ alias pointing to src directory)
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import { contactTranslations } from '@/utils/i18n';
 
+// Select Bengali dictionary
 const t = contactTranslations.bn;
 ---
 
@@ -17,15 +19,19 @@ const t = contactTranslations.bn;
     <main class="section light">
         <div class="container">
             
+            <!-- SECTION: Page Title & Description -->
             <div style="text-align: center; margin-bottom: 2.5rem;">
                 <h2 style="font-size: 2.2rem; color: #0b3d91; margin-bottom: 0.8rem;">{t.heading}</h2>
                 <p style="max-width: 650px; margin: 0 auto; color: #555; line-height: 1.6;">{t.subheading}</p>
             </div>
 
+            <!-- SECTION: Main Grid Layout -->
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
                 
+                <!-- COLUMN 1: Social & Location Info -->
                 <div style="display: flex; flex-direction: column; gap: 1.5rem;">
                     
+                    <!-- LinkedIn Card -->
                     <div style="background: #ffffff; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0077b5; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
                         <h3 style="margin-top: 0; color: #0077b5; font-size: 1.1rem;">🔗 {t.linkedinLabel}</h3>
                         <p style="margin: 0.5rem 0 1rem 0; color: #555; font-size: 0.95rem; line-height: 1.5;">{t.linkedinText}</p>
@@ -39,6 +45,7 @@ const t = contactTranslations.bn;
                         </a>
                     </div>
 
+                    <!-- Location Card -->
                     <div style="background: #ffffff; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0b3d91; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
                         <h3 style="margin-top: 0; color: #0b3d91; font-size: 1.1rem;">📍 {t.locationLabel}</h3>
                         <p style="margin: 0.5rem 0 0 0; color: #333; font-weight: 500;">{t.locationValue}</p>
@@ -46,17 +53,20 @@ const t = contactTranslations.bn;
 
                 </div>
 
+                <!-- COLUMN 2: Contact Form (Web3Forms API) -->
                 <div style="background: #ffffff; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.06);">
                     <h3 style="margin-top: 0; color: #0b3d91; margin-bottom: 1.5rem;">{t.formHeading}</h3>
                     
                     <form 
-                        name="contact" 
+                        action="https://api.web3forms.com/submit" 
                         method="POST" 
-                        data-netlify="true" 
                         style="display: flex; flex-direction: column; gap: 1.2rem;"
                     >
-                        <input type="hidden" name="form-name" value="contact" />
+                        <!-- Web3Forms Config -->
+                        <input type="hidden" name="access_key" value="a680be76-37d6-4a3b-a86d-a9f874b7a071" />
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
                         
+                        <!-- Field: Name -->
                         <div style="display: flex; flex-direction: column; gap: 0.4rem;">
                             <label for="name" style="font-weight: 600; color: #333; font-size: 0.95rem;">{t.nameLabel}</label>
                             <input 
@@ -69,6 +79,7 @@ const t = contactTranslations.bn;
                             />
                         </div>
 
+                        <!-- Field: Email -->
                         <div style="display: flex; flex-direction: column; gap: 0.4rem;">
                             <label for="email" style="font-weight: 600; color: #333; font-size: 0.95rem;">{t.emailFormLabel}</label>
                             <input 
@@ -81,6 +92,7 @@ const t = contactTranslations.bn;
                             />
                         </div>
 
+                        <!-- Field: Subject -->
                         <div style="display: flex; flex-direction: column; gap: 0.4rem;">
                             <label for="subject" style="font-weight: 600; color: #333; font-size: 0.95rem;">{t.subjectLabel}</label>
                             <input 
@@ -93,6 +105,7 @@ const t = contactTranslations.bn;
                             />
                         </div>
 
+                        <!-- Field: Message -->
                         <div style="display: flex; flex-direction: column; gap: 0.4rem;">
                             <label for="message" style="font-weight: 600; color: #333; font-size: 0.95rem;">{t.messageLabel}</label>
                             <textarea 
@@ -105,6 +118,7 @@ const t = contactTranslations.bn;
                             ></textarea>
                         </div>
 
+                        <!-- Submit Button -->
                         <button 
                             type="submit" 
                             class="btn" 
