@@ -1,110 +1,194 @@
 ---
-import ThemeToggle from './ThemeToggle.astro';
+// ============================================================================
+// HEADER COMPONENT (src/components/Header.astro)
+// ============================================================================
 
-const pathname = Astro.url.pathname;
-const isBn = Astro.props.lang === 'bn' || pathname.startsWith('/bn/') || pathname === '/bn';
-const currentLang = isBn ? 'bn' : 'en';
+import { navTranslations } from '@/utils/i18n';
 
-let togglePath = '/';
-if (isBn) {
-  togglePath = pathname.replace(/^\/bn(\/|$)/, '/') || '/';
-} else {
-  togglePath = pathname === '/' ? '/bn' : `/bn${pathname}`;
+interface Props {
+  lang?: 'en' | 'bn';
 }
-const cleanTogglePath = togglePath.replace(/\/\//g, '/');
 
-const getNavPath = (path: string) => {
-  const target = currentLang === 'bn' ? `/bn${path}` : path;
-  return target.replace(/\/\//g, '/');
-};
+const { lang = 'en' } = Astro.props;
+const t = navTranslations[lang] || navTranslations.en;
 
-const isActive = (path: string) => {
-  const currentClean = pathname.replace(/\/$/, '') || '/';
-  const targetClean = getNavPath(path).replace(/\/$/, '') || '/';
-  return currentClean === targetClean;
-};
+// Handle language toggle links
+const currentPath = Astro.url.pathname;
+const isBengali = currentPath.startsWith('/bn');
+const toggleUrl = isBengali 
+  ? currentPath.replace(/^\/bn/, '') || '/' 
+  : `/bn${currentPath === '/' ? '' : currentPath}`;
 ---
 
 <header class="site-header">
-  <div class="header-container">
+  <div class="nav-container">
     
-    <button 
-      id="mobile-menu-btn" 
-      class="hamburger-btn" 
-      aria-label="Toggle navigation menu"
-      aria-expanded="false"
-      aria-controls="main-nav"
-    >
-      <span class="hamburger-bar"></span>
-      <span class="hamburger-bar"></span>
-      <span class="hamburger-bar"></span>
-    </button>
+    <!-- Brand Logo / Title -->
+    <a href={isBengali ? '/bn' : '/'} class="brand">
+      <span class="brand-title">Santanu's Space</span>
+      <span class="brand-subtitle">Technology • Insurance • Learning</span>
+    </a>
 
-    <div class="brand-group">
-      <a href={getNavPath('/')} class="brand-logo">
-        {currentLang === 'bn' ? 'শান্তনু মুখার্জ্জী' : "Santanu's Space"}
-      </a>
-      <span class="brand-tagline">
-        {currentLang === 'bn' ? 'প্রযুক্তি • বীমা • শিক্ষা' : 'Technology • Insurance • Learning'}
-      </span>
-    </div>
+    <!-- Navigation Links -->
+    <nav class="nav-menu">
+      <ul class="nav-list">
+        <li><a href={isBengali ? '/bn' : '/'} class="nav-link">{t.home}</a></li>
+        <li><a href={isBengali ? '/bn/about' : '/about'} class="nav-link">{t.about}</a></li>
+        <li><a href={isBengali ? '/bn/projects' : '/projects'} class="nav-link">{t.projects}</a></li>
+        
+        <!-- Insurance Dropdown -->
+        <li class="dropdown">
+          <a href="#" class="nav-link dropdown-toggle">{t.insurance} ▾</a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href={isBengali ? '/bn/life-insurance' : '/life-insurance'}>
+                {isBengali ? 'লাইফ ইনসিওরেন্স' : 'Life Insurance'}
+              </a>
+            </li>
+            <li>
+              <a href={isBengali ? '/bn/health-insurance' : '/health-insurance'}>
+                {isBengali ? 'হেলথ ইনসিওরেন্স' : 'Health Insurance'}
+              </a>
+            </li>
+          </ul>
+        </li>
 
-    <div class="header-controls">
-      <a href={cleanTogglePath} class="lang-toggle" aria-label="Switch Language">
-        {currentLang === 'bn' ? 'ENG' : 'বাংলা'}
+        <li><a href={isBengali ? '/bn/learning' : '/learning'} class="nav-link">{t.learning}</a></li>
+        <li><a href={isBengali ? '/bn/blog' : '/blog'} class="nav-link">{t.blog}</a></li>
+        <li><a href={isBengali ? '/bn/contact' : '/contact'} class="nav-link">{t.contact}</a></li>
+      </ul>
+    </nav>
+
+    <!-- Language Toggle Button -->
+    <div class="header-actions">
+      <a href={toggleUrl} class="lang-btn">
+        {t.langToggle}
       </a>
-      <ThemeToggle />
     </div>
 
   </div>
-
-  <nav id="main-nav" class="nav-menu" aria-label="Main Navigation">
-    <ul class="nav-links">
-      <li><a href={getNavPath('/')} class={isActive('/') ? 'active' : ''}>{currentLang === 'bn' ? 'হোম' : 'Home'}</a></li>
-      <li><a href={getNavPath('/about')} class={isActive('/about') ? 'active' : ''}>{currentLang === 'bn' ? 'আমার সম্পর্কে' : 'About'}</a></li>
-      <li><a href={getNavPath('/projects')} class={isActive('/projects') ? 'active' : ''}>{currentLang === 'bn' ? 'প্রকল্পসমূহ' : 'Projects'}</a></li>
-      
-      <!-- Insurance Dropdown Sub-menu -->
-      <li class="nav-dropdown">
-        <a href={getNavPath('/insurance')} class={`dropdown-toggle ${isActive('/insurance') ? 'active' : ''}`}>
-          {currentLang === 'bn' ? 'বীমা' : 'Insurance'} <span class="arrow">▾</span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href={getNavPath('/insurance/life')}>{currentLang === 'bn' ? 'জীবন বীমা' : 'Life Insurance'}</a></li>
-          <li><a href={getNavPath('/insurance/health')}>{currentLang === 'bn' ? 'স্বাস্থ্য বীমা' : 'Health Insurance'}</a></li>
-        </ul>
-      </li>
-
-      <li><a href={getNavPath('/learning')} class={isActive('/learning') ? 'active' : ''}>{currentLang === 'bn' ? 'শিক্ষা' : 'Learning'}</a></li>
-      <li><a href={getNavPath('/blog')} class={isActive('/blog') ? 'active' : ''}>{currentLang === 'bn' ? 'ব্লগ' : 'Blog'}</a></li>
-      <li><a href={getNavPath('/contact')} class={isActive('/contact') ? 'active' : ''}>{currentLang === 'bn' ? 'যোগাযোগ' : 'Contact'}</a></li>
-    </ul>
-  </nav>
 </header>
 
-<script>
-  function initMobileMenu() {
-    const menuBtn = document.getElementById('mobile-menu-btn');
-    const navMenu = document.getElementById('main-nav');
-
-    if (!menuBtn || !navMenu) return;
-
-    menuBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
-      menuBtn.setAttribute('aria-expanded', (!isExpanded).toString());
-      navMenu.classList.toggle('is-open');
-    });
-
-    document.addEventListener('click', (e) => {
-      const target = e.target as HTMLElement;
-      if (!menuBtn.contains(target) && !navMenu.contains(target)) {
-        navMenu.classList.remove('is-open');
-        menuBtn.setAttribute('aria-expanded', 'false');
-      }
-    });
+<style is:global>
+  /* Header Base Container */
+  .site-header {
+    background-color: #0b3d91;
+    color: #ffffff;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   }
 
-  initMobileMenu();
-  document.addEventListener('astro:page-load', initMobileMenu);
-</script>
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Brand Styling */
+  .brand {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: #ffffff;
+  }
+  .brand-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+  .brand-subtitle {
+    font-size: 0.75rem;
+    opacity: 0.85;
+  }
+
+  /* Navigation Bar Base Lists */
+  .nav-menu {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    list-style: none !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-list li {
+    list-style: none !important;
+    position: relative;
+  }
+
+  .nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.4rem 0.6rem;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link:hover {
+    color: #ffcc00;
+  }
+
+  /* Dropdown Positioning & Hiding (Fixes Vercel Overflow) */
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-menu {
+    display: none !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #082c6a;
+    min-width: 170px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 4px;
+    padding: 0.5rem 0;
+    margin: 0;
+    list-style: none !important;
+    z-index: 1000;
+  }
+
+  .dropdown-menu li {
+    list-style: none !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  .dropdown-menu a {
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+  .dropdown-menu a:hover {
+    background-color: #0b3d91;
+    color: #ffcc00;
+  }
+
+  /* Reveal Dropdown on Hover */
+  .dropdown:hover .dropdown-menu {
+    display: block !important;
+  }
+
+  /* Language Switcher */
+  .lang-btn {
+    background: #ffffff;
+    color: #0b3d91;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+</style>
