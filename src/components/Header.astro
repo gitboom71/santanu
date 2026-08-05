@@ -1,194 +1,300 @@
 ---
 // ============================================================================
+// Header Component for Astro Project
 // HEADER COMPONENT (src/components/Header.astro)
+// Purpose: Main site navigation bar with active highlights & embedded ThemeToggle
 // ============================================================================
 
-import { navTranslations } from '@/utils/i18n';
+import { navTranslations } from "../utils/i18n";
+import ThemeToggle from "./ThemeToggle.astro";
 
 interface Props {
-  lang?: 'en' | 'bn';
+  lang?: "en" | "bn";
 }
 
-const { lang = 'en' } = Astro.props;
+const { lang = "en" } = Astro.props;
 const t = navTranslations[lang] || navTranslations.en;
 
-// Handle language toggle links
+// ----------------------------------------------------------------------------
+// ROUTING & ACTIVE LINK DETECTION
+// ----------------------------------------------------------------------------
 const currentPath = Astro.url.pathname;
-const isBengali = currentPath.startsWith('/bn');
-const toggleUrl = isBengali 
-  ? currentPath.replace(/^\/bn/, '') || '/' 
-  : `/bn${currentPath === '/' ? '' : currentPath}`;
+const isBengali = currentPath.startsWith("/bn");
+const cleanPath = currentPath.replace(/\/$/, "") || "/";
+
+const toggleUrl = isBengali
+  ? currentPath.replace(/^\/bn/, "") || "/"
+  : `/bn${currentPath === "/" ? "" : currentPath}`;
+
+function isActive(targetPath: string): boolean {
+  const cleanTarget = targetPath.replace(/\/$/, "") || "/";
+  if (cleanTarget === "/" || cleanTarget === "/bn") {
+    return cleanPath === cleanTarget;
+  }
+  return cleanPath.startsWith(cleanTarget);
+}
 ---
 
+<!-- SECTION 1: HEADER CONTAINER -->
 <header class="site-header">
   <div class="nav-container">
-    
-    <!-- Brand Logo / Title -->
-    <a href={isBengali ? '/bn' : '/'} class="brand">
+    <!-- BRAND / LOGO AREA -->
+    <a href={isBengali ? "/bn" : "/"} class="brand">
       <span class="brand-title">Santanu's Space</span>
       <span class="brand-subtitle">Technology • Insurance • Learning</span>
     </a>
 
-    <!-- Navigation Links -->
+    <!-- NAVIGATION MENU (CLEAN FLAT STYLE) -->
     <nav class="nav-menu">
       <ul class="nav-list">
-        <li><a href={isBengali ? '/bn' : '/'} class="nav-link">{t.home}</a></li>
-        <li><a href={isBengali ? '/bn/about' : '/about'} class="nav-link">{t.about}</a></li>
-        <li><a href={isBengali ? '/bn/projects' : '/projects'} class="nav-link">{t.projects}</a></li>
-        
-        <!-- Insurance Dropdown -->
+        <!-- LINK: Home -->
+        <li>
+          <a
+            href={isBengali ? "/bn" : "/"}
+            class={`nav-link ${isActive(isBengali ? "/bn" : "/") ? "active" : ""}`}
+          >
+            {t.home}
+          </a>
+        </li>
+
+        <!-- LINK: About -->
+        <li>
+          <a
+            href={isBengali ? "/bn/about" : "/about"}
+            class={`nav-link ${isActive(isBengali ? "/bn/about" : "/about") ? "active" : ""}`}
+          >
+            {t.about}
+          </a>
+        </li>
+
+        <!-- LINK: Projects -->
+        <li>
+          <a
+            href={isBengali ? "/bn/projects" : "/projects"}
+            class={`nav-link ${isActive(isBengali ? "/bn/projects" : "/projects") ? "active" : ""}`}
+          >
+            {t.projects}
+          </a>
+        </li>
+
+        <!-- DROPDOWN: Insurance -->
         <li class="dropdown">
-          <a href="#" class="nav-link dropdown-toggle">{t.insurance} ▾</a>
+          <a
+            href={isBengali ? "/bn/insurance" : "/insurance"}
+            class={`nav-link dropdown-toggle ${isActive("/insurance") || isActive("/life-insurance") || isActive("/health-insurance") ? "active" : ""}`}
+          >
+            {t.insurance}
+            <span class="arrow">▾</span>
+          </a>
           <ul class="dropdown-menu">
             <li>
-              <a href={isBengali ? '/bn/life-insurance' : '/life-insurance'}>
-                {isBengali ? 'লাইফ ইনসিওরেন্স' : 'Life Insurance'}
+              <a href={isBengali ? "/bn/life-insurance" : "/life-insurance"}>
+                {isBengali ? "লাইফ ইনসিওরেন্স" : "Life Insurance"}
               </a>
             </li>
             <li>
-              <a href={isBengali ? '/bn/health-insurance' : '/health-insurance'}>
-                {isBengali ? 'হেলথ ইনসিওরেন্স' : 'Health Insurance'}
+              <a
+                href={isBengali ? "/bn/health-insurance" : "/health-insurance"}
+              >
+                {isBengali ? "হেলথ ইনসিওরেন্স" : "Health Insurance"}
               </a>
             </li>
           </ul>
         </li>
 
-        <li><a href={isBengali ? '/bn/learning' : '/learning'} class="nav-link">{t.learning}</a></li>
-        <li><a href={isBengali ? '/bn/blog' : '/blog'} class="nav-link">{t.blog}</a></li>
-        <li><a href={isBengali ? '/bn/contact' : '/contact'} class="nav-link">{t.contact}</a></li>
+        <!-- LINK: Learning -->
+        <li>
+          <a
+            href={isBengali ? "/bn/learning" : "/learning"}
+            class={`nav-link ${isActive(isBengali ? "/bn/learning" : "/learning") ? "active" : ""}`}
+          >
+            {t.learning}
+          </a>
+        </li>
+
+        <!-- LINK: Blog -->
+        <li>
+          <a
+            href={isBengali ? "/bn/blog" : "/blog"}
+            class={`nav-link ${isActive(isBengali ? "/bn/blog" : "/blog") ? "active" : ""}`}
+          >
+            {t.blog}
+          </a>
+        </li>
+
+        <!-- LINK: Contact -->
+        <li>
+          <a
+            href={isBengali ? "/bn/contact" : "/contact"}
+            class={`nav-link ${isActive(isBengali ? "/bn/contact" : "/contact") ? "active" : ""}`}
+          >
+            {t.contact}
+          </a>
+        </li>
       </ul>
     </nav>
 
-    <!-- Language Toggle Button -->
+    <!-- RIGHT ACTION BUTTONS -->
     <div class="header-actions">
-      <a href={toggleUrl} class="lang-btn">
+      <!-- Language Switcher -->
+      <a href={toggleUrl} class="action-btn lang-btn">
         {t.langToggle}
       </a>
-    </div>
 
+      <!-- Modular Theme Toggle Component -->
+      <ThemeToggle />
+    </div>
   </div>
 </header>
 
-<style is:global>
-  /* Header Base Container */
+<!-- SECTION 2: STYLESHEET (SCOPED STYLES) -->
+<style>
   .site-header {
-    background-color: #0b3d91;
+    background-color: #0d47a1;
     color: #ffffff;
     width: 100%;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
   .nav-container {
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 0.8rem 1.5rem;
+    padding: 0.85rem 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
   }
 
-  /* Brand Styling */
   .brand {
     display: flex;
     flex-direction: column;
     text-decoration: none;
     color: #ffffff;
-  }
-  .brand-title {
-    font-size: 1.3rem;
-    font-weight: 700;
-  }
-  .brand-subtitle {
-    font-size: 0.75rem;
-    opacity: 0.85;
+    min-width: max-content;
   }
 
-  /* Navigation Bar Base Lists */
+  .brand-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .brand-subtitle {
+    font-size: 0.72rem;
+    opacity: 0.85;
+    font-weight: 400;
+  }
+
+  /* --- FLAT NAVIGATION (REMOVED INNER SHADE) --- */
   .nav-menu {
-    display: flex;
-    align-items: center;
+    background-color: transparent;
+    padding: 0;
+    box-shadow: none;
   }
 
   .nav-list {
     display: flex;
     align-items: center;
-    gap: 1.2rem;
-    list-style: none !important;
+    gap: 1.75rem;
+    list-style: none;
     margin: 0;
     padding: 0;
   }
 
   .nav-list li {
-    list-style: none !important;
+    list-style: none;
     position: relative;
   }
 
   .nav-link {
     color: #ffffff;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 0.95rem;
-    padding: 0.4rem 0.6rem;
-    transition: color 0.2s ease;
+    padding: 0.3rem 0;
+    display: inline-block;
+    position: relative;
+    opacity: 0.9;
+    transition:
+      opacity 0.2s ease,
+      color 0.2s ease;
   }
 
   .nav-link:hover {
-    color: #ffcc00;
+    opacity: 1;
   }
 
-  /* Dropdown Positioning & Hiding (Fixes Vercel Overflow) */
-  .dropdown {
-    position: relative;
+  .nav-link.active {
+    color: #ffd54f;
+    opacity: 1;
   }
 
+  .nav-link.active::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #ffd54f;
+    border-radius: 2px;
+  }
+
+  /* --- DROPDOWN STYLING --- */
   .dropdown-menu {
-    display: none !important;
+    display: none;
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #082c6a;
-    min-width: 170px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    border-radius: 4px;
+    background-color: #093170;
+    min-width: 180px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
     padding: 0.5rem 0;
-    margin: 0;
-    list-style: none !important;
+    margin-top: 0.5rem;
+    list-style: none;
     z-index: 1000;
-  }
-
-  .dropdown-menu li {
-    list-style: none !important;
-    margin: 0;
-    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .dropdown-menu a {
     color: #ffffff;
     text-decoration: none;
     display: block;
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
-    white-space: nowrap;
+    font-weight: 500;
   }
 
   .dropdown-menu a:hover {
-    background-color: #0b3d91;
-    color: #ffcc00;
+    background-color: #0d47a1;
+    color: #ffd54f;
   }
 
-  /* Reveal Dropdown on Hover */
   .dropdown:hover .dropdown-menu {
-    display: block !important;
+    display: block;
   }
 
-  /* Language Switcher */
-  .lang-btn {
+  /* --- HEADER ACTIONS --- */
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .action-btn {
     background: #ffffff;
-    color: #0b3d91;
-    padding: 0.3rem 0.8rem;
+    color: #0d47a1;
+    border: none;
     border-radius: 20px;
-    text-decoration: none;
-    font-weight: 600;
+    padding: 0.35rem 0.9rem;
+    font-weight: 700;
     font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 </style>
