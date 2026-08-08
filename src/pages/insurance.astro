@@ -1,91 +1,124 @@
 ---
-// src/pages/insurance.astro
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import '../styles/insurance.css';
-import InsuranceFAQ from '../components/InsuranceFAQ.astro';
+// ============================================================================
+// ENGLISH INSURANCE PAGE (src/pages/insurance.astro)
+// Purpose: Main hub for Life & Health Insurance awareness
+// ============================================================================
 
-// Page Metadata matching your original HTML descriptions
-const pageTitle = "Insurance Learning Centre | Life & Health Insurance Awareness";
-const pageDescription = "Understand life insurance, health insurance, LIC plans, health insurance concepts, riders, calculators and insurance awareness resources through The Santanu Initiative.";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import InsuranceFAQ from "@components/InsuranceFAQ.astro";
+
+// Page Metadata
+const pageTitle =
+  "Insurance Learning Centre | Life & Health Insurance Awareness";
+const pageDescription =
+  "Understand life insurance, health insurance, LIC plans, health insurance concepts, riders, calculators and insurance awareness resources through The Santanu Initiative.";
 
 // Clean data structures for repetitive layout loops
 const quickNavCategories = [
-  { 
-    title: "Life Insurance", 
-    href: "/life-insurance", 
-    desc: "Understand life protection, LIC plans, riders and planning concepts.", 
-    class: "card-life", 
-    btnClass: "btn-life", 
+  {
+    title: "Life Insurance",
+    href: "/life-insurance",
+    desc: "Understand life protection, LIC plans, riders and planning concepts.",
+    class: "card-life",
+    btnClass: "btn-life",
     btnText: "Explore Life Plans →",
-    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 12a11.02 11.02 0 0 0-22 0zm-11-8v8"></path><path d="M12 12a2 2 0 0 0 4 0"></path><path d="M12 14v6a2 2 0 0 0 2 2"></path></svg>`
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 12a11.02 11.02 0 0 0-22 0zm-11-8v8"></path><path d="M12 12a2 2 0 0 0 4 0"></path><path d="M12 14v6a2 2 0 0 0 2 2"></path></svg>`,
   },
-  { 
-    title: "Health Insurance", 
-    href: "/health-insurance", 
-    desc: "Learn about health covers, claims, benefits and important terms.", 
-    class: "card-health", 
-    btnClass: "btn-health", 
+  {
+    title: "Health Insurance",
+    href: "/health-insurance",
+    desc: "Learn about health covers, claims, benefits and important terms.",
+    class: "card-health",
+    btnClass: "btn-health",
     btnText: "Explore Health Plans →",
-    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M12 8v8"></path><path d="M8 12h8"></path></svg>`
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M12 8v8"></path><path d="M8 12h8"></path></svg>`,
   },
-  { 
-    title: "Calculators", 
-    href: "#calculators", 
-    desc: "Estimate protection needs using simple planning tools.", 
-    class: "card-calc", 
-    btnClass: "btn-calc", 
+  {
+    title: "Calculators",
+    href: "#calculators",
+    desc: "Estimate protection needs using simple planning tools.",
+    class: "card-calc",
+    btnClass: "btn-calc",
     btnText: "Explore Tools →",
-    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="22" x2="9" y2="16"></line><line x1="15" y1="22" x2="15" y2="16"></line><line x1="9" y1="16" x2="15" y2="16"></line><path d="M8 6h8"></path><path d="M8 10h8"></path></svg>`
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="22" x2="9" y2="16"></line><line x1="15" y1="22" x2="15" y2="16"></line><line x1="9" y1="16" x2="15" y2="16"></line><path d="M8 6h8"></path><path d="M8 10h8"></path></svg>`,
   },
-  { 
-    title: "Resources", 
-    href: "#resources", 
-    desc: "Guides, FAQs and useful insurance learning materials.", 
-    class: "card-res", 
-    btnClass: "btn-res", 
+  {
+    title: "Resources",
+    href: "#resources",
+    desc: "Guides, FAQs and useful insurance learning materials.",
+    class: "card-res",
+    btnClass: "btn-res",
     btnText: "Explore Materials →",
-    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>`
-  }
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>`,
+  },
 ];
 
 const comparisonRows = [
-  { feature: "Purpose", health: "Medical expenses and hospitalisation support during life.", life: "Financial protection for family after the policyholder's death." },
-  { feature: "Main Need", health: "Protect current savings from medical emergencies.", life: "Protect future income and family responsibilities." },
-  { feature: "Claim Trigger", health: "Hospitalisation, treatment or eligible medical events.", life: "Death of the insured person as per policy terms." },
-  { feature: "Benefit Type", health: "Cashless treatment or reimbursement.", life: "Financial benefit paid to nominee." },
-  { feature: "Term Length", health: "Short-term (renewed annually).", life: "Long-term (typically 10 to 30+ years, or whole life)." }
+  {
+    feature: "Purpose",
+    health: "Medical expenses and hospitalisation support during life.",
+    life: "Financial protection for family after the policyholder's death.",
+  },
+  {
+    feature: "Main Need",
+    health: "Protect current savings from medical emergencies.",
+    life: "Protect future income and family responsibilities.",
+  },
+  {
+    feature: "Claim Trigger",
+    health: "Hospitalisation, treatment or eligible medical events.",
+    life: "Death of the insured person as per policy terms.",
+  },
+  {
+    feature: "Benefit Type",
+    health: "Cashless treatment or reimbursement.",
+    life: "Financial benefit paid to nominee.",
+  },
+  {
+    feature: "Term Length",
+    health: "Short-term (renewed annually).",
+    life: "Long-term (typically 10 to 30+ years, or whole life).",
+  },
 ];
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription}>
-  <Header />
+<BaseLayout title={pageTitle} description={pageDescription} lang="en">
+  <Header lang="en" />
 
   <main>
     <!-- ========================== INSURANCE HERO ========================== -->
     <section class="hero">
       <div class="container">
-        <h2>Insurance Knowledge Centre</h2>
-        <p>Understanding protection before making important financial decisions.</p>
+        <h2 class="centered-title">Insurance Knowledge Centre</h2>
+        <p class="centered-subtitle">
+          Understanding protection before making important financial decisions.
+        </p>
       </div>
     </section>
 
     <!-- ========================== QUICK NAVIGATION ========================== -->
-    <section class="section quick-nav">
+    <section class="section quick-nav bg-alt-strip">
       <div class="container">
-        <h2>Explore Insurance Learning</h2>
-        <p class="quick-nav-intro">Choose a topic and jump directly to the area you want to understand.</p>
+        <h2 class="centered-title">Explore Insurance Learning</h2>
+        <p class="section-intro centered-subtitle">
+          Choose a topic and jump directly to the area you want to understand.
+        </p>
 
         <div class="cards-wrapper">
-          {quickNavCategories.map((card) => (
-            <div class={`insurance-card ${card.class}`}>
-              <div class="card-icon" set:html={card.iconSvg} />
-              <h3>{card.title}</h3>
-              <p>{card.desc}</p>
-              <a href={card.href} class={`card-btn ${card.btnClass}`}>{card.btnText}</a>
-            </div>
-          ))}
+          {
+            quickNavCategories.map((card) => (
+              <div class={`insurance-card ${card.class}`}>
+                <div class="card-icon" set:html={card.iconSvg} />
+                <h3>{card.title}</h3>
+                <p>{card.desc}</p>
+                <a href={card.href} class={`card-btn ${card.btnClass}`}>
+                  {card.btnText}
+                </a>
+              </div>
+            ))
+          }
         </div>
       </div>
     </section>
@@ -93,52 +126,74 @@ const comparisonRows = [
     <!-- ========================== WHY INSURANCE MATTERS ========================== -->
     <section class="section insurance-group">
       <div class="container">
-        <h2>Why Insurance Matters</h2>
-        <p class="section-intro">
-          Insurance is not just about buying a policy. It is about protecting your family's financial stability, your health, your dreams and your future responsibilities.
+        <h2 class="centered-title">Why Insurance Matters</h2>
+        <p class="section-intro centered-subtitle">
+          Insurance is not just about buying a policy. It is about protecting
+          your family's financial stability, your health, your dreams and your
+          future responsibilities.
         </p>
 
         <div class="cards">
           <div class="card">
             <h3>🛡️ Life Insurance</h3>
-            <p>Life insurance creates a financial safety net for your family. It helps replace lost income, protect goals and provide stability when life takes an unexpected turn.</p>
+            <p>
+              Life insurance creates a financial safety net for your family. It
+              helps replace lost income, protect goals and provide stability
+              when life takes an unexpected turn.
+            </p>
           </div>
           <div class="card">
             <h3>❤️ Health Insurance</h3>
-            <p>Health insurance protects your hard-earned savings from medical emergencies. A good health cover helps you focus on recovery rather than financial stress.</p>
+            <p>
+              Health insurance protects your hard-earned savings from medical
+              emergencies. A good health cover helps you focus on recovery
+              rather than financial stress.
+            </p>
           </div>
           <div class="card">
             <h3>📘 Insurance Education</h3>
-            <p>With decades of IT experience and analytical thinking, my aim is to simplify insurance concepts so people can understand before choosing.</p>
+            <p>
+              With decades of IT experience and analytical thinking, my aim is
+              to simplify insurance concepts so people can understand before
+              choosing.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ========================== LIFE VS HEALTH GUIDE ========================== -->
-    <section class="section insurance-group">
+    <section class="section insurance-group bg-alt-strip">
       <div class="container">
-        <h2>Life vs. Health: The Quick Guide</h2>
-        <p>Life Insurance and Health Insurance solve different problems. Understanding the difference is the first step towards proper protection.</p>
+        <h2 class="centered-title">Life vs. Health: The Quick Guide</h2>
+        <p class="section-intro centered-subtitle">
+          Life Insurance and Health Insurance solve different problems.
+          Understanding the difference is the first step towards proper
+          protection.
+        </p>
 
         <div class="comparison-table">
           <div class="table-container">
             <table>
               <thead>
-                <tr>
-                  <th>Feature</th>
-                  <th>❤️ Health Insurance</th>
-                  <th>🛡️ Life Insurance</th>
+                <tr class="table-header-row">
+                  <th class="col-feature">Feature</th>
+                  <th class="col-health">❤️ Health Insurance</th>
+                  <th class="col-life">🛡️ Life Insurance</th>
                 </tr>
               </thead>
               <tbody>
-                {comparisonRows.map((row) => (
-                  <tr>
-                    <td><strong>{row.feature}</strong></td>
-                    <td>{row.health}</td>
-                    <td>{row.life}</td>
-                  </tr>
-                ))}
+                {
+                  comparisonRows.map((row) => (
+                    <tr>
+                      <td>
+                        <strong>{row.feature}</strong>
+                      </td>
+                      <td>{row.health}</td>
+                      <td>{row.life}</td>
+                    </tr>
+                  ))
+                }
               </tbody>
             </table>
           </div>
@@ -149,81 +204,127 @@ const comparisonRows = [
     <!-- ========================== INSURANCE CHOICE CARDS ========================== -->
     <section class="section insurance-group">
       <div class="container">
-        <h2>Choose Your Insurance Area</h2>
+        <h2 class="centered-title">Choose Your Insurance Area</h2>
         <div class="cards">
           <div class="card">
             <h3>🛡️ Life Insurance Learning</h3>
-            <p>Explore term plans, savings plans, whole life concepts, riders and LIC plan awareness.</p>
-            <a href="/life-insurance">Explore Life Insurance</a>
+            <p>
+              Explore term plans, savings plans, whole life concepts, riders and
+              LIC plan awareness.
+            </p>
+            <a href="/life-insurance" class="btn">Explore Life Insurance</a>
           </div>
           <div class="card">
             <h3>❤️ Health Insurance Learning</h3>
-            <p>Understand health covers, family floater, cashless facilities, waiting periods and benefits.</p>
-            <a href="/health-insurance">Explore Health Insurance</a>
+            <p>
+              Understand health covers, family floater, cashless facilities,
+              waiting periods and benefits.
+            </p>
+            <a href="/health-insurance" class="btn">Explore Health Insurance</a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ========================== INSURANCE CALCULATORS ========================== -->
-    <section class="section" id="calculators">
+    <section class="section bg-alt-strip" id="calculators">
       <div class="container">
-        <h2>Insurance Calculators</h2>
-        <p>Simple tools to understand your protection requirements.</p>
+        <h2 class="centered-title">Insurance Calculators</h2>
+        <p class="section-intro centered-subtitle">
+          Simple tools to understand your protection requirements.
+        </p>
 
         <div class="cards">
           <div class="card">
             <h3>🧮 Life Cover Calculator</h3>
-            <p>Estimate the approximate life cover needed to protect your family's future goals.</p>
-            <button disabled>Coming Soon</button>
+            <p>
+              Estimate the approximate life cover needed to protect your
+              family's future goals.
+            </p>
+            <button
+              class="btn"
+              disabled
+              style="opacity: 0.6; cursor: not-allowed;">Coming Soon</button
+            >
           </div>
           <div class="card">
             <h3>🏥 Health Cover Calculator</h3>
-            <p>Understand how medical inflation and family needs impact your health insurance requirement.</p>
-            <button disabled>Coming Soon</button>
+            <p>
+              Understand how medical inflation and family needs impact your
+              health insurance requirement.
+            </p>
+            <button
+              class="btn"
+              disabled
+              style="opacity: 0.6; cursor: not-allowed;">Coming Soon</button
+            >
           </div>
           <div class="card">
             <h3>📊 Financial Planning Tools</h3>
-            <p>Future tools will include retirement planning, education goals and premium affordability checks.</p>
-            <button disabled>Coming Soon</button>
+            <p>
+              Future tools will include retirement planning, education goals and
+              premium affordability checks.
+            </p>
+            <button
+              class="btn"
+              disabled
+              style="opacity: 0.6; cursor: not-allowed;">Coming Soon</button
+            >
           </div>
         </div>
       </div>
     </section>
 
     <!-- ========================== LIC LEARNING CENTRE ========================== -->
-    <section class="section" id="life-learning">
+    <section class="section insurance-group" id="life-learning">
       <div class="container">
-        <h2>LIC Learning Centre</h2>
-        <p>Understanding LIC plans through simple explanations, not complicated policy language.</p>
+        <h2 class="centered-title">LIC Learning Centre</h2>
+        <p class="section-intro centered-subtitle">
+          Understanding LIC plans through simple explanations, not complicated
+          policy language.
+        </p>
 
         <div class="cards">
           <div class="card">
             <h3>LIC Plan Understanding</h3>
-            <p>Learn how different LIC plans work, including protection plans, savings plans, whole life concepts and limited premium options.</p>
+            <p>
+              Learn how different LIC plans work, including protection plans,
+              savings plans, whole life concepts and limited premium options.
+            </p>
           </div>
           <div class="card">
             <h3>Example: Jeevan Utsav</h3>
-            <p>Understand guaranteed income concepts, whole life protection, premium paying terms and suitability considerations.</p>
+            <p>
+              Understand guaranteed income concepts, whole life protection,
+              premium paying terms and suitability considerations.
+            </p>
           </div>
           <div class="card">
             <h3>Choosing the Right Approach</h3>
-            <p>The right plan depends on goals, income stability, family responsibilities and financial priorities.</p>
+            <p>
+              The right plan depends on goals, income stability, family
+              responsibilities and financial priorities.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ========================== HEALTH INSURANCE SIMPLIFIED ========================== -->
-    <section class="section" id="health-learning">
+    <section class="section insurance-group bg-alt-strip" id="health-learning">
       <div class="container">
-        <h2>Health Insurance Simplified</h2>
-        <p>Important concepts explained in simple language.</p>
+        <h2 class="centered-title">Health Insurance Simplified</h2>
+        <p class="section-intro centered-subtitle">
+          Important concepts explained in simple language.
+        </p>
 
         <div class="cards">
           <div class="card">
             <h3>Individual vs Family Floater</h3>
-            <p>Understand which type of health cover may suit different family situations.</p>
+            <p>
+              Understand which type of health cover may suit different family
+              situations.
+            </p>
           </div>
           <div class="card">
             <h3>Cashless & Reimbursement</h3>
@@ -231,7 +332,10 @@ const comparisonRows = [
           </div>
           <div class="card">
             <h3>Important Features</h3>
-            <p>Waiting period, restoration benefit, no claim bonus and room rent limits explained.</p>
+            <p>
+              Waiting period, restoration benefit, no claim bonus and room rent
+              limits explained.
+            </p>
           </div>
         </div>
       </div>
@@ -240,21 +344,33 @@ const comparisonRows = [
     <!-- ========================== RIDERS ========================== -->
     <section class="section insurance-group">
       <div class="container">
-        <h2>Understanding Insurance Riders</h2>
-        <p>Riders provide additional protection options attached to a base insurance policy.</p>
+        <h2 class="centered-title">Understanding Insurance Riders</h2>
+        <p class="section-intro centered-subtitle">
+          Riders provide additional protection options attached to a base
+          insurance policy.
+        </p>
 
         <div class="cards">
           <div class="card">
             <h3>Accidental Death Benefit</h3>
-            <p>Additional protection in case of accidental death, subject to policy terms.</p>
+            <p>
+              Additional protection in case of accidental death, subject to
+              policy terms.
+            </p>
           </div>
           <div class="card">
             <h3>Critical Illness Rider</h3>
-            <p>Provides financial support after diagnosis of covered critical illnesses.</p>
+            <p>
+              Provides financial support after diagnosis of covered critical
+              illnesses.
+            </p>
           </div>
           <div class="card">
             <h3>Premium Waiver Benefit</h3>
-            <p>Helps continue policy benefits in specific situations defined by the policy.</p>
+            <p>
+              Helps continue policy benefits in specific situations defined by
+              the policy.
+            </p>
           </div>
         </div>
       </div>
@@ -264,9 +380,9 @@ const comparisonRows = [
     <InsuranceFAQ lang="en" />
 
     <!-- ========================== RESOURCES ========================== -->
-    <section class="section" id="resources">
+    <section class="section bg-alt-strip" id="resources">
       <div class="container">
-        <h2>Learning Resources</h2>
+        <h2 class="centered-title">Learning Resources</h2>
         <div class="cards">
           <div class="card">
             <h3>Insurance Guides</h3>
@@ -286,16 +402,286 @@ const comparisonRows = [
 
     <!-- ========================== CONTACT CTA ========================== -->
     <section class="section insurance-group">
-      <div class="container">
-        <h2>Need Personal Guidance?</h2>
-        <p>Every family's situation is different. Understand your needs before selecting protection.</p>
-        <a href="/contact" class="cta-link">Contact Santanu</a>
+      <div class="container text-center">
+        <h2 class="centered-title">Need Personal Guidance?</h2>
+        <p class="section-intro centered-subtitle">
+          Every family's situation is different. Understand your needs before
+          selecting protection.
+        </p>
+        <a href="/contact" class="btn">Contact Santanu</a>
       </div>
     </section>
   </main>
 
-  <Footer />
+  <Footer lang="en" />
 </BaseLayout>
 
 <!-- Client Side Script Implementation -->
 <script is:inline src="/js/insurance.js"></script>
+
+<!-- ==========================================
+     SCOPED CSS FOR INSURANCE PAGE
+     ========================================== -->
+<style>
+  /* Fix: Explicitly center titles and subtitles */
+  .centered-title {
+    text-align: center;
+    color: var(--text-heading);
+    margin-bottom: 1rem;
+  }
+  .centered-subtitle {
+    text-align: center;
+    margin: 0 auto 2rem auto;
+  }
+  .text-center {
+    text-align: center;
+  }
+
+  .hero {
+    max-width: 900px;
+    margin: auto;
+    padding: 60px 20px 20px 20px;
+  }
+  .hero h2 {
+    font-size: 2.5rem;
+    color: var(--primary);
+  }
+
+  /* --- Insurance Layout Groups --- */
+  .insurance-group {
+    padding: 3rem 0;
+  }
+  .section-intro {
+    max-width: 850px;
+    line-height: 1.7;
+    color: var(--text-body);
+  }
+
+  /* --- Base Cards Grid --- */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .card {
+    background: var(--bg-white);
+    padding: 2rem 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 4px 6px -1px var(--shadow-color);
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px -5px var(--shadow-color);
+  }
+  .card h3 {
+    color: var(--card-heading);
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+  }
+  .card p {
+    color: var(--text-body);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+  }
+
+  /* --- Option 1: Modern Bordered Grid --- */
+  .comparison-table {
+    overflow-x: auto;
+    margin-top: 2rem;
+    border-radius: 12px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .comparison-table table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--bg-white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px var(--shadow-color);
+    border: 1px solid var(--border-light);
+  }
+  .comparison-table thead tr.table-header-row th {
+    background-color: var(--primary);
+    color: #ffffff;
+    padding: 16px 20px;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    border-bottom: 2px solid var(--border-light);
+  }
+  .comparison-table th.col-feature {
+    width: 25%;
+  }
+  .comparison-table th.col-health,
+  .comparison-table th.col-life {
+    width: 37.5%;
+  }
+  .comparison-table tbody td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-light);
+    color: var(--text-body);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    vertical-align: top;
+  }
+  .comparison-table tbody td strong {
+    color: var(--text-heading);
+    font-weight: 600;
+  }
+  .comparison-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+  .comparison-table tbody tr {
+    transition: background-color 0.2s ease;
+  }
+  .comparison-table tbody tr:nth-child(even) {
+    background-color: var(--bg-alt);
+  }
+  .comparison-table tbody tr:hover {
+    background-color: var(--shadow-color);
+  }
+  /* --- Top Quick Nav Portal Cards --- */
+  .cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .insurance-card {
+    background: var(--bg-white);
+    border-radius: 20px;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+  }
+  .insurance-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+  }
+  .card-health::before {
+    background: linear-gradient(90deg, #00a86b, #52be80);
+  }
+  .card-life::before {
+    background: linear-gradient(90deg, #d4af37, #f4d03f);
+  }
+  .card-calc::before {
+    background: linear-gradient(90deg, #0284c7, #38bdf8);
+  }
+  .card-res::before {
+    background: linear-gradient(90deg, #64748b, #94a3b8);
+  }
+
+  .insurance-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  }
+  .card-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+  }
+  .insurance-card:hover .card-icon {
+    transform: scale(1.1);
+  }
+
+  .card-health .card-icon {
+    background: rgba(0, 168, 107, 0.1);
+    color: #00a86b;
+  }
+  .card-life .card-icon {
+    background: rgba(212, 175, 55, 0.1);
+    color: #d4af37;
+  }
+  .card-calc .card-icon {
+    background: rgba(2, 132, 199, 0.1);
+    color: #0284c7;
+  }
+  .card-res .card-icon {
+    background: rgba(100, 116, 139, 0.1);
+    color: #64748b;
+  }
+
+  .card-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .insurance-card h3 {
+    font-size: 1.35rem;
+    color: var(--text-heading);
+    margin-bottom: 0.8rem;
+  }
+  .insurance-card p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    flex-grow: 1;
+  }
+
+  /* --- Quick Nav Buttons --- */
+  .card-btn {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition:
+      transform 0.3s ease,
+      filter 0.2s ease;
+    width: 100%;
+  }
+  .btn-health {
+    background: linear-gradient(135deg, #00a86b, #1abc9c);
+    color: #fff;
+  }
+  .btn-life {
+    background: linear-gradient(135deg, #d4af37, #f39c12);
+    color: #fff;
+  }
+  .btn-calc {
+    background: linear-gradient(135deg, #0284c7, #38bdf8);
+    color: #fff;
+  }
+  .btn-res {
+    background: linear-gradient(135deg, #475569, #94a3b8);
+    color: #fff;
+  }
+
+  .card-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+  }
+</style>
