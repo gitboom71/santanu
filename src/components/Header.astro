@@ -1,13 +1,15 @@
 ---
 // ============================================================================
 // Header Component for Astro Project
-// HEADER COMPONENT (src/components/Header.astro)
 // Purpose: Main site navigation bar with active highlights & embedded ThemeToggle
+// Includes a regression-safe responsive mobile hamburger menu
 // ============================================================================
 
-import { navTranslations } from "../utils/i18n";
+import { navTranslations } from "@/utils/i18n";
 import ThemeToggle from "./ThemeToggle.astro";
-
+// Import your new decoupled header styles here
+// (Adjust path prefix depending on your project directory layout)
+import "@/styles/header.css";
 interface Props {
   lang?: "en" | "bn";
 }
@@ -35,7 +37,7 @@ function isActive(targetPath: string): boolean {
 }
 ---
 
-<!-- SECTION 1: HEADER CONTAINER -->
+<!-- SECTION 1: HEADER CONTAINER --><!-- SECTION 1: HEADER CONTAINER WITH INLINE DISMISS TRIGGERS -->
 <header class="site-header">
   <div class="nav-container">
     <!-- BRAND / LOGO AREA -->
@@ -44,8 +46,20 @@ function isActive(targetPath: string): boolean {
       <span class="brand-subtitle">Technology • Insurance • Learning</span>
     </a>
 
+    <!-- HAMBURGER TRIGGER BUTTON -->
+    <button
+      id="menuToggle"
+      class="hamburger-btn"
+      aria-label="Toggle Navigation"
+      aria-expanded="false"
+    >
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+
     <!-- NAVIGATION MENU (CLEAN FLAT STYLE) -->
-    <nav class="nav-menu">
+    <nav id="navMenu" class="nav-menu">
       <ul class="nav-list">
         <!-- LINK: Home -->
         <li>
@@ -78,13 +92,13 @@ function isActive(targetPath: string): boolean {
         </li>
 
         <!-- DROPDOWN: Insurance -->
-        <li class="dropdown">
+        <li class="dropdown-parent">
           <a
             href={isBengali ? "/bn/insurance" : "/insurance"}
             class={`nav-link dropdown-toggle ${isActive("/insurance") || isActive("/life-insurance") || isActive("/health-insurance") ? "active" : ""}`}
           >
             {t.insurance}
-            <span class="arrow">▾</span>
+            <span class="arrow">▼</span>
           </a>
           <ul class="dropdown-menu">
             <li>
@@ -147,154 +161,83 @@ function isActive(targetPath: string): boolean {
   </div>
 </header>
 
-<!-- SECTION 2: STYLESHEET (SCOPED STYLES) -->
-<style>
-  .site-header {
-    background-color: #0d47a1;
-    color: #ffffff;
-    width: 100%;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+<!-- SECTION 2: STYLESHEET (SCOPED STYLES) -- style section was her e but moved to header.css for decoupling -->
+
+<!-- SECTION 3: TRANSITIONS LIFE CYCLE SCRIPTS -->
+<script is:inline>
+  function setupMobileMenu() {
+    const toggle = document.getElementById("menuToggle");
+    const menu = document.getElementById("navMenu");
+
+    if (!toggle || !menu) return;
+
+    const newToggle = toggle.cloneNode(true);
+    toggle.parentNode.replaceChild(newToggle, toggle);
+    const activeToggle = document.getElementById("menuToggle");
+
+    activeToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isActive = menu.classList.toggle("is-active");
+      activeToggle.classList.toggle("is-active");
+      activeToggle.setAttribute("aria-expanded", isActive.toString());
+    });
+
+    menu.addEventListener("click", (e) => {
+      const targetLink = e.target.closest("a");
+      if (!targetLink) return;
+
+      const isDropdownToggle = targetLink.classList.contains("dropdown-toggle");
+
+      if (isDropdownToggle) {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          const parentLi = targetLink.closest(".dropdown-parent");
+          if (parentLi) {
+            parentLi.classList.toggle("dropdown-open");
+          }
+        }
+      } else {
+        if (document.activeElement instanceof HTMLElement) {
+          document.activeElement.blur();
+        }
+
+        document.querySelectorAll(".dropdown-parent").forEach((item) => {
+          item.classList.remove("dropdown-open");
+        });
+
+        menu.classList.remove("is-active");
+        activeToggle.classList.remove("is-active");
+        activeToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      const target = e.target;
+      if (
+        menu.classList.contains("is-active") &&
+        !menu.contains(target) &&
+        !activeToggle.contains(target)
+      ) {
+        menu.classList.remove("is-active");
+        activeToggle.classList.remove("is-active");
+        activeToggle.setAttribute("aria-expanded", "false");
+
+        document.querySelectorAll(".dropdown-parent").forEach((item) => {
+          item.classList.remove("dropdown-open");
+        });
+      }
+    });
   }
 
-  .nav-container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0.85rem 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-  }
+  document.addEventListener("astro:before-swap", () => {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+  });
 
-  .brand {
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    color: #ffffff;
-    min-width: max-content;
-  }
-
-  .brand-title {
-    font-size: 1.35rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-  }
-
-  .brand-subtitle {
-    font-size: 0.72rem;
-    opacity: 0.85;
-    font-weight: 400;
-  }
-
-  /* --- FLAT NAVIGATION (REMOVED INNER SHADE) --- */
-  .nav-menu {
-    background-color: transparent;
-    padding: 0;
-    box-shadow: none;
-  }
-
-  .nav-list {
-    display: flex;
-    align-items: center;
-    gap: 1.75rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .nav-list li {
-    list-style: none;
-    position: relative;
-  }
-
-  .nav-link {
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    padding: 0.3rem 0;
-    display: inline-block;
-    position: relative;
-    opacity: 0.9;
-    transition:
-      opacity 0.2s ease,
-      color 0.2s ease;
-  }
-
-  .nav-link:hover {
-    opacity: 1;
-  }
-
-  .nav-link.active {
-    color: #ffd54f;
-    opacity: 1;
-  }
-
-  .nav-link.active::after {
-    content: "";
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background-color: #ffd54f;
-    border-radius: 2px;
-  }
-
-  /* --- DROPDOWN STYLING --- */
-  .dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #093170;
-    min-width: 180px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
-    border-radius: 6px;
-    padding: 0.5rem 0;
-    margin-top: 0.5rem;
-    list-style: none;
-    z-index: 1000;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .dropdown-menu a {
-    color: #ffffff;
-    text-decoration: none;
-    display: block;
-    padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-  }
-
-  .dropdown-menu a:hover {
-    background-color: #0d47a1;
-    color: #ffd54f;
-  }
-
-  .dropdown:hover .dropdown-menu {
-    display: block;
-  }
-
-  /* --- HEADER ACTIONS --- */
-  .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
-
-  .action-btn {
-    background: #ffffff;
-    color: #0d47a1;
-    border: none;
-    border-radius: 20px;
-    padding: 0.35rem 0.9rem;
-    font-weight: 700;
-    font-size: 0.85rem;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-</style>
+  setupMobileMenu();
+  document.addEventListener("astro:page-load", setupMobileMenu);
+  document.addEventListener("astro:after-swap", setupMobileMenu);
+</script>
