@@ -1,32 +1,39 @@
 ---
 // ============================================================================
 // Header Component for Astro Project
-// Purpose: Main site navigation bar with active highlights & embedded ThemeToggle
-// Includes a regression-safe responsive mobile hamburger menu
+// Purpose: Main site navigation bar with active highlights & ThemeToggle
+// Uses a clean, flat navigation structure (No submenus/dropdowns)
 // ============================================================================
 
 import { navTranslations } from "@/utils/i18n";
-import ThemeToggle from "./ThemeToggle.astro";
-// Import your new decoupled header styles here
-// (Adjust path prefix depending on your project directory layout)
+import ThemeToggle from "@/components/ThemeToggle.astro";
 import "@/styles/header.css";
+
 interface Props {
   lang?: "en" | "bn";
 }
 
-const { lang = "en" } = Astro.props;
-const t = navTranslations[lang] || navTranslations.en;
-
-// ----------------------------------------------------------------------------
-// ROUTING & ACTIVE LINK DETECTION
-// ----------------------------------------------------------------------------
+const { lang } = Astro.props;
 const currentPath = Astro.url.pathname;
-const isBengali = currentPath.startsWith("/bn");
+
+// Auto-detect language from URL route if prop is not explicitly passed
+const isBengali = lang ? lang === "bn" : currentPath.startsWith("/bn");
+const currentLang = isBengali ? "bn" : "en";
+
+// Load translation dictionary
+const t = navTranslations[currentLang] || navTranslations.en;
+
+// Clean routing paths
 const cleanPath = currentPath.replace(/\/$/, "") || "/";
 
-const toggleUrl = isBengali
-  ? currentPath.replace(/^\/bn/, "") || "/"
-  : `/bn${currentPath === "/" ? "" : currentPath}`;
+// Calculate opposite language toggle URL
+let toggleUrl = "/";
+if (isBengali) {
+  const enPath = currentPath.replace(/^\/bn/, "");
+  toggleUrl = enPath === "" ? "/" : enPath;
+} else {
+  toggleUrl = `/bn${currentPath === "/" ? "" : currentPath}`;
+}
 
 function isActive(targetPath: string): boolean {
   const cleanTarget = targetPath.replace(/\/$/, "") || "/";
@@ -37,8 +44,8 @@ function isActive(targetPath: string): boolean {
 }
 ---
 
-<!-- SECTION 1: HEADER CONTAINER --><!-- SECTION 1: HEADER CONTAINER WITH INLINE DISMISS TRIGGERS -->
-<header class="site-header">
+<!-- SECTION 1: HEADER CONTAINER WITH TRANSLATION SHIELD -->
+<header class="site-header notranslate" translate="no">
   <div class="nav-container">
     <!-- BRAND / LOGO AREA -->
     <a href={isBengali ? "/bn" : "/"} class="brand">
@@ -58,8 +65,8 @@ function isActive(targetPath: string): boolean {
       <span class="hamburger-line"></span>
     </button>
 
-    <!-- NAVIGATION MENU (CLEAN FLAT STYLE) -->
-    <nav id="navMenu" class="nav-menu">
+    <!-- NAVIGATION MENU (FLAT STRUCTURE - NO DROPDOWNS) -->
+    <nav id="navMenu" class="nav-menu" aria-label="Main Navigation">
       <ul class="nav-list">
         <!-- LINK: Home -->
         <li>
@@ -67,7 +74,7 @@ function isActive(targetPath: string): boolean {
             href={isBengali ? "/bn" : "/"}
             class={`nav-link ${isActive(isBengali ? "/bn" : "/") ? "active" : ""}`}
           >
-            {t.home}
+            <span>{t.home}</span>
           </a>
         </li>
 
@@ -77,7 +84,7 @@ function isActive(targetPath: string): boolean {
             href={isBengali ? "/bn/about" : "/about"}
             class={`nav-link ${isActive(isBengali ? "/bn/about" : "/about") ? "active" : ""}`}
           >
-            {t.about}
+            <span>{t.about}</span>
           </a>
         </li>
 
@@ -87,36 +94,18 @@ function isActive(targetPath: string): boolean {
             href={isBengali ? "/bn/projects" : "/projects"}
             class={`nav-link ${isActive(isBengali ? "/bn/projects" : "/projects") ? "active" : ""}`}
           >
-            {t.projects}
+            <span>{t.projects}</span>
           </a>
         </li>
 
-        <!-- DROPDOWN: Insurance -->
-        <!-- DROPDOWN: Insurance -->
-        <li
-          class={`dropdown-parent ${isActive(isBengali ? "/bn/insurance" : "/insurance") || isActive(isBengali ? "/bn/life-insurance" : "/life-insurance") || isActive(isBengali ? "/bn/health-insurance" : "/health-insurance") ? "active-dropdown" : ""}`}
-        >
+        <!-- LINK: Insurance (Acts as the Hub Page) -->
+        <li>
           <a
             href={isBengali ? "/bn/insurance" : "/insurance"}
-            class={`nav-link dropdown-toggle ${isActive(isBengali ? "/bn/insurance" : "/insurance") ? "active" : ""}`}
+            class={`nav-link ${isActive(isBengali ? "/bn/insurance" : "/insurance") ? "active" : ""}`}
           >
-            {t.insurance}
-            <span class="arrow">▼</span>
+            <span>{t.insurance}</span>
           </a>
-          <ul class="dropdown-menu">
-            <li>
-              <a href={isBengali ? "/bn/life-insurance" : "/life-insurance"}>
-                {isBengali ? "লাইফ ইনসিওরেন্স" : "Life Insurance"}
-              </a>
-            </li>
-            <li>
-              <a
-                href={isBengali ? "/bn/health-insurance" : "/health-insurance"}
-              >
-                {isBengali ? "হেলথ ইনসিওরেন্স" : "Health Insurance"}
-              </a>
-            </li>
-          </ul>
         </li>
 
         <!-- LINK: Learning -->
@@ -125,7 +114,7 @@ function isActive(targetPath: string): boolean {
             href={isBengali ? "/bn/learning" : "/learning"}
             class={`nav-link ${isActive(isBengali ? "/bn/learning" : "/learning") ? "active" : ""}`}
           >
-            {t.learning}
+            <span>{t.learning}</span>
           </a>
         </li>
 
@@ -135,7 +124,7 @@ function isActive(targetPath: string): boolean {
             href={isBengali ? "/bn/blog" : "/blog"}
             class={`nav-link ${isActive(isBengali ? "/bn/blog" : "/blog") ? "active" : ""}`}
           >
-            {t.blog}
+            <span>{t.blog}</span>
           </a>
         </li>
 
@@ -145,7 +134,7 @@ function isActive(targetPath: string): boolean {
             href={isBengali ? "/bn/contact" : "/contact"}
             class={`nav-link ${isActive(isBengali ? "/bn/contact" : "/contact") ? "active" : ""}`}
           >
-            {t.contact}
+            <span>{t.contact}</span>
           </a>
         </li>
       </ul>
@@ -154,8 +143,12 @@ function isActive(targetPath: string): boolean {
     <!-- RIGHT ACTION BUTTONS -->
     <div class="header-actions">
       <!-- Language Switcher -->
-      <a href={toggleUrl} class="action-btn lang-btn">
-        {t.langToggle}
+      <a
+        href={toggleUrl}
+        class="action-btn lang-btn"
+        lang={isBengali ? "en" : "bn"}
+      >
+        <span>{isBengali ? "English" : "বাংলা"}</span>
       </a>
 
       <!-- Modular Theme Toggle Component -->
@@ -164,9 +157,7 @@ function isActive(targetPath: string): boolean {
   </div>
 </header>
 
-<!-- SECTION 2: STYLESHEET (SCOPED STYLES) -- style section was her e but moved to header.css for decoupling -->
-
-<!-- SECTION 3: TRANSITIONS LIFE CYCLE SCRIPTS -->
+<!-- SECTION 2: TRANSITIONS LIFE CYCLE SCRIPTS -->
 <script is:inline>
   function setupMobileMenu() {
     const toggle = document.getElementById("menuToggle");
@@ -174,10 +165,16 @@ function isActive(targetPath: string): boolean {
 
     if (!toggle || !menu) return;
 
+    // Clone button to strip duplicate event listeners on Astro view transitions
     const newToggle = toggle.cloneNode(true);
-    toggle.parentNode.replaceChild(newToggle, toggle);
+    if (toggle.parentNode) {
+      toggle.parentNode.replaceChild(newToggle, toggle);
+    }
     const activeToggle = document.getElementById("menuToggle");
 
+    if (!activeToggle) return;
+
+    // Toggle mobile menu drawer open/close
     activeToggle.addEventListener("click", (e) => {
       e.stopPropagation();
       const isActive = menu.classList.toggle("is-active");
@@ -185,37 +182,21 @@ function isActive(targetPath: string): boolean {
       activeToggle.setAttribute("aria-expanded", isActive.toString());
     });
 
+    // Close menu when clicking any nav link
     menu.addEventListener("click", (e) => {
       const targetLink = e.target.closest("a");
       if (!targetLink) return;
 
-      const isDropdownToggle = targetLink.classList.contains("dropdown-toggle");
-
-      if (isDropdownToggle) {
-        if (window.innerWidth <= 768) {
-          e.preventDefault();
-          e.stopPropagation();
-
-          const parentLi = targetLink.closest(".dropdown-parent");
-          if (parentLi) {
-            parentLi.classList.toggle("dropdown-open");
-          }
-        }
-      } else {
-        if (document.activeElement instanceof HTMLElement) {
-          document.activeElement.blur();
-        }
-
-        document.querySelectorAll(".dropdown-parent").forEach((item) => {
-          item.classList.remove("dropdown-open");
-        });
-
-        menu.classList.remove("is-active");
-        activeToggle.classList.remove("is-active");
-        activeToggle.setAttribute("aria-expanded", "false");
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
       }
+
+      menu.classList.remove("is-active");
+      activeToggle.classList.remove("is-active");
+      activeToggle.setAttribute("aria-expanded", "false");
     });
 
+    // Close menu when clicking outside
     document.addEventListener("click", (e) => {
       const target = e.target;
       if (
@@ -226,10 +207,6 @@ function isActive(targetPath: string): boolean {
         menu.classList.remove("is-active");
         activeToggle.classList.remove("is-active");
         activeToggle.setAttribute("aria-expanded", "false");
-
-        document.querySelectorAll(".dropdown-parent").forEach((item) => {
-          item.classList.remove("dropdown-open");
-        });
       }
     });
   }

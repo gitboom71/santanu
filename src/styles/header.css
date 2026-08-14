@@ -123,6 +123,11 @@
   display: none;
 }
 
+/* HARDENED LAYOUT ANCHORS AGAINST EXTENSION MUTATION */
+.layout-anchor {
+  position: relative !important;
+}
+
 /* ========================================== */
 /* RESPONSIVE BREAKPOINT: MOBILE (< 768px)    */
 /* ========================================== */
@@ -243,25 +248,19 @@
     padding: 0 !important;
   }
 
-  /* FIXED: Added relative anchor constraint with display block layout safety */
   .nav-list li.dropdown-parent {
     position: relative !important;
     display: block !important;
     padding-bottom: 15px !important;
-    /* FIXED: Closes the gap completely so mouse focus isn't lost */
     margin-bottom: -15px !important;
-    /* Visual counterbalance to keep navigation alignment straight */
   }
 
-  /* FIXED DESKTOP ALIGNMENT MATRIX */
   .dropdown-parent .dropdown-menu {
     display: none;
     position: absolute !important;
     top: 100% !important;
     left: 50% !important;
-    /* Shifts menu anchor line to the middle of the button */
     transform: translateX(-50%) !important;
-    /* FIXED: Center alignment stops left viewport drift */
     background-color: #093170 !important;
     min-width: 190px !important;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3) !important;

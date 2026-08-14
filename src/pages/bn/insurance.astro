@@ -5,9 +5,12 @@
 // ============================================================================
 
 import BaseLayout from "@layouts/BaseLayout.astro";
+//import Header from "@components/Header.astro";
 import Header from "@components/Header.astro";
+
 import Footer from "@components/Footer.astro";
 import InsuranceFAQ from "@components/InsuranceFAQ.astro";
+import BackToTop from "@components/BackToTop.astro";
 
 // Page Metadata
 const pageTitle = "বীমা শিক্ষা কেন্দ্র | জীবন ও স্বাস্থ্য বীমা সচেতনতা";
@@ -426,12 +429,14 @@ const comparisonRows = [
             <a href="/bn/contact" class="btn">সান্তনুর সাথে যোগাযোগ করুন</a>
         </div>
     </section>
+    <BackToTop />
 </BaseLayout>
 
 <Footer lang="bn" />
 
 <!-- Client Side Script Implementation -->
-<script is:inline src="/js/insurance.js"></script>
+<!-- Replace <script is:inline src="/js/insurance.js"></script> with: -->
+<script src="/js/insurance.js" defer></script>
 
 <!-- ==========================================
      SCOPED CSS FOR INSURANCE PAGE

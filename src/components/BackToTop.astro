@@ -1,0 +1,89 @@
+---
+// src/components/BackToTop.astro
+---
+
+<button id="backToTop" class="back-to-top-btn" aria-label="Back to top">
+  <!-- Native Inline SVG: Guaranteed to never fail rendering -->
+  <svg
+    xmlns="http://w3.org"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polyline points="18 15 12 9 6 15"></polyline>
+  </svg>
+</button>
+
+<style>
+  .back-to-top-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 999;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      background-color 0.2s;
+
+    /* Default hidden state */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+
+    /* Employs your global CSS color themes with fallbacks */
+    background-color: var(--accent, #0b3a7d);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .back-to-top-btn.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .back-to-top-btn:hover {
+    background-color: var(--accent-hover, #082a5c);
+    transform: translateY(-3px);
+  }
+
+  .back-to-top-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+</style>
+
+<script>
+  // Safe lifecycle wrapper for Astro ClientRouter View Transitions
+  document.addEventListener("astro:page-load", () => {
+    const btn = document.getElementById("backToTop");
+    if (!btn) return;
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        btn.classList.add("is-visible");
+      } else {
+        btn.classList.remove("is-visible");
+      }
+    });
+
+    btn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+  });
+</script>
