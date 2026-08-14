@@ -92,10 +92,13 @@ function isActive(targetPath: string): boolean {
         </li>
 
         <!-- DROPDOWN: Insurance -->
-        <li class="dropdown-parent">
+        <!-- DROPDOWN: Insurance -->
+        <li
+          class={`dropdown-parent ${isActive(isBengali ? "/bn/insurance" : "/insurance") || isActive(isBengali ? "/bn/life-insurance" : "/life-insurance") || isActive(isBengali ? "/bn/health-insurance" : "/health-insurance") ? "active-dropdown" : ""}`}
+        >
           <a
             href={isBengali ? "/bn/insurance" : "/insurance"}
-            class={`nav-link dropdown-toggle ${isActive("/insurance") || isActive("/life-insurance") || isActive("/health-insurance") ? "active" : ""}`}
+            class={`nav-link dropdown-toggle ${isActive(isBengali ? "/bn/insurance" : "/insurance") ? "active" : ""}`}
           >
             {t.insurance}
             <span class="arrow">▼</span>
