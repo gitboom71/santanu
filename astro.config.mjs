@@ -7,4 +7,9 @@ export default defineConfig({
   // Astro uses 'site' to construct absolute URLs in your sitemap
   site: 'https://santanumukherjee.vercel.app', 
   integrations: [sitemap()],
+  vite: {
+    build: {
+      cssMinify: 'esbuild',
+    },
+  },
 });

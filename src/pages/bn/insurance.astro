@@ -1,67 +1,704 @@
 ---
 // ============================================================================
 // BENGALI INSURANCE PAGE (src/pages/bn/insurance.astro)
+// Purpose: Main hub for Life & Health Insurance awareness (Bengali Version)
 // ============================================================================
 
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import InsuranceFAQ from '../../components/InsuranceFAQ.astro';
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import InsuranceFAQ from "@components/InsuranceFAQ.astro";
+
+// Page Metadata
+const pageTitle = "বীমা শিক্ষা কেন্দ্র | জীবন ও স্বাস্থ্য বীমা সচেতনতা";
+const pageDescription =
+    "সান্তনু ইনিশিয়েটিভের মাধ্যমে জীবন বীমা, স্বাস্থ্য বীমা, এলআইসি প্ল্যান, রাইডার এবং বীমা সচেতনতা সম্পর্কে জানুন।";
+
+// Clean data structures for repetitive layout loops
+const quickNavCategories = [
+    {
+        title: "জীবন বীমা",
+        href: "/bn/life-insurance",
+        desc: "জীবন সুরক্ষা, এলআইসি প্ল্যান, রাইডার এবং পরিকল্পনা সম্পর্কে জানুন।",
+        class: "card-life",
+        btnClass: "btn-life",
+        btnText: "জীবন বীমা দেখুন →",
+        iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 12a11.02 11.02 0 0 0-22 0zm-11-8v8"></path><path d="M12 12a2 2 0 0 0 4 0"></path><path d="M12 14v6a2 2 0 0 0 2 2"></path></svg>`,
+    },
+    {
+        title: "স্বাস্থ্য বীমা",
+        href: "/bn/health-insurance",
+        desc: "স্বাস্থ্য কভার, ক্লেম, সুবিধা এবং গুরুত্বপূর্ণ শর্তাবলী সম্পর্কে জানুন।",
+        class: "card-health",
+        btnClass: "btn-health",
+        btnText: "স্বাস্থ্য বীমা দেখুন →",
+        iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M12 8v8"></path><path d="M8 12h8"></path></svg>`,
+    },
+    {
+        title: "ক্যালকুলেটর",
+        href: "#calculators",
+        desc: "সহজ সরঞ্জামের সাহায্যে আপনার সুরক্ষার প্রয়োজনীয়তা অনুমান করুন।",
+        class: "card-calc",
+        btnClass: "btn-calc",
+        btnText: "টুলস ব্যবহার করুন →",
+        iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="22" x2="9" y2="16"></line><line x1="15" y1="22" x2="15" y2="16"></line><line x1="9" y1="16" x2="15" y2="16"></line><path d="M8 6h8"></path><path d="M8 10h8"></path></svg>`,
+    },
+    {
+        title: "উপাদান (Resources)",
+        href: "#resources",
+        desc: "গাইড, সাধারণ প্রশ্নাবলী (FAQ) এবং দরকারী বীমা শিক্ষার উপকরণ।",
+        class: "card-res",
+        btnClass: "btn-res",
+        btnText: "উপাদান দেখুন →",
+        iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>`,
+    },
+];
+
+const comparisonRows = [
+    {
+        feature: "উদ্দেশ্য (Purpose)",
+        health: "জীবদ্দশায় চিকিৎসা ব্যয় এবং হাসপাতালে ভর্তির খরচ।",
+        life: "পলিসিধারীর মৃত্যুর পর পরিবারের জন্য আর্থিক সুরক্ষা।",
+    },
+    {
+        feature: "প্রধান প্রয়োজন",
+        health: "জরুরি চিকিৎসার খরচ থেকে বর্তমান সঞ্চয় রক্ষা করা।",
+        life: "ভবিষ্যতের আয় এবং পারিবারিক দায়িত্ব রক্ষা করা।",
+    },
+    {
+        feature: "ক্লেম কখন হয়",
+        health: "হাসপাতালে ভর্তি, চিকিৎসা বা নির্দিষ্ট স্বাস্থ্য সমস্যা।",
+        life: "পলিসির শর্ত অনুযায়ী বীমাকৃত ব্যক্তির মৃত্যু হলে।",
+    },
+    {
+        feature: "সুবিধার ধরন",
+        health: "ক্যাশলেস চিকিৎসা বা খরচ ফেরতের (Reimbursement) সুবিধা।",
+        life: "নমিনিকে এককালীন আর্থিক সুবিধা প্রদান।",
+    },
+    {
+        feature: "মেয়াদকাল",
+        health: "স্বল্পমেয়াদী (প্রতি বছর নবায়ন করতে হয়)।",
+        life: "দীর্ঘমেয়াদী (সাধারণত ১০ থেকে ৩০+ বছর, বা সারাজীবন)।",
+    },
+];
 ---
 
-<BaseLayout title="বীমা পরিকল্পনা ও পরামর্শ | সান্তনু মুখার্জি">
-    <Header />
+<BaseLayout title={pageTitle} description={pageDescription} lang="bn">
+    <Header lang="bn" />
 
     <main>
-        <!-- HERO SECTION -->
-        <section class="section light" style="text-align: center; padding: 3rem 1rem;">
+        <!-- ========================== INSURANCE HERO ========================== -->
+        <section class="hero">
             <div class="container">
-                <h1 style="font-size: 2.3rem; color: #0b3d91; margin-bottom: 0.8rem;">
-                    বীমা ও আর্থিক নিরাপত্তা পরিকল্পনা
-                </h1>
-                <p style="max-width: 700px; margin: 0 auto; color: #555; font-size: 1.1rem; line-height: 1.6;">
-                    আপনার পরিবারের ভবিষ্যৎ সুরক্ষিত রাখতে স্বাস্থ্য বীমা, জীবন বীমা এবং সঞ্চয় প্রকল্পের সঠিক পথপ্রদর্শন।
+                <h2 class="centered-title">বীমা শিক্ষা কেন্দ্র</h2>
+                <p class="centered-subtitle">
+                    গুরুত্বপূর্ণ আর্থিক সিদ্ধান্ত নেওয়ার আগে বীমা সুরক্ষা
+                    সম্পর্কে জানুন।
                 </p>
             </div>
         </section>
 
-        <!-- SERVICES OVERVIEW -->
-        <section class="section">
+        <!-- ========================== QUICK NAVIGATION ========================== -->
+        <section class="section quick-nav bg-alt-strip">
             <div class="container">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem;">
-                    
-                    <!-- Term Life Insurance -->
-                    <div style="background: #fff; padding: 1.8rem; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-                        <h3 style="color: #0b3d91; margin-top: 0;">🛡️ টার্ম লাইফ ইনস্যুরেন্স</h3>
-                        <p style="color: #555; line-height: 1.6; font-size: 0.95rem;">
-                            আপনার অনুপস্থিতিতে পরিবারের আর্থিক স্থায়িত্ব বজায় রাখতে সবচেয়ে সাশ্রয়ী জীবন বীমা পরিকল্পনা।
-                        </p>
-                    </div>
+                <h2 class="centered-title">বীমা সম্পর্কে জানুন</h2>
+                <p class="section-intro centered-subtitle">
+                    একটি বিষয় চয়ন করুন এবং সরাসরি সেই বিভাগে যান।
+                </p>
 
-                    <!-- Health Insurance -->
-                    <div style="background: #fff; padding: 1.8rem; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-                        <h3 style="color: #0b3d91; margin-top: 0;">🏥 স্বাস্থ্য বীমা (Health Insurance)</h3>
-                        <p style="color: #555; line-height: 1.6; font-size: 0.95rem;">
-                            জরুরি চিকিৎসার খচর ও হাসপাতালের বিলের হাত থেকে পরিবারের সঞ্চয়কে রক্ষা করতে সম্পূর্ণ ক্যাশলেস কভারেজ।
-                        </p>
-                    </div>
-
-                    <!-- Family & Retirement -->
-                    <div style="background: #fff; padding: 1.8rem; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-                        <h3 style="color: #0b3d91; margin-top: 0;">👨‍👩‍👧‍👦 অবসর ও পরিবার পরিকল্পনা</h3>
-                        <p style="color: #555; line-height: 1.6; font-size: 0.95rem;">
-                            সন্তানদের শিক্ষা, বিবাহ এবং আপনার অবসর জীবনের জন্য দীর্ঘমেয়াদী সুরক্ষিত আর্থিক লক্ষ্য তৈরি করুন।
-                        </p>
-                    </div>
-
+                <div class="cards-wrapper">
+                    {
+                        quickNavCategories.map((card) => (
+                            <div class={`insurance-card ${card.class}`}>
+                                <div
+                                    class="card-icon"
+                                    set:html={card.iconSvg}
+                                />
+                                <h3>{card.title}</h3>
+                                <p>{card.desc}</p>
+                                <a
+                                    href={card.href}
+                                    class={`card-btn ${card.btnClass}`}
+                                >
+                                    {card.btnText}
+                                </a>
+                            </div>
+                        ))
+                    }
                 </div>
             </div>
         </section>
 
-        <!-- BENGALI INTERACTIVE FAQ ACCORDION -->
-        <InsuranceFAQ lang="bn" />
-        
+        <!-- ========================== WHY INSURANCE MATTERS ========================== -->
+        <section class="section insurance-group">
+            <div class="container">
+                <h2 class="centered-title">বীমা কেন গুরুত্বপূর্ণ</h2>
+                <p class="section-intro centered-subtitle">
+                    বীমা শুধু একটি পলিসি কেনা নয়। এটি আপনার পরিবারের আর্থিক
+                    স্থিতিশীলতা, আপনার স্বাস্থ্য, আপনার স্বপ্ন এবং ভবিষ্যতের
+                    দায়িত্বগুলি রক্ষা করার একটি উপায়।
+                </p>
+
+                <div class="cards">
+                    <div class="card">
+                        <h3>🛡️ জীবন বীমা</h3>
+                        <p>
+                            জীবন বীমা আপনার পরিবারের জন্য একটি আর্থিক নিরাপত্তা
+                            জাল তৈরি করে। জীবনের অপ্রত্যাশিত পরিস্থিতিতে এটি আয়
+                            প্রতিস্থাপন এবং স্থিতিশীলতা প্রদানে সাহায্য করে।
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3>❤️ স্বাস্থ্য বীমা</h3>
+                        <p>
+                            স্বাস্থ্য বীমা চিকিৎসা জরুরি অবস্থা থেকে আপনার
+                            কষ্টার্জিত সঞ্চয়কে রক্ষা করে। একটি ভালো স্বাস্থ্য
+                            কভার আপনাকে আর্থিক চাপের পরিবর্তে পুনরুদ্ধারে ফোকাস
+                            করতে সাহায্য করে।
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3>📘 বীমা শিক্ষা</h3>
+                        <p>
+                            কয়েক দশকের আইটি অভিজ্ঞতা এবং বিশ্লেষণাত্মক চিন্তার
+                            সাহায্যে, আমার লক্ষ্য হল বীমার ধারণাগুলোকে সহজ করা
+                            যাতে মানুষ সঠিক সিদ্ধান্ত নিতে পারে।
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================== LIFE VS HEALTH GUIDE (BN) ========================== -->
+        <section class="section insurance-group bg-alt-strip">
+            <div class="container">
+                <h2 class="centered-title">
+                    জীবন বনাম স্বাস্থ্য বীমা: নির্দেশিকা
+                </h2>
+                <p class="section-intro centered-subtitle">
+                    জীবন বীমা এবং স্বাস্থ্য বীমা ভিন্ন ভিন্ন সমস্যার সমাধান করে।
+                    এদের মধ্যে পার্থক্য বুঝতে পারা সঠিক সুরক্ষার দিকে প্রথম
+                    পদক্ষেপ।
+                </p>
+
+                <div class="custom-table-wrapper">
+                    <table class="custom-grid-table">
+                        <thead>
+                            <tr class="custom-header-row">
+                                <th class="col-feature">বৈশিষ্ট্য</th>
+                                <th class="col-health">❤️ স্বাস্থ্য বীমা</th>
+                                <th class="col-life">🛡️ জীবন বীমা</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                comparisonRows.map((row) => (
+                                    <tr class="custom-body-row">
+                                        <td>
+                                            <strong>{row.feature}</strong>
+                                        </td>
+                                        <td>{row.health}</td>
+                                        <td>{row.life}</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <Footer />
+    <!-- ========================== INSURANCE CHOICE CARDS ========================== -->
+    <section class="section insurance-group">
+        <div class="container">
+            <h2 class="centered-title">আপনার বীমার ক্ষেত্র বেছে নিন</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3>🛡️ জীবন বীমা সম্পর্কে জানুন</h3>
+                    <p>
+                        টার্ম প্ল্যান, সেভিংস প্ল্যান, হোল লাইফ কনসেপ্ট, রাইডার
+                        এবং এলআইসি (LIC) প্ল্যান সম্পর্কে অন্বেষণ করুন।
+                    </p>
+                    <a href="/bn/life-insurance" class="btn">জীবন বীমা দেখুন</a>
+                </div>
+                <div class="card">
+                    <h3>❤️ স্বাস্থ্য বীমা সম্পর্কে জানুন</h3>
+                    <p>
+                        স্বাস্থ্য কভার, ফ্যামিলি ফ্লোটার, ক্যাশলেস সুবিধা,
+                        ওয়েটিং পিরিয়ড এবং অন্যান্য সুবিধাগুলো সম্পর্কে জানুন।
+                    </p>
+                    <a href="/bn/health-insurance" class="btn"
+                        >স্বাস্থ্য বীমা দেখুন</a
+                    >
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================== INSURANCE CALCULATORS ========================== -->
+    <section class="section bg-alt-strip" id="calculators">
+        <div class="container">
+            <h2 class="centered-title">বীমা ক্যালকুলেটর</h2>
+            <p class="section-intro centered-subtitle">
+                আপনার সুরক্ষার প্রয়োজনীয়তা বোঝার জন্য সহজ সরঞ্জাম।
+            </p>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>🧮 লাইফ কভার ক্যালকুলেটর</h3>
+                    <p>
+                        আপনার পরিবারের ভবিষ্যতের লক্ষ্য রক্ষা করতে আনুমানিক জীবন
+                        কভারের পরিমাণ গণনা করুন।
+                    </p>
+                    <button
+                        class="btn"
+                        disabled
+                        style="opacity: 0.6; cursor: not-allowed;"
+                        >শীঘ্রই আসছে</button
+                    >
+                </div>
+                <div class="card">
+                    <h3>🏥 হেলথ কভার ক্যালকুলেটর</h3>
+                    <p>
+                        চিকিৎসার ব্যয় বৃদ্ধি এবং পরিবারের চাহিদা কীভাবে আপনার
+                        স্বাস্থ্য বীমার প্রয়োজনীয়তাকে প্রভাবিত করে তা বুঝুন।
+                    </p>
+                    <button
+                        class="btn"
+                        disabled
+                        style="opacity: 0.6; cursor: not-allowed;"
+                        >শীঘ্রই আসছে</button
+                    >
+                </div>
+                <div class="card">
+                    <h3>📊 আর্থিক পরিকল্পনার টুলস</h3>
+                    <p>
+                        ভবিষ্যতের টুলগুলোতে অবসর পরিকল্পনা, শিক্ষার লক্ষ্য এবং
+                        প্রিমিয়ামের সামর্থ্য যাচাই অন্তর্ভুক্ত থাকবে।
+                    </p>
+                    <button
+                        class="btn"
+                        disabled
+                        style="opacity: 0.6; cursor: not-allowed;"
+                        >শীঘ্রই আসছে</button
+                    >
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================== LIC LEARNING CENTRE ========================== -->
+    <section class="section insurance-group" id="life-learning">
+        <div class="container">
+            <h2 class="centered-title">এলআইসি (LIC) লার্নিং সেন্টার</h2>
+            <p class="section-intro centered-subtitle">
+                জটিল নীতিমালার বদলে সহজ ভাষায় এলআইসি প্ল্যানগুলো বুঝুন।
+            </p>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>এলআইসি প্ল্যান বোঝা</h3>
+                    <p>
+                        প্রোটেকশন প্ল্যান, সেভিংস প্ল্যান, হোল লাইফ কনসেপ্ট এবং
+                        সীমিত প্রিমিয়াম বিকল্পসহ বিভিন্ন এলআইসি প্ল্যান কীভাবে
+                        কাজ করে তা জানুন।
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>উদাহরণ: জীবন উৎসব</h3>
+                    <p>
+                        নিশ্চিত আয়ের ধারণা, হোল লাইফ সুরক্ষা, প্রিমিয়াম
+                        প্রদানের সময়কাল এবং উপযুক্ততার বিষয়গুলো বুঝুন।
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>সঠিক পন্থা নির্বাচন</h3>
+                    <p>
+                        সঠিক প্ল্যানটি লক্ষ্য, আয়ের স্থিতিশীলতা, পারিবারিক
+                        দায়িত্ব এবং আর্থিক অগ্রাধিকারের উপর নির্ভর করে।
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================== HEALTH INSURANCE SIMPLIFIED ========================== -->
+    <section class="section insurance-group bg-alt-strip" id="health-learning">
+        <div class="container">
+            <h2 class="centered-title">সহজে স্বাস্থ্য বীমা</h2>
+            <p class="section-intro centered-subtitle">
+                গুরুত্বপূর্ণ ধারণাগুলো সহজ ভাষায় ব্যাখ্যা করা হয়েছে।
+            </p>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>ইন্ডিভিজুয়াল বনাম ফ্যামিলি ফ্লোটার</h3>
+                    <p>
+                        পরিবারের বিভিন্ন পরিস্থিতিতে কোন ধরনের স্বাস্থ্য কভার
+                        উপযুক্ত হতে পারে তা বুঝুন।
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>ক্যাশলেস এবং রিইম্বারসমেন্ট</h3>
+                    <p>
+                        হাসপাতালের নেটওয়ার্ক, ক্লেম এবং খরচ ফেরত কীভাবে কাজ করে
+                        তা জানুন।
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>গুরুত্বপূর্ণ বৈশিষ্ট্য</h3>
+                    <p>
+                        ওয়েটিং পিরিয়ড, রিস্টোরেশন বেনিফিট, নো ক্লেম বোনাস এবং
+                        রুম ভাড়ার সীমা ব্যাখ্যা করা হয়েছে।
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================== RIDERS ========================== -->
+    <section class="section insurance-group">
+        <div class="container">
+            <h2 class="centered-title">বীমা রাইডার্স সম্পর্কে ধারণা</h2>
+            <p class="section-intro centered-subtitle">
+                রাইডারগুলি একটি বেস বীমা পলিসির সাথে সংযুক্ত অতিরিক্ত সুরক্ষা
+                বিকল্প প্রদান করে।
+            </p>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>দুর্ঘটনাজনিত মৃত্যু সুবিধা</h3>
+                    <p>
+                        পলিসির শর্ত সাপেক্ষে দুর্ঘটনাজনিত মৃত্যুর ক্ষেত্রে
+                        অতিরিক্ত সুরক্ষা।
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>ক্রিটিকাল ইলনেস রাইডার</h3>
+                    <p>
+                        গুরুতর অসুস্থতা ধরা পড়ার পর আর্থিক সহায়তা প্রদান করে।
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>প্রিমিয়াম মুকুব সুবিধা</h3>
+                    <p>
+                        পলিসিতে সংজ্ঞায়িত নির্দিষ্ট পরিস্থিতিতে পলিসির
+                        সুবিধাগুলো চালিয়ে যেতে সাহায্য করে।
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================== INTERACTIVE ACCORDION FAQ ========================== -->
+    <InsuranceFAQ lang="bn" />
+
+    <!-- ========================== RESOURCES ========================== -->
+    <section class="section bg-alt-strip" id="resources">
+        <div class="container">
+            <h2 class="centered-title">শিক্ষামূলক উপাদান</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3>ইন্সুরেন্স গাইড</h3>
+                    <p>বীমার ধারণা এবং পরিভাষার সহজ ব্যাখ্যা।</p>
+                </div>
+                <div class="card">
+                    <h3>ডাউনলোড</h3>
+                    <p>ভবিষ্যতের ওয়ার্কশিট, চেকলিস্ট এবং শিক্ষার উপাদান।</p>
+                </div>
+                <div class="card">
+                    <h3>গুরুত্বপূর্ণ লিঙ্ক</h3>
+                    <p>অফিসিয়াল বীমা সংস্থান এবং গ্রাহক সেবা।</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================== CONTACT CTA ========================== -->
+    <section class="section insurance-group">
+        <div class="container text-center">
+            <h2 class="centered-title">ব্যক্তিগত পরামর্শ প্রয়োজন?</h2>
+            <p class="section-intro centered-subtitle">
+                প্রতিটি পরিবারের পরিস্থিতি ভিন্ন। সুরক্ষা নির্বাচন করার আগে
+                আপনার প্রয়োজনীয়তাগুলো বুঝুন।
+            </p>
+            <a href="/bn/contact" class="btn">সান্তনুর সাথে যোগাযোগ করুন</a>
+        </div>
+    </section>
 </BaseLayout>
+
+<Footer lang="bn" />
+
+<!-- Client Side Script Implementation -->
+<script is:inline src="/js/insurance.js"></script>
+
+<!-- ==========================================
+     SCOPED CSS FOR INSURANCE PAGE
+     ========================================== -->
+<style>
+    /* Fix: Explicitly center titles and subtitles */
+    .centered-title {
+        text-align: center;
+        color: var(--text-heading);
+        margin-bottom: 1rem;
+    }
+    .centered-subtitle {
+        text-align: center;
+        margin: 0 auto 2rem auto;
+    }
+    .text-center {
+        text-align: center;
+    }
+
+    .hero {
+        max-width: 900px;
+        margin: auto;
+        padding: 60px 20px 20px 20px;
+    }
+    .hero h2 {
+        font-size: 2.5rem;
+        color: var(--primary);
+    }
+
+    /* --- Insurance Layout Groups --- */
+    .insurance-group {
+        padding: 3rem 0;
+    }
+    .section-intro {
+        max-width: 850px;
+        line-height: 1.7;
+        color: var(--text-body);
+    }
+
+    /* --- Base Cards Grid --- */
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.5rem;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+    .card {
+        background: var(--bg-white);
+        padding: 2rem 1.5rem;
+        border-radius: 12px;
+        text-align: center;
+        border: 1px solid var(--border-light);
+        box-shadow: 0 4px 6px -1px var(--shadow-color);
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 20px -5px var(--shadow-color);
+    }
+    .card h3 {
+        color: var(--card-heading);
+        margin-bottom: 1rem;
+        font-size: 1.25rem;
+    }
+    .card p {
+        color: var(--text-body);
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+        flex-grow: 1;
+    }
+
+    /* --- Modern Bordered Grid Table Styles --- */
+    .custom-table-wrapper {
+        overflow-x: auto;
+        margin-top: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 16px var(--shadow-color);
+    }
+
+    table.custom-grid-table {
+        width: 100% !important;
+        border-collapse: separate !important;
+        border-spacing: 0 !important;
+        background-color: var(--bg-white) !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        border: 1px solid var(--border-light) !important;
+        margin: 0 !important;
+    }
+
+    table.custom-grid-table tr.custom-header-row th {
+        background-color: var(--primary) !important;
+        color: #ffffff !important;
+        padding: 16px 20px !important;
+        text-align: left !important;
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+        border-bottom: 2px solid var(--border-light) !important;
+    }
+
+    table.custom-grid-table th.col-feature {
+        width: 25% !important;
+    }
+
+    table.custom-grid-table th.col-health,
+    table.custom-grid-table th.col-life {
+        width: 37.5% !important;
+    }
+
+    table.custom-grid-table tr.custom-body-row td {
+        padding: 16px 20px !important;
+        border-bottom: 1px solid var(--border-light) !important;
+        color: var(--text-body) !important;
+        font-size: 0.95rem !important;
+        line-height: 1.6 !important;
+        vertical-align: top !important;
+        background-color: transparent !important;
+    }
+
+    table.custom-grid-table tr.custom-body-row td strong {
+        color: var(--text-heading) !important;
+        font-weight: 600 !important;
+    }
+
+    table.custom-grid-table tr.custom-body-row:last-child td {
+        border-bottom: none !important;
+    }
+
+    table.custom-grid-table tr.custom-body-row:nth-child(even) {
+        background-color: var(--bg-alt) !important;
+    }
+
+    /* --- Top Quick Nav Portal Cards --- */
+    .cards-wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+    .insurance-card {
+        background: var(--bg-white);
+        border-radius: 20px;
+        padding: 2.5rem 1.5rem;
+        text-align: center;
+        box-shadow: 0 10px 30px var(--shadow-color);
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--border-light);
+    }
+    .insurance-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+    }
+    .card-health::before {
+        background: linear-gradient(90deg, #00a86b, #52be80);
+    }
+    .card-life::before {
+        background: linear-gradient(90deg, #d4af37, #f4d03f);
+    }
+    .card-calc::before {
+        background: linear-gradient(90deg, #0284c7, #38bdf8);
+    }
+    .card-res::before {
+        background: linear-gradient(90deg, #64748b, #94a3b8);
+    }
+
+    .insurance-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+    .card-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        transition: transform 0.3s ease;
+    }
+    .insurance-card:hover .card-icon {
+        transform: scale(1.1);
+    }
+
+    .card-health .card-icon {
+        background: rgba(0, 168, 107, 0.1);
+        color: #00a86b;
+    }
+    .card-life .card-icon {
+        background: rgba(212, 175, 55, 0.1);
+        color: #d4af37;
+    }
+    .card-calc .card-icon {
+        background: rgba(2, 132, 199, 0.1);
+        color: #0284c7;
+    }
+    .card-res .card-icon {
+        background: rgba(100, 116, 139, 0.1);
+        color: #64748b;
+    }
+
+    .card-icon svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    .insurance-card h3 {
+        font-size: 1.35rem;
+        color: var(--text-heading);
+        margin-bottom: 0.8rem;
+    }
+    .insurance-card p {
+        font-size: 0.95rem;
+        color: var(--text-muted);
+        margin-bottom: 2rem;
+        flex-grow: 1;
+    }
+
+    /* --- Quick Nav Buttons --- */
+    .card-btn {
+        display: inline-block;
+        padding: 10px 24px;
+        border-radius: 30px;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition:
+            transform 0.3s ease,
+            filter 0.2s ease;
+        width: 100%;
+    }
+    .btn-health {
+        background: linear-gradient(135deg, #00a86b, #1abc9c);
+        color: #fff;
+    }
+    .btn-life {
+        background: linear-gradient(135deg, #d4af37, #f39c12);
+        color: #fff;
+    }
+    .btn-calc {
+        background: linear-gradient(135deg, #0284c7, #38bdf8);
+        color: #fff;
+    }
+    .btn-res {
+        background: linear-gradient(135deg, #475569, #94a3b8);
+        color: #fff;
+    }
+
+    .card-btn:hover {
+        filter: brightness(1.1);
+        transform: translateY(-2px);
+    }
+</style>
