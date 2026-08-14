@@ -1,15 +1,15 @@
 ---
 // src/pages/index.astro
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { Image } from 'astro:assets';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { Image } from "astro:assets";
 
 // Import hero image from assets for auto-optimization & WebP conversion
-import heroImg from '../assets/DP_for_wapp.png';
+import heroImg from "../assets/DP_for_wapp.png";
 
 // Import the translation database
-import { homepageTranslations } from '../utils/i18n.js';
+import { homepageTranslations } from "../utils/i18n.js";
 
 // Select the English dataset
 const t = homepageTranslations.en;
@@ -17,7 +17,11 @@ const t = homepageTranslations.en;
 
 <BaseLayout title={t.title}>
     <!-- Google Ownership Verification -->
-    <meta name="google-site-verification" content="J46AE7qtW861R5WPls8Ju_9DLlIJ-KW7lqcqjeIaTU4" slot="head" />
+    <meta
+        name="google-site-verification"
+        content="J46AE7qtW861R5WPls8Ju_9DLlIJ-KW7lqcqjeIaTU4"
+        slot="head"
+    />
 
     <Header />
 
@@ -33,21 +37,33 @@ const t = homepageTranslations.en;
                     <div class="hero-actions">
                         <a href="/about" class="btn btn-primary">
                             {t.heroCta}
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="18"
+                                height="18"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><path d="M5 12h14"></path><path
+                                    d="m12 5 7 7-7 7"></path></svg
+                            >
                         </a>
                     </div>
                 </div>
                 <!-- Right Side Image -->
                 <div class="hero-image-wrapper">
                     <div class="image-frame">
-                        <Image 
-                            src={heroImg} 
-                            alt="Santanu Mukherjee Logo" 
-                            width={340} 
-                            height={340} 
-                            loading="eager" 
+                        <Image
+                            src={heroImg}
+                            alt="Santanu Mukherjee Logo"
+                            width={340}
+                            height={340}
+                            loading="eager"
                             fetchpriority="high"
-                            class="hero-img" 
+                            class="hero-img"
                         />
                     </div>
                 </div>
@@ -127,15 +143,15 @@ const t = homepageTranslations.en;
 <style>
     /* Theme matched to Header & SM Logo */
     :root {
-        --color-bg-main: #f8fafc;          /* Soft slate tint */
-        --color-bg-card: #ffffff;          /* Pure white cards */
-        --color-bg-light: #f1f5f9;         /* Accent section background */
-        --color-primary: #0f2b5c;          /* Exact Header Deep Navy */
-        --color-primary-hover: #183e80;    /* Hover state navy */
-        --color-gold: #d4af37;             /* Matches SM logo gold accents */
-        --color-text-dark: #0f172a;        /* High contrast text */
-        --color-text-muted: #475569;      /* Easy-reading slate */
-        --color-border: #e2e8f0;           /* Soft dividing borders */
+        --color-bg-main: #f8fafc; /* Soft slate tint */
+        --color-bg-card: #ffffff; /* Pure white cards */
+        --color-bg-light: #f1f5f9; /* Accent section background */
+        --color-primary: #0f2b5c; /* Exact Header Deep Navy */
+        --color-primary-hover: #183e80; /* Hover state navy */
+        --color-gold: #d4af37; /* Matches SM logo gold accents */
+        --color-text-dark: #0f172a; /* High contrast text */
+        --color-text-muted: #475569; /* Easy-reading slate */
+        --color-border: #e2e8f0; /* Soft dividing borders */
         --shadow-sm: 0 2px 4px rgba(15, 43, 92, 0.04);
         --shadow-hover: 0 16px 32px -8px rgba(15, 43, 92, 0.12);
         --radius-lg: 16px;
@@ -145,7 +161,13 @@ const t = homepageTranslations.en;
     .page-wrapper {
         background-color: var(--color-bg-main);
         color: var(--color-text-dark);
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-family:
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            Roboto,
+            sans-serif;
     }
 
     /* Layout Utility Classes */
@@ -161,8 +183,12 @@ const t = homepageTranslations.en;
         margin-right: auto;
     }
 
-    .text-center { text-align: center; }
-    .mb-12 { margin-bottom: 3rem; }
+    .text-center {
+        text-align: center;
+    }
+    .mb-12 {
+        margin-bottom: 3rem;
+    }
 
     /* Content Sections */
     .content-section {
@@ -208,7 +234,11 @@ const t = homepageTranslations.en;
     /* Hero Section */
     .hero-section {
         padding: 5.5rem 0 4.5rem;
-        background: linear-gradient(180deg, #ffffff 0%, var(--color-bg-main) 100%);
+        background: linear-gradient(
+            180deg,
+            #ffffff 0%,
+            var(--color-bg-main) 100%
+        );
         border-bottom: 1px solid var(--color-border);
     }
 
@@ -305,7 +335,8 @@ const t = homepageTranslations.en;
         gap: 2rem;
     }
 
-    .stat-card, .focus-card {
+    .stat-card,
+    .focus-card {
         background: var(--color-bg-card);
         padding: 2.5rem 2rem;
         border-radius: var(--radius-lg);
@@ -314,7 +345,8 @@ const t = homepageTranslations.en;
         transition: all 0.3s ease;
     }
 
-    .stat-card:hover, .focus-card:hover {
+    .stat-card:hover,
+    .focus-card:hover {
         transform: translateY(-5px);
         box-shadow: var(--shadow-hover);
         border-color: #cbd5e1;
@@ -327,14 +359,16 @@ const t = homepageTranslations.en;
         margin-bottom: 0.5rem;
     }
 
-    .stat-card h3, .focus-card h3 {
+    .stat-card h3,
+    .focus-card h3 {
         font-size: 1.3rem;
         font-weight: 700;
         color: var(--color-primary);
         margin-bottom: 0.75rem;
     }
 
-    .stat-card p, .focus-card p {
+    .stat-card p,
+    .focus-card p {
         color: var(--color-text-muted);
         line-height: 1.6;
         font-size: 1rem;
