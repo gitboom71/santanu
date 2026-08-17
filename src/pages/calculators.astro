@@ -1,0 +1,163 @@
+---
+// src/pages/calculators.astro
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+---
+
+<BaseLayout title="Calculators - Santanu's Space" description="Interactive financial and insurance calculators to plan your coverage and growth." lang="en">
+    <Header />
+
+    <!-- Hero Section -->
+    <section class="calc-hero">
+        <div class="hero-container">
+            <span class="badge">Interactive Tools</span>
+            <h1>Financial & Insurance Calculators</h1>
+            <p>Smart, practical tools to estimate your life coverage, health insurance needs, and wealth growth.</p>
+        </div>
+    </section>
+
+    <!-- Calculators Grid -->
+    <main class="calc-main">
+        <div class="calc-grid">
+            
+            <!-- Active Tool: HLV Calculator -->
+            <article class="calc-card active">
+                <div class="card-badge">Available Now</div>
+                <div class="card-icon">🛡️</div>
+                <h2>Human Life Value (HLV) Calculator</h2>
+                <p>Calculate the exact term insurance cover required to protect your family's financial future.</p>
+                <a href="/blog/hlv-calculator" class="calc-btn">Use HLV Calculator &rarr;</a>
+            </article>
+
+            <!-- Placeholder: Health Cover Estimator -->
+            <article class="calc-card coming-soon">
+                <div class="card-badge neutral">Coming Soon</div>
+                <div class="card-icon">🏥</div>
+                <h2>Health Insurance Ideal Cover Estimator</h2>
+                <p>Estimate recommended health insurance sum insured based on family size and medical inflation.</p>
+                <span class="calc-btn disabled">In Development</span>
+            </article>
+
+            <!-- Placeholder: Term vs Endowment -->
+            <article class="calc-card coming-soon">
+                <div class="card-badge neutral">Coming Soon</div>
+                <div class="card-icon">⚖️</div>
+                <h2>Term Plan + SIP vs. Endowment</h2>
+                <p>Compare long-term wealth accumulation of pure risk cover plus SIPs against traditional plans.</p>
+                <span class="calc-btn disabled">In Development</span>
+            </article>
+
+        </div>
+    </main>
+
+    <Footer />
+</BaseLayout>
+
+<style>
+    .calc-hero {
+        background: linear-gradient(135deg, #0b3d91 0%, #1e5bb8 100%);
+        color: #ffffff;
+        padding: 4rem 1rem;
+        text-align: center;
+    }
+    .hero-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .badge {
+        background: rgba(255, 255, 255, 0.15);
+        color: #e2e8f0;
+        padding: 0.35rem 1rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+    .calc-hero h1 {
+        font-size: 2.75rem;
+        margin: 1rem 0 0.5rem 0;
+        font-weight: 800;
+    }
+    .calc-hero p {
+        font-size: 1.15rem;
+        color: #cbd5e1;
+        margin: 0;
+    }
+
+    .calc-main {
+        max-width: 1100px;
+        margin: 3rem auto;
+        padding: 0 1.5rem;
+    }
+    .calc-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 2rem;
+    }
+
+    .calc-card {
+        background: #ffffff;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .calc-card.active:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1);
+    }
+    .card-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 0.25rem 0.6rem;
+        border-radius: 6px;
+        background: #dcfce7;
+        color: #15803d;
+    }
+    .card-badge.neutral {
+        background: #f1f5f9;
+        color: #64748b;
+    }
+    .card-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+    .calc-card h2 {
+        font-size: 1.35rem;
+        color: #0f172a;
+        margin: 0 0 0.75rem 0;
+    }
+    .calc-card p {
+        color: #475569;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        flex-grow: 1;
+    }
+    .calc-btn {
+        display: inline-block;
+        text-align: center;
+        background: #0b3d91;
+        color: #ffffff;
+        font-weight: 700;
+        padding: 0.75rem 1.25rem;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background 0.2s ease;
+    }
+    .calc-btn:hover {
+        background: #1e5bb8;
+    }
+    .calc-btn.disabled {
+        background: #e2e8f0;
+        color: #94a3b8;
+        cursor: not-allowed;
+    }
+</style>
