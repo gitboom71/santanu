@@ -9,7 +9,7 @@ export interface NavTranslation {
   about: string;
   projects: string;
   insurance: string;
-  learning: string;
+  calculators: string;
   blog: string;
   contact: string;
   langToggle: string;
@@ -89,7 +89,7 @@ export const navTranslations: Record<string, NavTranslation> = {
     about: "About",
     projects: "Projects",
     insurance: "Insurance",
-    learning: "Calculators",
+    calculators: "Calculators",
     blog: "Blog",
     contact: "Contact",
     langToggle: "বাংলা",
@@ -99,7 +99,7 @@ export const navTranslations: Record<string, NavTranslation> = {
     about: "পরিচিতি",
     projects: "প্রকল্প",
     insurance: "বীমা",
-    learning: "ক্যালকুলেটর",
+    calculators: "ক্যালকুলেটর",
     blog: "ব্লগ",
     contact: "যোগাযোগ",
     langToggle: "English",
@@ -118,14 +118,14 @@ export const homepageTranslations: Record<string, HomepageTranslation> = {
     aboutText: "I am Santanu Mukherjee—an IT veteran, licensed insurance advisor, and continuous learner. Over the last three decades, I've built a career on solving complex tech problems, and today I combine that technical rigor with practical financial guidance to empower families and professionals.",
 
     missionTitle: "My Mission",
-    missionText: "To simplify complex insurance solutions, foster financial literacy, and inspire lifelong learning through technology, transparency, and trust.",
+    missionText: "To simplify complex insurance solutions, foster financial literacy, and inspire lifelong calculators through technology, transparency, and trust.",
 
     stat1Title: "28+ Years",
     stat1Desc: "Decades of proven expertise in Information Technology and systems.",
     stat2Title: "100%",
     stat2Desc: "Client-focused advice built on complete honesty and clarity.",
     stat3Title: "3 Core Pillars",
-    stat3Desc: "Combining Technology, Insurance Advisory, and Continuous Learning.",
+    stat3Desc: "Combining Technology, Insurance Advisory, and Continuous calculators.",
 
     focusTitle: "Areas of Expertise",
     focus1Title: "Technology & Web",
@@ -183,7 +183,7 @@ export const contactTranslations: Record<string, ContactTranslation> = {
   en: {
     pageTitle: "Contact Me",
     heading: "Get in Touch",
-    subheading: "Have a question about IT systems, insurance planning, or continuous learning? Send a secure message below or connect with me professionally.",
+    subheading: "Have a question about IT systems, insurance planning, or continuous calculators? Send a secure message below or connect with me professionally.",
 
     linkedinLabel: "Professional Network",
     linkedinText: "Connect with me on LinkedIn for IT consulting and professional updates.",

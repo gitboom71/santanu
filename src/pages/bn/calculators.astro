@@ -1,0 +1,163 @@
+---
+// src/pages/bn/calculators.astro
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+---
+
+<BaseLayout title="ক্যালকুলেটর - Santanu's Space" description="আপনার জীবন ও স্বাস্থ্য বীমা এবং আর্থিক পরিকল্পনার জন্য ইন্টারেক্টিভ ক্যালকুলেটর।" lang="bn">
+    <Header lang="bn" />
+
+    <!-- Hero Section -->
+    <section class="calc-hero">
+        <div class="hero-container">
+            <span class="badge">ইন্টারেক্টিভ টুলস</span>
+            <h1>ফাইন্যান্সিয়াল ও ইন্স্যুরেন্স ক্যালকুলেটর</h1>
+            <p>আপনার জীবন বীমা, স্বাস্থ্য বীমা এবং ভবিষ্যতের তহবিল সঠিকভাবে হিসাব করার সহজ টুলসমূহ।</p>
+        </div>
+    </section>
+
+    <!-- Calculators Grid -->
+    <main class="calc-main">
+        <div class="calc-grid">
+            
+            <!-- Active Tool: HLV Calculator -->
+            <article class="calc-card active">
+                <div class="card-badge">উপলব্ধ আছে</div>
+                <div class="card-icon">🛡️</div>
+                <h2>হিউম্যান লাইফ ভ্যালু (HLV) ক্যালকুলেটর</h2>
+                <p>পরিবারের আর্থিক নিরাপত্তা সুনিশ্চিত করতে আপনার সঠিক টার্ম ইন্স্যুরেন্স কভার হিসাব করুন।</p>
+                <a href="/bn/blog/hlv-calculator" class="calc-btn">HLV ক্যালকুলেটর ব্যবহার করুন &rarr;</a>
+            </article>
+
+            <!-- Placeholder: Health Cover Estimator -->
+            <article class="calc-card coming-soon">
+                <div class="card-badge neutral">শীঘ্রই আসছে</div>
+                <div class="card-icon">🏥</div>
+                <h2>হেলথ ইন্স্যুরেন্স আইডিয়াল কভার এস্টিমেটর</h2>
+                <p>পরিবারের সদস্য সংখ্যা এবং চিকিৎসার মূল্যবৃদ্ধির ওপর ভিত্তি করে উপযুক্ত হেলথ কভার নির্ধারণ করুন।</p>
+                <span class="calc-btn disabled">কাজ চলছে</span>
+            </article>
+
+            <!-- Placeholder: Term vs Endowment -->
+            <article class="calc-card coming-soon">
+                <div class="card-badge neutral">শীঘ্রই আসছে</div>
+                <div class="card-icon">⚖️</div>
+                <h2>টার্ম প্ল্যান + SIP বনাম এনডাওমেন্ট</h2>
+                <p>ঐতিহ্যবাহী বীমা পরিকল্পনার তুলনায় টার্ম কভার এবং মিউচুয়াল ফান্ড SIP-র দীর্ঘমেয়াদী রিটার্ন তুলনা করুন।</p>
+                <span class="calc-btn disabled">কাজ চলছে</span>
+            </article>
+
+        </div>
+    </main>
+
+    <Footer lang="bn" />
+</BaseLayout>
+
+<style>
+    .calc-hero {
+        background: linear-gradient(135deg, #0b3d91 0%, #1e5bb8 100%);
+        color: #ffffff;
+        padding: 4rem 1rem;
+        text-align: center;
+    }
+    .hero-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .badge {
+        background: rgba(255, 255, 255, 0.15);
+        color: #e2e8f0;
+        padding: 0.35rem 1rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+    .calc-hero h1 {
+        font-size: 2.75rem;
+        margin: 1rem 0 0.5rem 0;
+        font-weight: 800;
+    }
+    .calc-hero p {
+        font-size: 1.15rem;
+        color: #cbd5e1;
+        margin: 0;
+    }
+
+    .calc-main {
+        max-width: 1100px;
+        margin: 3rem auto;
+        padding: 0 1.5rem;
+    }
+    .calc-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 2rem;
+    }
+
+    .calc-card {
+        background: #ffffff;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .calc-card.active:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1);
+    }
+    .card-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 0.25rem 0.6rem;
+        border-radius: 6px;
+        background: #dcfce7;
+        color: #15803d;
+    }
+    .card-badge.neutral {
+        background: #f1f5f9;
+        color: #64748b;
+    }
+    .card-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+    .calc-card h2 {
+        font-size: 1.35rem;
+        color: #0f172a;
+        margin: 0 0 0.75rem 0;
+    }
+    .calc-card p {
+        color: #475569;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        flex-grow: 1;
+    }
+    .calc-btn {
+        display: inline-block;
+        text-align: center;
+        background: #0b3d91;
+        color: #ffffff;
+        font-weight: 700;
+        padding: 0.75rem 1.25rem;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background 0.2s ease;
+    }
+    .calc-btn:hover {
+        background: #1e5bb8;
+    }
+    .calc-btn.disabled {
+        background: #e2e8f0;
+        color: #94a3b8;
+        cursor: not-allowed;
+    }
+</style>
