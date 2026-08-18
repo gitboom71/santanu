@@ -1,72 +1,183 @@
 ---
-/**
- * ============================================================================
- * FILE: src/pages/bn/life-insurance/calculator.astro
- * PAGE: Bengali HLV Calculator Page (/bn/life-insurance/calculator)
- * SITE: Santanu's Space
- * VERSION: 1.2.0
- * ============================================================================
- */
-
-import BaseLayout from '@/layouts/BaseLayout.astro';
-import Header from '@/components/Header.astro';
-import Footer from '@/components/Footer.astro';
-import HLVCalculator from '@/components/HLVCalculator.astro';
-
-const pageTitle = "হিউম্যান লাইফ ভ্যালু (HLV) ক্যালকুলেটর | লাইফ ইনস্যুরেন্স";
-const pageDescription = "হিউম্যান লাইফ ভ্যালু (HLV) পদ্ধতির সাহায্যে আপনার পরিবারের জন্য সঠিক টার্ম ইনস্যুরেন্স কভারেজ হিসাব করুন।";
+// src/pages/calculators.astro
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} lang="bn">
+<BaseLayout
+  title="Calculators - Santanu's Space"
+  description="Interactive financial and insurance calculators to plan your coverage and growth."
+  lang="en"
+>
   <Header />
 
-  <main style="background-color: #f8fafd; padding: 2.5rem 1rem; min-height: 80vh;">
-    <div style="max-width: 800px; margin: 0 auto;">
-      
-      <!-- 1. BREADCRUMB / BACK LINK -->
-      <nav style="margin-bottom: 1.5rem; font-size: 0.9rem;">
-        <a href="/bn/life-insurance/term-life" style="color: #0b3d91; font-weight: 600; text-decoration: none;">
-          ← টার্ম লাইফ গাইড-এ ফিরে যান
-        </a>
-        <span style="color: #94a3b8; margin: 0 0.5rem;">|</span>
-        <a href="/bn/life-insurance" style="color: #64748b; text-decoration: none;">
-          লাইফ ইনস্যুরেন্স মূল পাতা
-        </a>
-      </nav>
+  <!-- Hero Section -->
+  <section class="calc-hero">
+    <div class="hero-container">
+      <span class="badge">Interactive Tools</span>
+      <h1>Financial & Insurance Calculators</h1>
+      <p>
+        Smart, practical tools to estimate your life coverage, health insurance
+        needs, and wealth growth.
+      </p>
+    </div>
+  </section>
 
-      <!-- 2. THE CALCULATOR COMPONENT -->
-      <HLVCalculator lang="bn" />
-
-      <!-- 3. RELATED GUIDES & NEXT STEPS -->
-      <div style="margin-top: 3rem; padding: 2rem; background: #ffffff; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-        <h3 style="color: #0b3d91; margin-top: 0; font-size: 1.25rem;">
-          কভারেজ হিসাব করার পর আপনার করণীয় কী?
-        </h3>
-        <p style="color: #475569; line-height: 1.6;">
-          আপনার প্রয়োজনীয় বিমার সঠিক পরিমাণ জানার পর, পরবর্তী ধাপ হলো সঠিক পলিসি কাঠামো ও রাইডার নির্বাচন করা।
+  <!-- Calculators Grid -->
+  <main class="calc-main">
+    <div class="calc-grid">
+      <!-- Tool 1: HLV Calculator -->
+      <article class="calc-card active">
+        <div class="card-badge">Available Now</div>
+        <div class="card-icon">🛡️</div>
+        <h2>Human Life Value (HLV) Calculator</h2>
+        <p>
+          Calculate the exact term insurance cover required to protect your
+          family's financial future.
         </p>
+        <a href="/blog/hlv-calculator" class="calc-btn"
+          >Use HLV Calculator &rarr;</a
+        >
+      </article>
 
-        <ul style="color: #334155; line-height: 1.8; padding-left: 1.2rem; margin-bottom: 1.5rem;">
-          <li>
-            <a href="/bn/life-insurance/term-life" style="color: #0b3d91; font-weight: 600; text-decoration: underline;">
-              টার্ম লাইফ ইনস্যুরেন্স গাইড পড়ুন
-            </a> 
-            — ক্লেম সেটেলমেন্ট রেশিও, গুরুত্বপূর্ণ রাইডার এবং ট্যাক্স সুবিধা সম্পর্কে বিস্তারিত জানুন।
-          </li>
-          <li>
-            <strong>ব্যক্তিগত পরামর্শ পান:</strong> আপনার প্রয়োজন অনুযায়ী সঠিক প্ল্যান বেছে নিতে উপরের ক্যালকুলেটর থেকে সরাসরি আমাদের সাথে যোগাযোগ করুন।
-          </li>
-        </ul>
+      <!-- Tool 2: Health Cover Estimator -->
+      <article class="calc-card active">
+        <div class="card-badge">Available Now</div>
+        <div class="card-icon">🏥</div>
+        <h2>Health Insurance Ideal Cover Estimator</h2>
+        <p>
+          Estimate recommended health insurance sum insured based on family
+          size, city category, and medical inflation.
+        </p>
+        <a href="/calculators/health-cover" class="calc-btn"
+          >Estimate Health Cover &rarr;</a
+        >
+      </article>
 
-        <div style="text-align: center; border-top: 1px solid #f1f5f9; padding-top: 1.25rem; margin-top: 1rem;">
-          <a href="/bn/life-insurance" style="display: inline-block; color: #0b3d91; font-weight: bold; text-decoration: none;">
-            সকল লাইফ ইনস্যুরেন্স গাইড দেখুন →
-          </a>
-        </div>
-      </div>
-
+      <!-- Tool 3: Term vs Endowment -->
+      <article class="calc-card coming-soon">
+        <div class="card-badge neutral">Coming Soon</div>
+        <div class="card-icon">⚖️</div>
+        <h2>Term Plan + SIP vs. Endowment</h2>
+        <p>
+          Compare long-term wealth accumulation of pure risk cover plus SIPs
+          against traditional plans.
+        </p>
+        <span class="calc-btn disabled">In Development</span>
+      </article>
     </div>
   </main>
 
   <Footer />
 </BaseLayout>
+
+<style>
+  .calc-hero {
+    background: linear-gradient(135deg, #0b3d91 0%, #1e5bb8 100%);
+    color: #ffffff;
+    padding: 4rem 1rem;
+    text-align: center;
+  }
+  .hero-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .badge {
+    background: rgba(255, 255, 255, 0.15);
+    color: #e2e8f0;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .calc-hero h1 {
+    font-size: 2.75rem;
+    margin: 1rem 0 0.5rem 0;
+    font-weight: 800;
+  }
+  .calc-hero p {
+    font-size: 1.15rem;
+    color: #cbd5e1;
+    margin: 0;
+  }
+
+  .calc-main {
+    max-width: 1100px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+  }
+  .calc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  .calc-card {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .calc-card.active:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1);
+  }
+  .card-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    background: #dcfce7;
+    color: #15803d;
+  }
+  .card-badge.neutral {
+    background: #f1f5f9;
+    color: #64748b;
+  }
+  .card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .calc-card h2 {
+    font-size: 1.35rem;
+    color: #0f172a;
+    margin: 0 0 0.75rem 0;
+  }
+  .calc-card p {
+    color: #475569;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+  }
+  .calc-btn {
+    display: inline-block;
+    text-align: center;
+    background: #0b3d91;
+    color: #ffffff;
+    font-weight: 700;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+  .calc-btn:hover {
+    background: #1e5bb8;
+  }
+  .calc-btn.disabled {
+    background: #e2e8f0;
+    color: #94a3b8;
+    cursor: not-allowed;
+  }
+</style>

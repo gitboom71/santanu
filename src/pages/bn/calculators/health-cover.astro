@@ -1,0 +1,83 @@
+---
+// src/pages/bn/calculators/health-cover.astro
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import HealthCoverCalculator from "@/components/HealthCoverCalculator.astro";
+---
+
+<BaseLayout
+  title="স্বাস্থ্য বীমা কভার নির্দেশক - Santanu's Space"
+  description="আপনার পরিবারের জন্য সঠিক স্বাস্থ্য বীমা কভারের পরিমাণ হিসাব করুন।"
+  lang="bn"
+>
+  <Header lang="bn" />
+
+  <main
+    style="background-color: #f8fafd; padding: 2.5rem 1rem; min-height: 80vh;"
+  >
+    <div style="max-width: 800px; margin: 0 auto;">
+      <!-- 1. BREADCRUMB / BACK LINK -->
+      <nav style="margin-bottom: 1.5rem; font-size: 0.9rem;">
+        <a
+          href="/bn/calculators"
+          style="color: #0b3d91; font-weight: 600; text-decoration: none;"
+        >
+          &larr; ক্যালকুলেটর পেজ-এ ফিরে যান
+        </a>
+        <span style="color: #94a3b8; margin: 0 0.5rem;">|</span>
+        <a href="/bn/insurance" style="color: #64748b; text-decoration: none;">
+          বীমা মূল পাতা
+        </a>
+      </nav>
+
+      <!-- 2. THE CALCULATOR COMPONENT -->
+      <HealthCoverCalculator lang="bn" />
+
+      <!-- 3. RELATED GUIDES & NEXT STEPS -->
+      <div
+        style="margin-top: 3rem; padding: 2rem; background: #ffffff; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.04);"
+      >
+        <h3 style="color: #0b3d91; margin-top: 0; font-size: 1.25rem;">
+          কভারেজ হিসাব করার পর আপনার করণীয় কী?
+        </h3>
+        <p style="color: #475569; line-height: 1.6;">
+          আপনার প্রয়োজনীয় স্বাস্থ্য বিমার সঠিক পরিমাণ জানার পর, পরবর্তী ধাপ
+          হলো সঠিক পলিসি কাঠামো ও সুপার টপ-আপ নির্বাচন করা।
+        </p>
+
+        <ul
+          style="color: #334155; line-height: 1.8; padding-left: 1.2rem; margin-bottom: 1.5rem;"
+        >
+          <li>
+            <a
+              href="/bn/insurance"
+              style="color: #0b3d91; font-weight: 600; text-decoration: underline;"
+            >
+              স্বাস্থ্য বীমা গাইড পড়ুন
+            </a>
+            — রুম রেন্ট ক্যাপ, নো ক্লেম বোনাস এবং ক্যাশলেস নেটওয়ার্ক হাসপাতাল সম্পর্কে
+            জানুন।
+          </li>
+          <li>
+            <strong>ব্যক্তিগত পরামর্শ পান:</strong> আপনার পরিবার ও বয়সের প্রয়োজন অনুযায়ী
+            সঠিক প্ল্যান বেছে নিতে সরাসরি আমাদের সাথে যোগাযোগ করুন।
+          </li>
+        </ul>
+
+        <div
+          style="text-align: center; border-top: 1px solid #f1f5f9; padding-top: 1.25rem; margin-top: 1rem;"
+        >
+          <a
+            href="/bn/calculators"
+            style="display: inline-block; color: #0b3d91; font-weight: bold; text-decoration: none;"
+          >
+            সকল ক্যালকুলেটর দেখুন &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer lang="bn" />
+</BaseLayout>

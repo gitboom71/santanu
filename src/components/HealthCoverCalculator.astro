@@ -1,0 +1,380 @@
+---
+// src/components/HealthCoverCalculator.astro
+interface Props {
+  lang?: "en" | "bn";
+}
+
+const { lang = "en" } = Astro.props;
+const isBn = lang === "bn";
+---
+
+<div class="health-calc-card">
+  <h2>
+    {isBn ? "স্বাস্থ্য বীমা কভার নির্দেশক" : "Health Insurance Cover Estimator"}
+  </h2>
+  <p class="calc-subtitle">
+    {
+      isBn
+        ? "আপনার পরিবারের সদস্য, শহর এবং চিকিৎসার খরচ অনুযায়ী উপযুক্ত স্বাস্থ্য কভার হিসাব করুন।"
+        : "Find out how much health cover your family needs based on location, age, and medical inflation."
+    }
+  </p>
+
+  <form id="healthCalcForm" class="calc-form">
+    <!-- City Tier selection -->
+    <div class="form-group">
+      <label for="cityTier"
+        >{isBn ? "আপনি কোন শহরে বসবাস করেন?" : "City Category / Tier"}</label
+      >
+      <select id="cityTier" required>
+        <option value="tier1"
+          >{
+            isBn
+              ? "মেট্রো সিটি (ঢাকা/কলকাতা/মুম্বাই/দিল্লি আদি)"
+              : "Tier 1 / Metro City (High Medical Cost)"
+          }</option
+        >
+        <option value="tier2" selected
+          >{
+            isBn
+              ? "টাইয়ার-২ / মাঝারি শহর"
+              : "Tier 2 / Tier 3 City (Moderate Medical Cost)"
+          }</option
+        >
+      </select>
+    </div>
+
+    <!-- Family Members -->
+    <div class="form-group">
+      <label for="familyType"
+        >{isBn ? "বীমার আওতায় কারা থাকবেন?" : "Family Members to Cover"}</label
+      >
+      <select id="familyType" required>
+        <option value="individual"
+          >{isBn ? "শুধু নিজের জন্য (Individual)" : "Individual Only"}</option
+        >
+        <option value="couple"
+          >{isBn ? "দম্পতি (Self + Spouse)" : "Couple (Self + Spouse)"}</option
+        >
+        <option value="family" selected
+          >{
+            isBn
+              ? "পরিবার (Self + Spouse + Children)"
+              : "Family Floater (Self + Spouse + Kids)"
+          }</option
+        >
+        <option value="parents"
+          >{
+            isBn
+              ? "বয়স্ক বাবা-মা সহ (Including Elderly Parents)"
+              : "Family + Senior Citizen Parents"
+          }</option
+        >
+      </select>
+    </div>
+
+    <!-- Eldest Member Age -->
+    <div class="form-group">
+      <label for="eldestAge"
+        >{
+          isBn
+            ? "পরিবারের জ্যেষ্ঠতম সদস্যের বয়স"
+            : "Age of Eldest Family Member"
+        }</label
+      >
+      <input
+        type="number"
+        id="eldestAge"
+        min="18"
+        max="85"
+        value="35"
+        required
+      />
+    </div>
+
+    <!-- Corporate/Employer Cover -->
+    <div class="form-group">
+      <label for="corporateCover"
+        >{
+          isBn
+            ? "বিদ্যমান কর্পোরেট/কোম্পানি কভার (যদি থাকে)"
+            : "Existing Corporate/Employer Cover (in Lakhs)"
+        }</label
+      >
+      <input
+        type="number"
+        id="corporateCover"
+        min="0"
+        max="50"
+        value="3"
+        placeholder="e.g. 3 or 5"
+      />
+    </div>
+
+    <button type="submit" class="calc-submit-btn">
+      {isBn ? "উপযুক্ত কভার হিসাব করুন" : "Calculate Recommended Cover"}
+    </button>
+  </form>
+
+  <!-- RESULT DISPLAY AREA -->
+  <div id="calcResults" class="calc-results hidden">
+    <div class="result-box">
+      <h3>
+        {isBn ? "আপনার জন্য সুপারিশকৃত কভার" : "Recommended Health Coverage"}
+      </h3>
+
+      <div class="result-grid">
+        <div class="result-card primary">
+          <span class="result-label"
+            >{isBn ? "সুপারিশকৃত বেস কভার" : "Recommended Base Policy"}</span
+          >
+          <span class="result-value" id="baseCoverVal">₹10 Lakhs</span>
+          <small
+            >{
+              isBn
+                ? "প্রতিদিনের হাসপাতাল ও চিকিৎসার সুরক্ষার জন্য"
+                : "Primary comprehensive health insurance"
+            }</small
+          >
+        </div>
+
+        <div class="result-card secondary">
+          <span class="result-label"
+            >{
+              isBn ? "সুপারিশকৃত সুপার টপ-আপ" : "Recommended Super Top-Up"
+            }</span
+          >
+          <span class="result-value" id="topupCoverVal">₹20 Lakhs</span>
+          <small
+            >{
+              isBn
+                ? "কম খরচে বড় ধরণের জটিল রোগের সুরক্ষায়"
+                : "High deductible buffer for critical illnesses"
+            }</small
+          >
+        </div>
+      </div>
+
+      <div class="result-total">
+        <span
+          >{isBn ? "মোট সুরক্ষিত কভার:" : "Total Effective Protection:"}</span
+        >
+        <strong id="totalCoverVal">₹30 Lakhs</strong>
+      </div>
+
+      <div class="advice-box" id="adviceText">
+        <!-- Dynamic recommendation tips insert here -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .health-calc-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 650px;
+    margin: 0 auto;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  }
+  .health-calc-card h2 {
+    margin-top: 0;
+    color: #0b3d91;
+    font-size: 1.75rem;
+  }
+  .calc-subtitle {
+    color: #64748b;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+  .calc-form {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .form-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1e293b;
+  }
+  .form-group select,
+  .form-group input {
+    padding: 0.75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group select:focus,
+  .form-group input:focus {
+    border-color: #0b3d91;
+  }
+  .calc-submit-btn {
+    background: #0b3d91;
+    color: #ffffff;
+    font-weight: 700;
+    padding: 0.85rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 0.5rem;
+  }
+  .calc-submit-btn:hover {
+    background: #1e5bb8;
+  }
+  .calc-results {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 2px dashed #e2e8f0;
+  }
+  .calc-results.hidden {
+    display: none;
+  }
+  .result-box h3 {
+    margin-top: 0;
+    color: #0f172a;
+    text-align: center;
+  }
+  .result-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  @media (max-width: 500px) {
+    .result-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .result-card {
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .result-card.primary {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+  }
+  .result-card.secondary {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+  }
+  .result-label {
+    display: block;
+    font-size: 0.85rem;
+    color: #475569;
+    font-weight: 600;
+  }
+  .result-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #0b3d91;
+    margin: 0.4rem 0;
+  }
+  .result-card small {
+    font-size: 0.75rem;
+    color: #64748b;
+  }
+  .result-total {
+    background: #0f172a;
+    color: #ffffff;
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+  }
+  .result-total strong {
+    color: #4ade80;
+    font-size: 1.4rem;
+  }
+  .advice-box {
+    margin-top: 1.25rem;
+    background: #f8fafc;
+    border-left: 4px solid #0b3d91;
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: #334155;
+    line-height: 1.5;
+  }
+</style>
+
+<script is:inline define:vars={{ isBn }}>
+  function initHealthCalc() {
+    const form = document.getElementById("healthCalcForm");
+    const resultsDiv = document.getElementById("calcResults");
+
+    if (!form) return;
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const cityTier = document.getElementById("cityTier").value;
+      const familyType = document.getElementById("familyType").value;
+      const eldestAge =
+        parseInt(document.getElementById("eldestAge").value, 10) || 30;
+      const corporateCover =
+        parseFloat(document.getElementById("corporateCover").value) || 0;
+
+      // Calculation Logic
+      let baseRecommend = 5;
+
+      if (cityTier === "tier1") {
+        baseRecommend += 5;
+      }
+
+      if (familyType === "couple") {
+        baseRecommend += 3;
+      } else if (familyType === "family") {
+        baseRecommend += 5;
+      } else if (familyType === "parents") {
+        baseRecommend += 10;
+      }
+
+      if (eldestAge > 50) {
+        baseRecommend += 5;
+      }
+
+      let topUpRecommend = baseRecommend >= 10 ? 20 : 15;
+      const totalCover = baseRecommend + topUpRecommend;
+      const lakhText = isBn ? "লাখ" : "Lakhs";
+
+      // Dynamic Localized Advice Text
+      let adviceText = "";
+      if (isBn) {
+        if (corporateCover > 0) {
+          adviceText += `আপনার বর্তমানে ₹${corporateCover} লাখের কর্পোরেট কভার রয়েছে। মনে রাখবেন, চাকরি পরিবর্তন বা অবসর গ্রহণের পর এই কভার বন্ধ হয়ে যায়। তাই একটি নিজস্ব বেস প্ল্যান রাখা জরুরি। `;
+        }
+        adviceText += `₹${baseRecommend} লাখের বেস প্ল্যান সাধারণ চিকিৎসার জন্য যথেষ্ট। আর ₹${topUpRecommend} লাখের সুপার টপ-আপ আপনাকে কম খরচে মোট ₹${totalCover} লাখের বড় সুরক্ষা দেবে।`;
+      } else {
+        if (corporateCover > 0) {
+          adviceText += `You currently have ₹${corporateCover}L corporate cover. Remember that corporate cover ends if you change jobs or retire. Having an individual/floater base plan is vital. `;
+        }
+        adviceText += `A Base Plan of ₹${baseRecommend}L handles basic hospitalization. Adding a ₹${topUpRecommend}L Super Top-Up gives you a total ₹${totalCover}L safety net at a fraction of the cost.`;
+      }
+
+      // Update UI
+      document.getElementById("baseCoverVal").innerText = `₹${baseRecommend} ${lakhText}`;
+      document.getElementById("topupCoverVal").innerText = `₹${topUpRecommend} ${lakhText}`;
+      document.getElementById("totalCoverVal").innerText = `₹${totalCover} ${lakhText}`;
+      document.getElementById("adviceText").innerText = adviceText;
+
+      resultsDiv.classList.remove("hidden");
+      resultsDiv.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+
+  initHealthCalc();
+  document.addEventListener("astro:page-load", initHealthCalc);
+</script>

@@ -1,0 +1,26 @@
+---
+// src/pages/calculators/hlv.astro
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import HLVCalculator from '@/components/HLVCalculator.astro';
+---
+
+<BaseLayout title="Human Life Value (HLV) Calculator - Santanu's Space" description="Calculate your term insurance coverage needs." lang="en">
+  <Header lang="en" />
+
+  <main style="background-color: #f8fafd; padding: 2.5rem 1rem; min-height: 80vh;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <nav style="margin-bottom: 1.5rem; font-size: 0.9rem;">
+        <a href="/calculators" style="color: #0b3d91; font-weight: 600; text-decoration: none;">
+          &larr; Back to Calculators
+        </a>
+      </nav>
+
+      <!-- Make sure lang="en" is set here -->
+      <HLVCalculator lang="en" />
+    </div>
+  </main>
+
+  <Footer lang="en" />
+</BaseLayout>
