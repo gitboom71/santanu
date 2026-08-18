@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="bn"><head><meta name="google-site-verification" content="J46AE7qtW861R5WPls8Ju_9DLlIJ-KW7lqcqjeIaTU4"><meta charset="utf-8"><link rel="icon" type="image/x-icon" href="/favicon.ico"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v7.1.3"><!-- Author & Description from SITE config --><meta name="author" content="Santanu Mukhopadhyay"><meta name="description" content="কম খরচে কভার ৫০ লাখ বা ১ কোটি টাকায় উন্নীত করার কৌশল — শান্তনু মুখার্জ্জী।"><title>সুপার টপ-আপ হেলথ ইনসিওরেন্স গাইড | Santanu&#39;s Space</title><!-- ASTRO VIEW TRANSITIONS --><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.aQfDf-Kh.js"></script><!-- ⚡ ANTI-FLASH INLINE SCRIPT (Prevents white flash on dark mode reload) --><script>
+            (function () {
+                const savedTheme = localStorage.getItem("theme");
+                if (savedTheme) {
+                    document.documentElement.setAttribute(
+                        "data-theme",
+                        savedTheme,
+                    );
+                } else if (
+                    window.matchMedia("(prefers-color-scheme: dark)").matches
+                ) {
+                    document.documentElement.setAttribute("data-theme", "dark");
+                } else {
+                    document.documentElement.setAttribute(
+                        "data-theme",
+                        "light",
+                    );
+                }
+            })();
+        </script><link rel="stylesheet" href="/_astro/Footer.BPJ-vx2K.css"></head><body><!-- Everything from your pages will be injected here --><!-- SECTION 1: HEADER CONTAINER WITH TRANSLATION SHIELD --><header class="site-header notranslate" translate="no"><div class="nav-container"><!-- BRAND / LOGO AREA --><a href="/bn" class="brand"><span class="brand-title">Santanu's Space</span><span class="brand-subtitle">Technology • Insurance • Calculators</span></a><!-- HAMBURGER TRIGGER BUTTON --><button id="menuToggle" class="hamburger-btn" aria-label="Toggle Navigation" aria-expanded="false"><span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span></button><!-- NAVIGATION MENU (FLAT STRUCTURE - NO DROPDOWNS) --><nav id="navMenu" class="nav-menu" aria-label="Main Navigation"><ul class="nav-list"><!-- LINK: Home --><li><a href="/bn" class="nav-link "><span>হোম</span></a></li><!-- LINK: About --><li><a href="/bn/about" class="nav-link "><span>পরিচিতি</span></a></li><!-- LINK: Projects --><li><a href="/bn/projects" class="nav-link "><span>প্রকল্প</span></a></li><!-- LINK: Insurance (Acts as the Hub Page) --><li><a href="/bn/insurance" class="nav-link "><span>বীমা</span></a></li><!-- LINK: Calculators --><li><a href="/bn/calculators" class="nav-link "><span>ক্যালকুলেটর</span></a></li><!-- LINK: Blog --><li><a href="/bn/blog" class="nav-link "><span>ব্লগ</span></a></li><!-- LINK: Contact --><li><a href="/bn/contact" class="nav-link "><span>যোগাযোগ</span></a></li></ul></nav><!-- RIGHT ACTION BUTTONS --><div class="header-actions"><!-- Language Switcher --><a href="/health-insurance/super-top-up/" class="action-btn lang-btn" lang="en"><span>English</span></a><!-- Modular Theme Toggle Component --><button id="theme-toggle" class="theme-toggle-btn" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode" data-astro-cid-l6lhmie6><span class="icon sun-icon" id="sun-icon" aria-hidden="true" data-astro-cid-l6lhmie6>☀️</span><span class="icon moon-icon" id="moon-icon" aria-hidden="true" data-astro-cid-l6lhmie6>🌙</span></button><script type="module">function e(e){document.documentElement.setAttribute(`data-theme`,e),localStorage.setItem(`theme`,e);let t=document.getElementById(`theme-toggle`),n=document.getElementById(`sun-icon`),r=document.getElementById(`moon-icon`);if(!t)return;let i=e===`dark`,a=i?`Switch to Light Mode`:`Switch to Dark Mode`;t.setAttribute(`title`,a),t.setAttribute(`aria-label`,a),n&&r&&(n.style.display=i?`inline-block`:`none`,r.style.display=i?`none`:`inline-block`)}function t(){e(document.documentElement.getAttribute(`data-theme`)||localStorage.getItem(`theme`)||(window.matchMedia(`(prefers-color-scheme: dark)`).matches?`dark`:`light`));let t=document.getElementById(`theme-toggle`);t&&(t.onclick=()=>{e((document.documentElement.getAttribute(`data-theme`)||`light`)===`dark`?`light`:`dark`)})}document.addEventListener(`astro:page-load`,t);</script></div></div></header><!-- SECTION 2: TRANSITIONS LIFE CYCLE SCRIPTS --><script>
+  function setupMobileMenu() {
+    const toggle = document.getElementById("menuToggle");
+    const menu = document.getElementById("navMenu");
+
+    if (!toggle || !menu) return;
+
+    // Clone button to strip duplicate event listeners on Astro view transitions
+    const newToggle = toggle.cloneNode(true);
+    if (toggle.parentNode) {
+      toggle.parentNode.replaceChild(newToggle, toggle);
+    }
+    const activeToggle = document.getElementById("menuToggle");
+
+    if (!activeToggle) return;
+
+    // Toggle mobile menu drawer open/close
+    activeToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isActive = menu.classList.toggle("is-active");
+      activeToggle.classList.toggle("is-active");
+      activeToggle.setAttribute("aria-expanded", isActive.toString());
+    });
+
+    // Close menu when clicking any nav link
+    menu.addEventListener("click", (e) => {
+      const targetLink = e.target.closest("a");
+      if (!targetLink) return;
+
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+
+      menu.classList.remove("is-active");
+      activeToggle.classList.remove("is-active");
+      activeToggle.setAttribute("aria-expanded", "false");
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", (e) => {
+      const target = e.target;
+      if (
+        menu.classList.contains("is-active") &&
+        !menu.contains(target) &&
+        !activeToggle.contains(target)
+      ) {
+        menu.classList.remove("is-active");
+        activeToggle.classList.remove("is-active");
+        activeToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+
+  document.addEventListener("astro:before-swap", () => {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+  });
+
+  setupMobileMenu();
+  document.addEventListener("astro:page-load", setupMobileMenu);
+  document.addEventListener("astro:after-swap", setupMobileMenu);
+</script><main><!-- HERO SECTION --><section style="background-color: #f8fafd; padding: 3.5rem 1rem; border-bottom: 1px solid #e2e8f0;"><div style="max-width: 850px; margin: 0 auto; text-align: center;"><a href="/bn/health-insurance" style="color: #0b3d91; font-weight: bold; text-decoration: none; font-size: 0.9rem;">← স্বাস্থ্য বীমা মূল পেজে ফিরে যান</a><h1 style="font-size: 2.4rem; color: #0b3d91; margin: 1rem 0 0.5rem 0;">সুপার টপ-আপ স্বাস্থ্য বীমা (Super Top-Up)</h1><p style="color: #4a5568; font-size: 1.15rem; line-height: 1.6;">অল্প প্রিমিয়ামে আপনার হেলথ কভার ৫০ লাখ বা ১ কোটি টাকায় বাড়ানোর স্মার্ট কৌশল — শান্তনু মুখার্জ্জী।</p></div></section><!-- MAIN ARTICLE CONTENT --><section style="padding: 3rem 1rem;"><div style="max-width: 800px; margin: 0 auto; color: #2d3748; line-height: 1.8;"><!-- CARD 1: WHAT IS A SUPER TOP-UP --><div style="background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem;"><h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">১. সুপার টপ-আপ কী?</h2><p>সুপার টপ-আপ হলো অতিরিক্ত সুরক্ষাবলয়। হাসপাতালে চিকিৎসার খরচ একটি নির্দিষ্ট সীমা (যাকে Deductible বলা হয়) পার হলেই এই পলিসি কার্যকর হয়। যেহেতু প্রাথমিক খরচটি বেস পলিসি মেটায়, তাই ইন্স্যুরেন্স কোম্পানিগুলো সুপার টপ-আপে খুব কম প্রিমিয়ামে বিশাল টাকার কভার প্রদান করে।</p></div><!-- CARD 2: TOP-UP vs SUPER TOP-UP --><div style="background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem;"><h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">২. নরমাল টপ-আপ বনাম সুপার টপ-আপ</h2><ul><li><strong>নরমাল টপ-আপ:</strong> বছরের <em>প্রতিটি আলাদা হাসপাতালে ভর্তির ক্ষেত্রে</em> আলাদাভাবে ডিডাক্টেবল সীমা হিসাব করা হয়।</li><li><strong>সুপার টপ-আপ:</strong> সারা বছরে মোট চিকিৎসার <em>একত্রিত বিলের ওপর</em> ডিডাক্টেবল সীমা হিসাব করা হয়, যা গ্রাহকের জন্য সবচেয়ে লাভজনক।</li></ul></div><!-- CARD 3: HOW TO STRUCTURE --><div style="background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem;"><h2 style="color: #0b3d91; font-size: 1.5rem; margin-top: 0;">৩. সেরা স্ট্র্যাটেজি: বেস + সুপার টপ-আপ</h2><p>একটি <strong>৫ বা ১০ লাখ টাকার বেস পলিসির</strong> সাথে <strong>৪০ বা ৯০ লাখ টাকার সুপার টপ-আপ</strong> যোগ করুন। এতে সরাসরি ১ কোটি টাকার মূল পলিসি কেনার চেয়ে প্রায় ৫০-৬০% পর্যন্ত প্রিমিয়াম বাঁচানো সম্ভব।</p></div><!-- CTA BOX --><div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #0b3d91; color: #ffffff; border-radius: 8px;"><h3 style="margin-top: 0; color: #ffffff;">কম খরচে স্বাস্থ্য সুরক্ষা বাড়াতে চান?</h3><p style="color: #e2e8f0; margin-bottom: 1.5rem;">আপনার বর্তমান পলিসির ওপর ভিত্তি করে সেরা সুপার টপ-আপ বেছে নিন।</p><a href="/bn/contact" style="display: inline-block; background: #ffffff; color: #0b3d91; font-weight: bold; padding: 0.8rem 1.8rem; border-radius: 5px; text-decoration: none;">যোগাযোগ করুন →</a></div></div></section></main><!-- Footer --><footer><p>© 2026 Santanu's Space | Technology • Insurance • Learning</p></footer></body></html><!-- GLOBAL THEME VARIABLES -->
