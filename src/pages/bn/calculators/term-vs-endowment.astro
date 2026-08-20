@@ -1,0 +1,67 @@
+---
+// src/pages/bn/calculators/term-vs-endowment.astro
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import TermVsEndowmentCalculator from "@/components/TermVsEndowmentCalculator.astro";
+---
+
+<BaseLayout
+  title="টার্ম প্ল্যান + SIP বনাম এন্ডোমেন্ট - Santanu's Space"
+  description="পিওর টার্ম ইনসিওরেন্স ও SIP বিনিয়োগের সংমিশ্রণের সাথে এন্ডোমেন্ট প্ল্যানের রিটার্ন তুলনা করুন।"
+>
+  <Header />
+
+  <main style="background-color: #f8fafd; padding: 2.5rem 1rem; min-height: 80vh;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <!-- 1. BREADCRUMB / BACK LINK -->
+      <nav style="margin-bottom: 1.5rem; font-size: 0.9rem;">
+        <a
+          href="/bn/calculators"
+          style="color: #0b3d91; font-weight: 600; text-decoration: none;"
+        >
+          &larr; ক্যালকুলেটর তালিকা
+        </a>
+        <span style="color: #94a3b8; margin: 0 0.5rem;">|</span>
+        <a href="/bn/insurance" style="color: #64748b; text-decoration: none;">
+          ইনসিওরেন্স হাব
+        </a>
+      </nav>
+
+      <!-- 2. THE CALCULATOR COMPONENT -->
+      <TermVsEndowmentCalculator lang="bn" />
+
+      <!-- 3. RELATED GUIDES & NEXT STEPS -->
+      <div
+        style="margin-top: 3rem; padding: 2rem; background: #ffffff; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.04);"
+      >
+        <h3 style="color: #0b3d91; margin-top: 0; font-size: 1.25rem;">
+          কেন বিমা এবং বিনিয়োগ আলাদা রাখবেন?
+        </h3>
+        <p style="color: #475569; line-height: 1.6;">
+          ট্র্যাডিশনাল এন্ডোমেন্ট পলিসিতে বিমা ও সঞ্চয় একসাথে থাকে, যা সাধারণত মাত্র ৫–৬% রিটার্ন দেয় এবং লাইফ কভারও কম থাকে।
+        </p>
+
+        <ul style="color: #334155; line-height: 1.8; padding-left: 1.2rem; margin-bottom: 1.5rem;">
+          <li>
+            <strong>পিওর টার্ম ইনসিওরেন্স নিন:</strong> কম প্রিমিয়ামে পরিবারের জন্য বড় লাইফ কভার (₹১ কোটি+) নিশ্চিত করুন।
+          </li>
+          <li>
+            <strong>অবশিষ্ট অর্থ SIP-তে দিন:</strong> বাকি টাকা মিউচুয়াল ফান্ডে বিনিয়োগ করলে দীর্ঘমেয়াদে চক্রবৃদ্ধি সুদের সুবিধা পেয়ে বড় ক্যাপিটাল তৈরি হয়।
+          </li>
+        </ul>
+
+        <div style="text-align: center; border-top: 1px solid #f1f5f9; padding-top: 1.25rem; margin-top: 1rem;">
+          <a
+            href="/bn/calculators"
+            style="display: inline-block; color: #0b3d91; font-weight: bold; text-decoration: none;"
+          >
+            অন্যান্য ক্যালকুলেটর দেখুন &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,443 @@
+---
+// src/components/TermVsEndowmentCalculator.astro
+interface Props {
+  lang?: 'en' | 'bn';
+}
+
+const { lang = 'en' } = Astro.props;
+
+const translations = {
+  en: {
+    title: "Term Plan + SIP vs. Endowment Plan",
+    subtitle: "Compare combining Pure Term Insurance + Equity SIP versus Traditional Endowment Plans.",
+    monthlyBudgetLabel: "Monthly Budget (₹)",
+    tenureLabel: "Investment & Cover Tenure (Years)",
+    termCoverLabel: "Term Insurance Cover",
+    endowmentCoverLabel: "Endowment Cover (Estimated)",
+    calcBtn: "Compare Outcomes",
+    resultHeading: "Comparison Summary at Maturity",
+    optionATitle: "Option 1: Traditional Endowment Plan",
+    optionBTitle: "Option 2: Pure Term Cover + Mutual Fund SIP",
+    termPremiumNote: "Term Premium (~₹1,000/mo)",
+    sipInvestNote: "Monthly SIP Amount",
+    lifeCover: "Life Cover Provided:",
+    maturityCorpus: "Maturity Corpus:",
+    differenceHeading: "Wealth Advantage of Term + SIP:",
+    keyTakeaway: "💡 Separating insurance and investment gives significantly higher life cover and wealth accumulation."
+  },
+  bn: {
+    title: "টার্ম প্ল্যান + SIP বনাম এন্ডোমেন্ট প্ল্যান",
+    subtitle: "পিওর টার্ম ইনসিওরেন্স ও SIP বিনিয়োগের যৌথ রিটার্নের সাথে চিরাচরিত এন্ডোমেন্ট প্ল্যানের তুলনা করুন।",
+    monthlyBudgetLabel: "মাসিক বাজেট (টাকা)",
+    tenureLabel: "মেয়াদ (বছর)",
+    termCoverLabel: "টার্ম ইনসিওরেন্স কভার",
+    endowmentCoverLabel: "এন্ডোমেন্ট কভার (আনুপাতিক)",
+    calcBtn: "ফলাফল তুলনা করুন",
+    resultHeading: "মেয়াদ শেষে প্রাপ্তির তুলনা",
+    optionATitle: "অপশন ১: ট্র্যাডিশনাল এন্ডোমেন্ট প্ল্যান",
+    optionBTitle: "অপশন ২: টার্ম ইনসিওরেন্স + মিউচুয়াল ফান্ড SIP",
+    termPremiumNote: "টার্ম প্রিমিয়াম (~₹১,০০০/মাস)",
+    sipInvestNote: "মাসিক SIP বিনিয়োগ",
+    lifeCover: "প্রাপ্ত লাইফ কভার:",
+    maturityCorpus: "মেয়াদ শেষে আনুমানিক মূলধন:",
+    differenceHeading: "টার্ম + SIP-তে অতিরিক্ত লাভ:",
+    keyTakeaway: "💡 বিমা এবং বিনিয়োগ আলাদা রাখলে অনেক বেশি লাইফ কভার এবং সম্পদ উভয়ই অর্জন করা সম্ভব।"
+  }
+};
+
+const t = translations[lang] || translations.en;
+---
+
+<div class="calc-card">
+  <div class="calc-header">
+    <h2>{t.title}</h2>
+    <p>{t.subtitle}</p>
+  </div>
+
+  <form id="termVsEndowmentForm" onsubmit="return false;">
+    <div class="form-grid">
+      <!-- Monthly Budget -->
+      <div class="form-group">
+        <label for="monthlyBudget">{t.monthlyBudgetLabel}</label>
+        <input type="number" id="monthlyBudget" min="2000" max="100000" step="500" value="10000" required />
+      </div>
+
+      <!-- Tenure -->
+      <div class="form-group">
+        <label for="investmentTenure">{t.tenureLabel}</label>
+        <select id="investmentTenure">
+          <option value="15">15 Years</option>
+          <option value="20" selected>20 Years</option>
+          <option value="25">25 Years</option>
+          <option value="30">30 Years</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="button" id="compareBtn" class="calc-btn">{t.calcBtn}</button>
+  </form>
+
+  <!-- Comparison Results -->
+  <div id="compareResult" class="results-card" style="display: none;">
+    <h3>{t.resultHeading}</h3>
+
+    <div class="comparison-grid">
+      <!-- Option 1: Endowment -->
+      <div class="option-card endowment">
+        <h4>{t.optionATitle}</h4>
+        <div class="stat-group">
+          <span>{t.lifeCover}</span>
+          <strong id="endowmentCoverDisplay">₹ 12 Lakhs</strong>
+        </div>
+        <div class="stat-group highlight">
+          <span>{t.maturityCorpus}</span>
+          <strong id="endowmentCorpusDisplay">₹ 0</strong>
+        </div>
+        <small class="rate-tag">Expected Return: ~5.5% p.a.</small>
+      </div>
+
+      <!-- Option 2: Term + SIP -->
+      <div class="option-card term-sip">
+        <h4>{t.optionBTitle}</h4>
+        <div class="stat-group">
+          <span>{t.lifeCover}</span>
+          <strong id="termCoverDisplay">₹ 1 Crore</strong>
+        </div>
+        <div class="stat-group highlight">
+          <span>{t.maturityCorpus}</span>
+          <strong id="sipCorpusDisplay">₹ 0</strong>
+        </div>
+        <small class="rate-tag">SIP Expected Return: ~12.0% p.a.</small>
+      </div>
+    </div>
+
+    <!-- Wealth Gain Highlight -->
+    <div class="gain-banner">
+      <span>{t.differenceHeading}</span>
+      <strong id="diffCorpusDisplay">₹ 0</strong>
+    </div>
+
+    <p class="takeaway-note">{t.keyTakeaway}</p>
+  </div>
+</div>
+
+<style>
+  .calc-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
+    max-width: 750px;
+    margin: 0 auto;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+
+  /* DARK MODE STYLES */
+  :global(.dark) .calc-card {
+    background: #1e293b;
+    border-color: #334155;
+  }
+
+  .calc-header h2 {
+    color: #0b3d91;
+    margin-bottom: 0.5rem;
+    font-size: 1.6rem;
+  }
+
+  :global(.dark) .calc-header h2 {
+    color: #60a5fa; /* High-contrast light blue for dark mode */
+  }
+
+  .calc-header p {
+    color: #4b5563;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  :global(.dark) .calc-header p {
+    color: #cbd5e1; /* Clear light gray */
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  label {
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: #1f2937;
+    font-size: 0.9rem;
+  }
+
+  :global(.dark) label {
+    color: #f1f5f9; /* Bright white text for labels */
+  }
+
+  input[type="number"], select {
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background-color: #ffffff;
+    color: #0f172a;
+  }
+
+  :global(.dark) input[type="number"], 
+  :global(.dark) select {
+    background-color: #0f172a;
+    border-color: #475569;
+    color: #f8fafc;
+  }
+
+  .calc-btn {
+    margin-top: 1.5rem;
+    width: 100%;
+    padding: 0.9rem;
+    background-color: #0b3d91;
+    color: #ffffff;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  :global(.dark) .calc-btn {
+    background-color: #2563eb;
+  }
+
+  /* RESULTS SECTION DARK MODE */
+  .results-card {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 2px dashed #e5e7eb;
+  }
+
+  :global(.dark) .results-card {
+    border-top-color: #334155;
+  }
+
+  :global(.dark) .results-card h3 {
+    color: #f8fafc;
+  }
+
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    margin-top: 1rem;
+  }
+
+  .option-card {
+    padding: 1.25rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .option-card.endowment {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+  }
+
+  :global(.dark) .option-card.endowment {
+    background-color: #451a1a;
+    border-color: #7f1d1d;
+  }
+
+  .option-card.term-sip {
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+  }
+
+  :global(.dark) .option-card.term-sip {
+    background-color: #064e3b;
+    border-color: #047857;
+  }
+
+  .option-card h4 {
+    font-size: 0.95rem;
+    color: #1f2937;
+  }
+
+  :global(.dark) .option-card h4 {
+    color: #f8fafc;
+  }
+
+  .stat-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-group span {
+    font-size: 0.8rem;
+    color: #6b7280;
+  }
+
+  :global(.dark) .stat-group span {
+    color: #94a3b8;
+  }
+
+  .stat-group strong {
+    font-size: 1.2rem;
+    color: #111827;
+  }
+
+  :global(.dark) .stat-group strong {
+    color: #ffffff;
+  }
+
+  .stat-group.highlight strong {
+    font-size: 1.4rem;
+    color: #0b3d91;
+  }
+
+  :global(.dark) .stat-group.highlight strong {
+    color: #93c5fd;
+  }
+
+  .option-card.term-sip .stat-group.highlight strong {
+    color: #166534;
+  }
+
+  :global(.dark) .option-card.term-sip .stat-group.highlight strong {
+    color: #86efac;
+  }
+
+  .rate-tag {
+    font-size: 0.75rem;
+    color: #6b7280;
+  }
+
+  :global(.dark) .rate-tag {
+    color: #cbd5e1;
+  }
+
+  .gain-banner {
+    margin-top: 1.25rem;
+    padding: 1rem;
+    background: #eef2ff;
+    border: 1px solid #c7d2fe;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  :global(.dark) .gain-banner {
+    background: #1e1b4b;
+    border-color: #3730a3;
+  }
+
+  .gain-banner span {
+    font-weight: 600;
+    color: #374151;
+  }
+
+  :global(.dark) .gain-banner span {
+    color: #e0e7ff;
+  }
+
+  .gain-banner strong {
+    font-size: 1.3rem;
+    color: #1e40af;
+  }
+
+  :global(.dark) .gain-banner strong {
+    color: #93c5fd;
+  }
+
+  .takeaway-note {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: #4b5563;
+  }
+
+  :global(.dark) .takeaway-note {
+    color: #cbd5e1;
+  }
+
+  @media (max-width: 600px) {
+    .form-grid, .comparison-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  function calculateComparison() {
+    const budgetInput = document.getElementById('monthlyBudget') as HTMLInputElement | null;
+    const tenureSelect = document.getElementById('investmentTenure') as HTMLSelectElement | null;
+
+    if (!budgetInput || !tenureSelect) return;
+
+    const budget = parseFloat(budgetInput.value) || 10000;
+    const years = parseInt(tenureSelect.value) || 20;
+
+    // 1. Endowment Plan Calculation (~5.5% returns, cover ~10x annual premium)
+    const annualInvestment = budget * 12;
+    const endowmentCover = annualInvestment * 10;
+    const endowmentRate = 0.055 / 12; // monthly rate
+    const months = years * 12;
+
+    // Compound monthly annuity formula
+    const endowmentCorpus = budget * ((Math.pow(1 + endowmentRate, months) - 1) / endowmentRate) * (1 + endowmentRate);
+
+    // 2. Term Plan + SIP Calculation
+    // Fixed ₹1,000/month allocation for ₹1 Cr Term Insurance
+    const termPremium = 1000;
+    const sipAmount = Math.max(0, budget - termPremium);
+    const sipRate = 0.12 / 12; // 12% annual return on SIP
+
+    const sipCorpus = sipAmount * ((Math.pow(1 + sipRate, months) - 1) / sipRate) * (1 + sipRate);
+
+    // Difference
+    const diffCorpus = sipCorpus - endowmentCorpus;
+
+    // Format helpers
+    const formatLakhs = (val: number) => {
+      const inLakhs = val / 100000;
+      return inLakhs >= 100 
+        ? `₹ ${(inLakhs / 100).toFixed(2)} Crores` 
+        : `₹ ${inLakhs.toFixed(2)} Lakhs`;
+    };
+
+    // Render results
+    const endCoverDisplay = document.getElementById('endowmentCoverDisplay');
+    const endCorpusDisplay = document.getElementById('endowmentCorpusDisplay');
+    const termCoverDisplay = document.getElementById('termCoverDisplay');
+    const sipCorpusDisplay = document.getElementById('sipCorpusDisplay');
+    const diffDisplay = document.getElementById('diffCorpusDisplay');
+    const resultCard = document.getElementById('compareResult');
+
+    if (endCoverDisplay && endCorpusDisplay && termCoverDisplay && sipCorpusDisplay && diffDisplay && resultCard) {
+      endCoverDisplay.textContent = formatLakhs(endowmentCover);
+      endCorpusDisplay.textContent = formatLakhs(endowmentCorpus);
+
+      termCoverDisplay.textContent = "₹ 1.00 Crore";
+      sipCorpusDisplay.textContent = formatLakhs(sipCorpus);
+
+      diffDisplay.textContent = formatLakhs(diffCorpus);
+      resultCard.style.display = 'block';
+    }
+  }
+
+  function initCalculator() {
+    const compareBtn = document.getElementById('compareBtn');
+    if (compareBtn) {
+      compareBtn.removeEventListener('click', calculateComparison);
+      compareBtn.addEventListener('click', calculateComparison);
+    }
+  }
+
+  initCalculator();
+  document.addEventListener('astro:page-load', initCalculator);
+</script>

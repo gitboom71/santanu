@@ -1,0 +1,67 @@
+---
+// src/pages/calculators/term-vs-endowment.astro
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import TermVsEndowmentCalculator from "@/components/TermVsEndowmentCalculator.astro";
+---
+
+<BaseLayout
+  title="Term Plan + SIP vs Endowment - Santanu's Space"
+  description="Compare long-term wealth accumulation of pure term insurance plus equity SIPs versus traditional endowment plans."
+>
+  <Header />
+
+  <main style="background-color: #f8fafd; padding: 2.5rem 1rem; min-height: 80vh;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <!-- 1. BREADCRUMB / BACK LINK -->
+      <nav style="margin-bottom: 1.5rem; font-size: 0.9rem;">
+        <a
+          href="/calculators"
+          style="color: #0b3d91; font-weight: 600; text-decoration: none;"
+        >
+          &larr; Back to Calculators Hub
+        </a>
+        <span style="color: #94a3b8; margin: 0 0.5rem;">|</span>
+        <a href="/insurance" style="color: #64748b; text-decoration: none;">
+          Insurance Hub
+        </a>
+      </nav>
+
+      <!-- 2. THE CALCULATOR COMPONENT -->
+      <TermVsEndowmentCalculator lang="en" />
+
+      <!-- 3. RELATED GUIDES & NEXT STEPS -->
+      <div
+        style="margin-top: 3rem; padding: 2rem; background: #ffffff; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.04);"
+      >
+        <h3 style="color: #0b3d91; margin-top: 0; font-size: 1.25rem;">
+          Why separate insurance and investment?
+        </h3>
+        <p style="color: #475569; line-height: 1.6;">
+          Combining life insurance with savings (like traditional endowment or money-back policies) often yields low returns (~5–6%) while providing inadequate life cover.
+        </p>
+
+        <ul style="color: #334155; line-height: 1.8; padding-left: 1.2rem; margin-bottom: 1.5rem;">
+          <li>
+            <strong>Buy Pure Term Insurance:</strong> Get high financial protection (₹1 Cr+) for your family at affordable premiums.
+          </li>
+          <li>
+            <strong>Invest the Surplus in SIPs:</strong> Allocating the remaining budget into mutual funds harnesses compound interest for long-term wealth generation.
+          </li>
+        </ul>
+
+        <div style="text-align: center; border-top: 1px solid #f1f5f9; padding-top: 1.25rem; margin-top: 1rem;">
+          <a
+            href="/calculators"
+            style="display: inline-block; color: #0b3d91; font-weight: bold; text-decoration: none;"
+          >
+            Explore All Calculators &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
