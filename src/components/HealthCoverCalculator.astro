@@ -1,24 +1,56 @@
 ---
 // src/components/HealthCoverCalculator.astro
 interface Props {
-  lang?: 'en' | 'bn';
+  lang?: "en" | "bn";
 }
 
-const { lang = 'en' } = Astro.props;
+const { lang = "en" } = Astro.props;
+
+// Master City List with Tier Mapping
+const CITIES = [
+  // Tier 1 Metros
+  { nameEn: "Kolkata", nameBn: "কলকাতা", tier: "tier1" },
+  { nameEn: "Delhi NCR", nameBn: "দিল্লি এনসিআর", tier: "tier1" },
+  { nameEn: "Mumbai", nameBn: "মুম্বাই", tier: "tier1" },
+  { nameEn: "Bengaluru", nameBn: "বেঙ্গালুরু", tier: "tier1" },
+  { nameEn: "Chennai", nameBn: "চেন্নাই", tier: "tier1" },
+  { nameEn: "Hyderabad", nameBn: "হায়দ্রাবাদ", tier: "tier1" },
+  { nameEn: "Pune", nameBn: "পুণে", tier: "tier1" },
+  { nameEn: "Ahmedabad", nameBn: "আমেদাবাদ", tier: "tier1" },
+
+  // Tier 2 Major Cities
+  { nameEn: "Siliguri", nameBn: "শিলিগুড়ি", tier: "tier2" },
+  { nameEn: "Howrah", nameBn: "হাওড়া", tier: "tier2" },
+  { nameEn: "Durgapur", nameBn: "দুর্গাপুর", tier: "tier2" },
+  { nameEn: "Asansol", nameBn: "আসানসোল", tier: "tier2" },
+  { nameEn: "Patna", nameBn: "পাটনা", tier: "tier2" },
+  { nameEn: "Bhubaneswar", nameBn: "ভুবনেশ্বর", tier: "tier2" },
+  { nameEn: "Ranchi", nameBn: "রাঁচি", tier: "tier2" },
+  { nameEn: "Lucknow", nameBn: "লখনউ", tier: "tier2" },
+  { nameEn: "Jaipur", nameBn: "জয়পুর", tier: "tier2" },
+  { nameEn: "Guwahati", nameBn: "গুয়াহাটি", tier: "tier2" },
+  { nameEn: "Chandigarh", nameBn: "চণ্ডীগড়", tier: "tier2" },
+  { nameEn: "Kochi", nameBn: "কোচি", tier: "tier2" },
+  { nameEn: "Indore", nameBn: "ইন্দোর", tier: "tier2" },
+];
 
 const translations = {
   en: {
     title: "Health Cover Estimator",
-    subtitle: "Estimate the optimal health insurance cover for you and your family.",
+    subtitle:
+      "Estimate the optimal health insurance cover for you and your family.",
     ageLabel: "Age of Eldest Family Member",
     adultsLabel: "Number of Adults",
     childrenLabel: "Number of Children",
-    cityLabel: "City of Residence / Tier",
-    cityTier1: "Tier 1 Metros (Kolkata, Delhi-NCR, Mumbai, Bengaluru, Chennai, Hyderabad, Pune, Ahmedabad)",
-    cityTier2: "Tier 2 Major Cities (Siliguri, Howrah, Patna, Bhubaneswar, Ranchi, Lucknow, Jaipur, etc.)",
-    cityTier3: "Tier 3 / Other Towns & Rural Areas",
-    cityHelp: "💡 Healthcare costs in Metro cities are 30–40% higher, requiring a higher base cover.",
-    preExistingLabel: "Any Pre-existing Diseases? (Diabetes, BP, Heart conditions, etc.)",
+    cityLabel: "City of Residence",
+    cityPlaceholder: "Type or select your city...",
+    cityHelp:
+      "💡 Healthcare costs in Metro cities are 30–40% higher, requiring a higher base cover.",
+    tier1Option: "Other Tier 1 / Metro City",
+    tier2Option: "Other Tier 2 Major City",
+    tier3Option: "Tier 3 / Other Towns & Rural Areas",
+    preExistingLabel:
+      "Any Pre-existing Diseases? (Diabetes, BP, Heart conditions, etc.)",
     yes: "Yes",
     no: "No",
     calcBtn: "Calculate Recommended Cover",
@@ -26,20 +58,25 @@ const translations = {
     baseLabel: "Base Hospitalization Cover:",
     superTopUpLabel: "Suggested Super Top-up Cover:",
     breakdownTitle: "How This Was Calculated:",
-    inflationNote: "Includes ~10–12% annual medical inflation buffer for hospital procedures."
+    inflationNote:
+      "Includes ~10–12% annual medical inflation buffer for hospital procedures.",
   },
   bn: {
     title: "হেলথ কভার এস্টিমেটর",
-    subtitle: "আপনার এবং আপনার পরিবারের জন্য সঠিক স্বাস্থ্য বিমা কভারের পরিমাণ হিসাব করুন।",
+    subtitle:
+      "আপনার এবং আপনার পরিবারের জন্য সঠিক স্বাস্থ্য বিমা কভারের পরিমাণ হিসাব করুন।",
     ageLabel: "পরিবারের জ্যেষ্ঠ সদস্যের বয়স",
     adultsLabel: "প্রাপ্তবয়স্ক সদস্য সংখ্যা",
     childrenLabel: "শিশু সংখ্যা (১৮ বছরের নিচে)",
-    cityLabel: "আপনার বসবাসের শহর / Tier",
-    cityTier1: "Tier 1 মেট্রো (কলকাতা, দিল্লি-NCR, মুম্বাই, বেঙ্গালুরু, চেন্নাই, হায়দ্রাবাদ, পুনে, আহমেদাবাদ)",
-    cityTier2: "Tier 2 প্রধান শহর (শিলিগুড়ি, হাওড়া, পাটনা, ভুবনেশ্বর, রাঁচি, লখনউ, জয়পুর ইত্যাদি)",
-    cityTier3: "Tier 3 / অন্যান্য ছোট শহর ও গ্রামীণ এলাকা",
-    cityHelp: "💡 মেট্রো শহরে চিকিৎসার খরচ ৩০-৪০% বেশি হওয়ায় স্বাস্থ্য কভার বেশি ধরা হয়।",
-    preExistingLabel: "পরিবারে কারো পূর্বের গুরুতর রোগ আছে? (ডায়াবেটিস, প্রেসার, হৃদরোগ ইত্যাদি)",
+    cityLabel: "আপনার বসবাসের শহর",
+    cityPlaceholder: "আপনার শহর খুঁজুন বা টাইপ করুন...",
+    cityHelp:
+      "💡 মেট্রো শহরে চিকিৎসার খরচ ৩০-৪০% বেশি হওয়ায় স্বাস্থ্য কভার বেশি ধরা হয়।",
+    tier1Option: "অন্যান্য মেট্রো / Tier 1 শহর",
+    tier2Option: "অন্যান্য প্রধান Tier 2 শহর",
+    tier3Option: "Tier 3 / অন্যান্য ছোট শহর ও গ্রামীণ এলাকা",
+    preExistingLabel:
+      "পরিবারে কারো পূর্বের গুরুতর রোগ আছে? (ডায়াবেটিস, প্রেসার, হৃদরোগ ইত্যাদি)",
     yes: "হ্যাঁ",
     no: "না",
     calcBtn: "প্রয়োজনীয় কভার হিসাব করুন",
@@ -47,11 +84,13 @@ const translations = {
     baseLabel: "মূল বিমা কভার (Base Cover):",
     superTopUpLabel: "সুপারিশকৃত সুপার টপ-আপ কভার:",
     breakdownTitle: "হিসাবের মূল ভিত্তি:",
-    inflationNote: "বার্ষিক ১০-১২% চিকিৎসা খরচ বৃদ্ধি (Medical Inflation) বিবেচনায় রাখা হয়েছে।"
-  }
+    inflationNote:
+      "বার্ষিক ১০-১২% চিকিৎসা খরচ বৃদ্ধি (Medical Inflation) বিবেচনায় রাখা হয়েছে।",
+  },
 };
 
 const t = translations[lang] || translations.en;
+const isBn = lang === "bn";
 ---
 
 <div class="health-calc-card">
@@ -65,7 +104,14 @@ const t = translations[lang] || translations.en;
       <!-- Eldest Age -->
       <div class="form-group">
         <label for="eldestAge">{t.ageLabel}</label>
-        <input type="number" id="eldestAge" min="18" max="100" value="35" required />
+        <input
+          type="number"
+          id="eldestAge"
+          min="18"
+          max="100"
+          value="35"
+          required
+        />
       </div>
 
       <!-- Adults Count -->
@@ -90,14 +136,31 @@ const t = translations[lang] || translations.en;
         </select>
       </div>
 
-      <!-- City Selection with Detailed Tiers -->
+      <!-- City Selection with Autocomplete Datalist -->
       <div class="form-group full-width">
-        <label for="cityTier">{t.cityLabel}</label>
-        <select id="cityTier">
-          <option value="tier1">{t.cityTier1}</option>
-          <option value="tier2" selected>{t.cityTier2}</option>
-          <option value="tier3">{t.cityTier3}</option>
-        </select>
+        <label for="citySearchInput">{t.cityLabel}</label>
+        <input
+          type="text"
+          id="citySearchInput"
+          list="cityListOptions"
+          placeholder={t.cityPlaceholder}
+          autocomplete="off"
+        />
+        <datalist id="cityListOptions">
+          {
+            CITIES.map((city) => (
+              <option
+                value={isBn ? city.nameBn : city.nameEn}
+                data-tier={city.tier}
+              />
+            ))
+          }
+          <option value={t.tier1Option} data-tier="tier1"></option>
+          <option value={t.tier2Option} data-tier="tier2"></option>
+          <option value={t.tier3Option} data-tier="tier3"></option>
+        </datalist>
+        <!-- Hidden field that stores the calculated tier -->
+        <input type="hidden" id="cityTier" value="tier2" />
         <small class="help-text">{t.cityHelp}</small>
       </div>
 
@@ -117,13 +180,15 @@ const t = translations[lang] || translations.en;
       </div>
     </div>
 
-    <button type="button" id="calculateHealthBtn" class="calc-btn">{t.calcBtn}</button>
+    <button type="button" id="calculateHealthBtn" class="calc-btn"
+      >{t.calcBtn}</button
+    >
   </form>
 
   <!-- Calculation Results -->
   <div id="healthResult" class="results-card" style="display: none;">
     <h3>{t.resultHeading}</h3>
-    
+
     <div class="result-box">
       <div class="result-item primary">
         <span>{t.baseLabel}</span>
@@ -188,7 +253,9 @@ const t = translations[lang] || translations.en;
     font-size: 0.9rem;
   }
 
-  input[type="number"], select {
+  input[type="number"],
+  input[type="text"],
+  select {
     padding: 0.75rem;
     border: 1px solid #d1d5db;
     border-radius: 8px;
@@ -197,7 +264,9 @@ const t = translations[lang] || translations.en;
     color: #111827;
   }
 
-  input[type="number"]:focus, select:focus {
+  input[type="number"]:focus,
+  input[type="text"]:focus,
+  select:focus {
     outline: none;
     border-color: #0b3d91;
     box-shadow: 0 0 0 3px rgba(11, 61, 145, 0.1);
@@ -323,7 +392,8 @@ const t = translations[lang] || translations.en;
   }
 
   @media (max-width: 600px) {
-    .form-grid, .result-box {
+    .form-grid,
+    .result-box {
       grid-template-columns: 1fr;
     }
     .form-group.full-width {
@@ -333,29 +403,74 @@ const t = translations[lang] || translations.en;
 </style>
 
 <script>
-  function calculateHealthCover() {
-    const eldestInput = document.getElementById('eldestAge') as HTMLInputElement | null;
-    const adultSelect = document.getElementById('adultCount') as HTMLSelectElement | null;
-    const childSelect = document.getElementById('childCount') as HTMLSelectElement | null;
-    const citySelect = document.getElementById('cityTier') as HTMLSelectElement | null;
-    const pedRadio = document.querySelector('input[name="ped"]:checked') as HTMLInputElement | null;
+  function syncCityTier() {
+    const searchInput = document.getElementById(
+      "citySearchInput",
+    ) as HTMLInputElement | null;
+    const datalist = document.getElementById(
+      "cityListOptions",
+    ) as HTMLDataListElement | null;
+    const tierHiddenInput = document.getElementById(
+      "cityTier",
+    ) as HTMLInputElement | null;
 
-    if (!eldestInput || !adultSelect || !childSelect || !citySelect) return;
+    if (!searchInput || !datalist || !tierHiddenInput) return;
+
+    const query = searchInput.value.trim().toLowerCase();
+    if (!query) {
+      tierHiddenInput.value = "tier2";
+      return;
+    }
+
+    const options = Array.from(datalist.options);
+    const matchedOption = options.find(
+      (opt) => opt.value.toLowerCase() === query,
+    );
+
+    if (matchedOption) {
+      tierHiddenInput.value =
+        matchedOption.getAttribute("data-tier") || "tier2";
+    } else {
+      // Default to Tier 2 if user enters an unlisted custom city name
+      tierHiddenInput.value = "tier2";
+    }
+  }
+
+  function calculateHealthCover() {
+    syncCityTier();
+
+    const eldestInput = document.getElementById(
+      "eldestAge",
+    ) as HTMLInputElement | null;
+    const adultSelect = document.getElementById(
+      "adultCount",
+    ) as HTMLSelectElement | null;
+    const childSelect = document.getElementById(
+      "childCount",
+    ) as HTMLSelectElement | null;
+    const cityTierInput = document.getElementById(
+      "cityTier",
+    ) as HTMLInputElement | null;
+    const pedRadio = document.querySelector(
+      'input[name="ped"]:checked',
+    ) as HTMLInputElement | null;
+
+    if (!eldestInput || !adultSelect || !childSelect || !cityTierInput) return;
 
     const age = parseInt(eldestInput.value) || 35;
     const adults = parseInt(adultSelect.value) || 2;
     const children = parseInt(childSelect.value) || 0;
-    const cityTier = citySelect.value;
-    const hasPED = pedRadio?.value === 'yes';
+    const cityTier = cityTierInput.value;
+    const hasPED = pedRadio?.value === "yes";
 
     let baseCover = 500000; // Base ₹5 Lakhs minimum
     const notes: string[] = [];
 
     // City Tier Adjustment
-    if (cityTier === 'tier1') {
+    if (cityTier === "tier1") {
       baseCover += 500000;
       notes.push("Added ₹5L base cover for Tier 1 Metro healthcare costs.");
-    } else if (cityTier === 'tier2') {
+    } else if (cityTier === "tier2") {
       baseCover += 200000;
       notes.push("Added ₹2L base cover for Tier 2 city hospital expenses.");
     }
@@ -381,33 +496,39 @@ const t = translations[lang] || translations.en;
       notes.push("Added buffer for pre-existing illness treatment costs.");
     }
 
-    // Calculate Super Top-up (Base x 2 to 3 times)
+    // Calculate Super Top-up
     let topUpCover = baseCover * 2;
     if (baseCover <= 700000) {
-      topUpCover = 1500000; // Recommend 15L Top-Up for lower base cover
+      topUpCover = 1500000;
     }
 
     // Render results
-    const baseDisplay = document.getElementById('baseCoverDisplay');
-    const topUpDisplay = document.getElementById('topUpCoverDisplay');
-    const breakdownList = document.getElementById('breakdownList');
-    const resultCard = document.getElementById('healthResult');
+    const baseDisplay = document.getElementById("baseCoverDisplay");
+    const topUpDisplay = document.getElementById("topUpCoverDisplay");
+    const breakdownList = document.getElementById("breakdownList");
+    const resultCard = document.getElementById("healthResult");
 
     if (baseDisplay && topUpDisplay && breakdownList && resultCard) {
       baseDisplay.textContent = `₹ ${(baseCover / 100000).toFixed(1)} Lakhs`;
       topUpDisplay.textContent = `₹ ${(topUpCover / 100000).toFixed(1)} Lakhs`;
 
-      breakdownList.innerHTML = notes.map(n => `<li>${n}</li>`).join('');
-      resultCard.style.display = 'block';
+      breakdownList.innerHTML = notes.map((n) => `<li>${n}</li>`).join("");
+      resultCard.style.display = "block";
     }
   }
 
   function initCalculator() {
-    const calcBtn = document.getElementById('calculateHealthBtn');
+    const calcBtn = document.getElementById("calculateHealthBtn");
+    const searchInput = document.getElementById("citySearchInput");
+
     if (calcBtn) {
-      // Remove any existing click listeners to prevent duplicates
-      calcBtn.removeEventListener('click', calculateHealthCover);
-      calcBtn.addEventListener('click', calculateHealthCover);
+      calcBtn.removeEventListener("click", calculateHealthCover);
+      calcBtn.addEventListener("click", calculateHealthCover);
+    }
+
+    if (searchInput) {
+      searchInput.removeEventListener("input", syncCityTier);
+      searchInput.addEventListener("input", syncCityTier);
     }
   }
 
@@ -415,5 +536,5 @@ const t = translations[lang] || translations.en;
   initCalculator();
 
   // Support Astro View Transitions / Client Navigation
-  document.addEventListener('astro:page-load', initCalculator);
+  document.addEventListener("astro:page-load", initCalculator);
 </script>
